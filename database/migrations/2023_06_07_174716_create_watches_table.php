@@ -14,17 +14,20 @@ return new class extends Migration
         Schema::create('watches', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('collection_id');
-            $table->string('name')->unique();
-            $table->string('model');
+            $table->string('model')->unique();
             $table->decimal('price');
             $table->integer('stock');
             $table->string('gender');
             $table->string('case_material');
-            $table->decimal('case_diameter');
-            $table->decimal('case_thickness');
+            $table->integer('case_diameter');
+            $table->integer('case_thickness');
             $table->string('strap_material');
             $table->string('dial_color');
-            $table->boolean('water_resistance');
+            $table->string('crystal_material');
+            $table->integer('water_resistance');
+            $table->string('movement_type');
+            $table->integer('power_reserve');
+            $table->string('complications');
             $table->boolean('availability');
             $table->timestamps();
 

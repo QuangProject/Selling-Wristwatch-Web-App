@@ -5,20 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderDetail extends Model
+class CategoryWatch extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'order_id',
+        'category_id',
         'watch_id',
-        'quantity',
-        'price',
     ];
 
-    public function order()
+    public function category()
     {
-        return $this->belongsTo(Order::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function watch()

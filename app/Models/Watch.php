@@ -10,7 +10,6 @@ class Watch extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'model',
         'price',
         'stock',
@@ -20,13 +19,18 @@ class Watch extends Model
         'case_thickness',
         'strap_material',
         'dial_color',
+        'crystal_material',
         'water_resistance',
+        'movement_type',
+        'power_reserve',
+        'complications',
         'availability',
+        'collection_id',
     ];
 
-    public function categories()
+    public function categoryWatches()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->hasMany(CategoryWatch::class);
     }
 
     public function collection()
