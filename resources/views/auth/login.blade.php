@@ -28,8 +28,8 @@
                             {{-- Email --}}
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" class="@error('email') is-invalid @enderror"
-                                    name="email" id="email" value="{{ old('email') }}" placeholder="Email" required
+                                <input type="text" class="@error('email') is-invalid @enderror" name="email"
+                                    id="email" value="{{ old('email') }}" placeholder="Email" required
                                     autocomplete="email" autofocus />
 
                                 @error('email')
@@ -42,9 +42,8 @@
                             {{-- Password --}}
                             <div class="form-group">
                                 <label for="password"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" class="@error('password') is-invalid @enderror"
-                                    name="password" id="password" placeholder="Password" required
-                                    autocomplete="current-password" />
+                                <input type="password" class="@error('password') is-invalid @enderror" name="password"
+                                    id="password" placeholder="Password" required autocomplete="current-password" />
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -53,11 +52,21 @@
                                 @enderror
                             </div>
 
-                            {{-- Remember --}}
-                            <div class="form-group">
-                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term"
-                                    {{ old('remember') ? 'checked' : '' }} />
-                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                            <div class="d-flex justify-content-between">
+                                {{-- Remember --}}
+                                <div class="form-group">
+                                    <input type="checkbox" name="remember-me" id="remember-me" class="agree-term"
+                                        {{ old('remember') ? 'checked' : '' }} />
+                                    <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember
+                                        me</label>
+                                </div>
+
+                                {{-- Forgot Password --}}
+                                <div class="form-group">
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                </div>
                             </div>
 
                             {{-- Submit --}}
@@ -68,9 +77,9 @@
                         <div class="social-login">
                             <span class="social-label">Or login with</span>
                             <ul class="socials">
+                                <li><a href="{{ route('login.google') }}"><i
+                                            class="display-flex-center zmdi zmdi-google"></i></a></li>
                                 <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
-                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
                             </ul>
                         </div>
                     </div>

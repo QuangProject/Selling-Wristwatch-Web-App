@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class CollectionController extends Controller
 {
-    public function index()
+    public function list()
     {
         $collections = Collection::all();
         return response()->json([

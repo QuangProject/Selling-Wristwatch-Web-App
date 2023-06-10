@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8 order-md-first">
                 <div class="row">
-                    <div class="col-md-6 order-2 order-md-1">
+                    <div class="col-md-6 order-2 order-md-1 mb-2 mb-md-0">
                         <form action="#" class="searchform order-lg-first">
                             <div class="form-group d-flex">
                                 <input type="text" class="form-control pl-3" placeholder="Search">
@@ -15,7 +15,9 @@
                     </div>
                     <div class="col-md-6 my-3 my-md-0 order-1 order-md-2">
                         <div class="text-center">
-                            <a class="navbar-brand" href="/">Logistica <span>Architecture Agency</span></a>
+                            <a class="navbar-brand" href="/">
+                                <img src="{{asset('img/logo.png')}}" alt="Watch World" width="50">
+                            </a>
                         </div>
                     </div>
                 </div>

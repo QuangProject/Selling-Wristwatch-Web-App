@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category_watch', function (Blueprint $table) {
-            $table->unsignedBigInteger('category_id');
+        Schema::create('watch_categories', function (Blueprint $table) {
             $table->unsignedBigInteger('watch_id');
+            $table->unsignedBigInteger('category_id');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('category_watch');
+        Schema::dropIfExists('watch_categories');
     }
 };

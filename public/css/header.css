@@ -64,7 +64,7 @@
     display: block;
     width: 0;
     height: 2px;
-    background: #5777ba;
+    background: #dc3545;
     transition: 0.3s;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item>.nav-link:hover {
-    color: #5777ba;
+    color: #dc3545;
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item>.nav-link:hover:before {
@@ -118,7 +118,7 @@
 
 .ftco-navbar-light .navbar-nav>.nav-item .dropdown-menu .dropdown-item:hover,
 .ftco-navbar-light .navbar-nav>.nav-item .dropdown-menu .dropdown-item:focus {
-    background: #5777ba;
+    background: #dc3545;
     color: #fff;
 }
 
@@ -135,7 +135,7 @@
 
 .ftco-navbar-light .navbar-nav>.nav-item.cta>a {
     color: #fff;
-    background: #5777ba;
+    background: #dc3545;
     border-radius: 0px;
 }
 
@@ -149,13 +149,13 @@
 @media (max-width: 991.98px) {
     .ftco-navbar-light .navbar-nav>.nav-item.cta>a {
         color: #fff;
-        background: #5777ba;
+        background: #dc3545;
         border-radius: 4px;
     }
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item.active>a {
-    color: #5777ba;
+    color: #dc3545;
 }
 
 @media (max-width: 991.98px) {
@@ -228,8 +228,8 @@
 }
 
 .social-media p a:hover {
-    background: #5777ba;
-    border-color: #5777ba;
+    background: #dc3545;
+    border-color: #dc3545;
 }
 
 .social-media p a:hover span {
@@ -280,7 +280,7 @@
 .searchform .search {
     width: 50px;
     height: 50px;
-    background: #5777ba !important;
+    background: #dc3545 !important;
 }
 
 .searchform .search span {

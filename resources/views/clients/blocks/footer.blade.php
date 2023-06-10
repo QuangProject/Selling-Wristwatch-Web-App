@@ -10,16 +10,14 @@
             <div class="col-md">
                 <ul class="list-unstyled nav-links">
                     <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Shop</a></li>
                     <li><a href="#">Contact</a></li>
                 </ul>
             </div>
             <div class="col-md">
                 <ul class="list-unstyled nav-links">
                     <li><a href="#">Clients</a></li>
-                    <li><a href="#">Team</a></li>
                     <li><a href="#">Career</a></li>
                     <li><a href="#">Testimonials</a></li>
                     <li><a href="#">Journal</a></li>
@@ -37,10 +35,8 @@
                     <li><a href="#"><span class="icon-instagram"></span></a></li>
                     <li><a href="#"><span class="icon-twitter"></span></a></li>
                     <li><a href="#"><span class="icon-facebook"></span></a></li>
-                    <li><a href="#"><span class="icon-pinterest"></span></a></li>
-                    <li><a href="#"><span class="icon-dribbble"></span></a></li>
                 </ul>
-                <p class=""><a href="#" class="btn btn-tertiary">Contact Us</a></p>
+                <p class=""><a href="{{ route('contact') }}" class="btn btn-tertiary">Contact Us</a></p>
             </div>
         </div>
 

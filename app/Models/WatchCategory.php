@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CategoryWatch extends Model
+class WatchCategory extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'category_id',
         'watch_id',
+        'category_id',
     ];
 
     public function category()

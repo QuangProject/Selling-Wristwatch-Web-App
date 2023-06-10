@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>The Light - @yield('title')</title>
+    <title>Watch World - @yield('title')</title>
+    {{-- Logo --}}
+    <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/icon type">
 
     <!-- Vendor CSS Files -->
     <link href="{{ asset('vendor/aos/aos.css') }}" rel="stylesheet">
@@ -29,12 +31,12 @@
     {{-- Style css --}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-    
+
     @yield('css')
 </head>
 
 <body>
-    <div>
+    <div class="container-fluid">
         @include('clients.blocks.header')
 
         <main id="main">
@@ -59,22 +61,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     @yield('js')
-
-    <script>
-        const pathname = window.location.href
-        const element = document.querySelector("#ftco-nav > ul");
-
-        if (window.location.href == element.childNodes[1].childNodes[0].getAttribute("href") + "/") {
-            element.childNodes[1].className += " active"
-        } else {
-            for (let i = 1; i < element.childNodes.length; i += 2) {
-                const href = element.childNodes[i].childNodes[0].getAttribute("href")
-                if (href === pathname) {
-                    element.childNodes[i].className += " active"
-                }
-            }
-        }
-    </script>
 
     <script>
         $("#sign-out").click(function(e) {
@@ -106,6 +92,20 @@
                 }
             })
         })
+
+        const pathname = window.location.href
+        const element = document.querySelector("#ftco-nav > ul");
+
+        if (window.location.href == element.childNodes[1].childNodes[0].getAttribute("href") + "/") {
+            element.childNodes[1].className += " active"
+        } else {
+            for (let i = 1; i < element.childNodes.length; i += 2) {
+                const href = element.childNodes[i].childNodes[0].getAttribute("href")
+                if (href === pathname) {
+                    element.childNodes[i].className += " active"
+                }
+            }
+        }
     </script>
 </body>
 

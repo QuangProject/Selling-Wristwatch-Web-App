@@ -11,6 +11,7 @@ class Image extends Model
 
     protected $fillable = [
         'image_url',
+        'watch_id',
     ];
 
     public function watch()

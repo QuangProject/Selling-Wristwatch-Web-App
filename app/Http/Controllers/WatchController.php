@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class WatchController extends Controller
 {
-    public function index()
+    public function list()
     {
         $watches = Watch::all();
         return response()->json([

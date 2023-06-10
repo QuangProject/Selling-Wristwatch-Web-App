@@ -13,17 +13,17 @@
         <div class="story-container">
             <div class="need-for-dx-container">
                 <h3 class="text-center">
-                    FPT Book
+                    Watch World
                 </h3>
                 <p style="text-align: justify;">
-                    FPT Book is a brand from Vietnam, born in 2022, started off as a small thrift shop in CanTho,
-                    Vietnam. Through the lens of books, FPT Book would like to share experiences and POV in music,
-                    movies, and art, connecting the youth community with a global lifestyle. However, developing DN
-                    stores and writing documentation are arduous, monotonous, and error-prone tasks. It is a slow
-                    process and costs a lot of time and money.
+                    Discover a world where precision meets artistry, where every tick of the hand tells a story of timeless
+                    elegance. Welcome to WatchWorld, a destination for watch enthusiasts and connoisseurs alike. With a
+                    legacy spanning over five decades, we are proud to offer a curated selection of exceptional timepieces
+                    that blend masterful craftsmanship with exquisite design.
                 </p>
                 <div class="text-center">
-                    <video src="{{ asset('video/introduction.mp4') }}" loop autoplay muted class="container"></video>
+                    <video src="{{ asset('video/classic-watches-datejust-cover-autoplay.mp4') }}" loop autoplay muted
+                        class="container"></video>
                 </div>
             </div>
             <div class="container-divider"></div>
@@ -32,71 +32,56 @@
                     Our History
                 </h3>
                 <p>
-                    Founded in 1978 in Milan,Gianni Dana S.r.l is one of the leading international fashion design houses
-                    and a symbol of Italian luxury world-wide. It designs, manufactures, distributes and retails fashion
-                    and lifestyle products including haute couture, prèt-à-porter, accessories, jewellery, watches,
-                    eyewear, fragrances, and home furnishings all bearing the distinctive Medusa logo.
+                    In the vast realm of horology, WatchWorld has stood as a beacon of timekeeping excellence for over half
+                    a century. Founded in 1970 by renowned watchmaker, Mr. Alexander Grant, the brand emerged as a pioneer
+                    in crafting exquisite timepieces that seamlessly blended precision, artistry, and innovation.
                 </p>
                 <p>
-                    The Dana Group distributes its products through a world-wide D.O.S network which includes over 200
-                    boutiques in the principal cities and over 1500 wholesalers worldwide.
+                    From its humble beginnings in a small workshop, WatchWorld quickly gained recognition for its meticulous
+                    craftsmanship and attention to detail. Mr. Grant's unwavering passion for horology guided the brand's
+                    trajectory, propelling it to new heights. With a team of skilled artisans and engineers, WatchWorld
+                    embraced traditional watchmaking techniques while embracing the spirit of innovation.
                 </p>
                 <p>
-                    Donatella Dana has been Artistic Director of Versace since 1997 and has steered the brand into the
-                    21st century. Today, Dana represents its heritage through its strong and fearless designs, while
-                    addressing a new global audience which continues to strengthen Versace’s position in contemporary
-                    culture.
+                    In the 1980s, WatchWorld introduced a groundbreaking collection of quartz watches, harnessing the
+                    cutting-edge technology of the time. These timepieces offered unparalleled accuracy and reliability,
+                    capturing the hearts of watch enthusiasts worldwide. The brand's dedication to excellence and the
+                    pursuit of perfection earned WatchWorld a prestigious reputation in the industry.
                 </p>
                 <p>
-                    In 2000 Gianni Dana S.r.l opened Palazzo Versace, the first hotel project to be branded by a luxury
-                    goods company, which provides tourists and travellers the opportunity to experience and enjoy the
-                    complete Versace lifestyle. The second Palazzo Dana built in Dubai opened in 2015. The third Palazzo
-                    Dana will be built in Macau, China.
+                    As the years rolled on, WatchWorld expanded its offerings, presenting a diverse range of wristwatches
+                    that catered to various tastes and lifestyles. From classic dress watches exuding elegance to robust
+                    sports watches built for adventure, every timepiece bore the signature mark of WatchWorld's commitment
+                    to quality.
                 </p>
                 <p>
-                    In February 2014, Gianni Dana S.r.l announced its agreement with Blackstone to participate in the
-                    next phase of the Company’s development. Blackstone owns 20 percent of the company; while the Dana
-                    family remains at its heart, with Ms. Allegra Versace Beck, Ms. Donatella Dana and Mr. Santo Versace
-                    all playing important roles in the company. Donatella Dana holds the dual role of Vice-President of
-                    the board and Artistic Director.
+                    In the late 1990s, WatchWorld embraced the digital age, launching an online platform to connect directly
+                    with its global customer base. The brand's website became a virtual horological haven, offering a
+                    seamless shopping experience and a wealth of information about their collections. Watch enthusiasts
+                    could explore the intricate details of each watch, read about the brand's rich history, and engage in
+                    forums to share their passion for timepieces.
                 </p>
                 <p>
-                    In May 2016, the Dana Group appointed Mr. Jonathan Akeroyd to the position of CEO and member of the
-                    company’s Board of Directors.
+                    In recent years, under the leadership of Mr. Grant's visionary successors, WatchWorld has continued to
+                    evolve and adapt to the ever-changing landscape of watchmaking. Embracing technological advancements
+                    while preserving the artistry of traditional craftsmanship, WatchWorld has remained at the forefront of
+                    the industry.
                 </p>
                 <p>
-                    In September of 2018 VerDana ace announced that one hundred percent of all Blackstone and Dana
-                    family shares had been sold to the Group Michael Kors Limited. In January 2019, Gianni Dana S.r.l.
-                    joined Capri Holdings Limited, forming a new global fashion luxury group together with Michael Kors
-                    and Jimmy Choo.
+                    Today, WatchWorld continues to enchant watch connoisseurs with its iconic collections, from
+                    limited-edition masterpieces that push the boundaries of design to everyday timepieces that combine
+                    style and functionality. The brand's commitment to excellence, integrity, and timeless elegance ensures
+                    that every WatchWorld watch is not just a timekeeping instrument but a symbol of prestige and
+                    sophistication.
+                </p>
+                <p>
+                    With a rich heritage spanning decades, WatchWorld remains dedicated to preserving the legacy of
+                    horological excellence established by Mr. Alexander Grant. As the brand looks towards the future, it
+                    continues to inspire watch enthusiasts around the globe, reminding them that time is a precious gift
+                    best measured by the masterful craftsmanship of a WatchWorld timepiece.
                 </p>
             </div>
             <div class="container-divider"></div>
-            <div class="row mb-3" style="max-width: 950px; margin: 0 auto; padding: 0 20px;">
-                <div class="col-lg-6 d-flex justify-content-center">
-                    <img src="{{ asset('img/introduction.jpg') }}" alt="" class="img-responsive" />
-                </div>
-                <div class="col-lg-6">
-                    <div class="today-container" style="text-align: justify;">
-                        <h3 class="text-center mt-4 mt-lg-0">
-                            Commitment to quality
-                        </h3>
-                        <p>
-                            APIMatic has come a long way since its inception 3 years ago. Having started with only
-                            generating SDKs, APIMatic now provides solutions in other areas of developer experience as
-                            well. Presently, APIMatic is used by numerous organizations around the world to:
-                        </p>
-                        <ul>
-                            <li>Create and store definitions of their APIs</li>
-                            <li>Generate SDKs for their APIs for 10 platforms</li>
-                            <li>Keep these SDKs in sync with API updates</li>
-                            <li>Convert API descriptions into multiple formats (Swagger, API Blueprint, RAML etc.)</li>
-                            <li>Generate beautiful documentation for their APIs and SDKs</li>
-                            <li>Generate complete Developer Experience API Portals</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 @endsection

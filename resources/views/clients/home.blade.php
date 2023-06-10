@@ -15,43 +15,36 @@
 
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
-        <div class="container position-relative" data-aos="fade-up" data-aos-delay="500">
-            <h1>Welcome to Day</h1>
-            <h2>We are team of talented designers making websites with Bootstrap</h2>
-            <a href="#about" class="btn-get-started scrollto">Get Started</a>
+        <div class="container d-flex justify-content-center justify-content-xl-end" data-aos="fade-up" data-aos-delay="500">
+            <div class="text-center">
+                <h1>Welcome to WatchWorld</h1>
+                <h2>Unlock Time's Beauty: WatchWorld, Where Elegance Never Stops.</h2>
+                <a href="#about" class="btn-get-started scrollto">Get Started</a>
+            </div>
         </div>
     </section><!-- End Hero -->
     <!-- ======= About Section ======= -->
     <section id="about" class="about">
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left">
-                    <img src="{{ asset('img/about.jpg') }}" class="img-fluid" alt="">
+                    <img src="{{ asset('img/home/watchmaking-navigation-WMPolish_2212jb_0005.jpg') }}" class="img-fluid"
+                        alt="">
                 </div>
                 <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right">
-                    <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+                    <h3>At WatchWorld, we believe that a watch is more than a mere accessory</h3>
                     <p class="fst-italic">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore
-                        magna aliqua.
+                        It is a reflection of one's personality and style. Explore our meticulously curated collections,
+                        each bearing the hallmark of our dedication to quality and timeless elegance.
                     </p>
                     <ul>
-                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat.</li>
-                        <li><i class="bi bi-check-circle"></i> Duis aute irure dolor in reprehenderit in voluptate
-                            velit.</li>
-                        <li><i class="bi bi-check-circle"></i> Ullamco laboris nisi ut aliquip ex ea commodo
-                            consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda
-                            mastiro dolore eu fugiat nulla pariatur.</li>
+                        <li><i class="bi bi-check-circle"></i> Heritage Collection: Step into the past with our Heritage
+                            Collection, where classic design elements meet modern sophistication.</li>
+                        <li><i class="bi bi-check-circle"></i> Artisan Edition: Immerse yourself in the realm of horological
+                            artistry with our Artisan Edition watches.</li>
+                        <li><i class="bi bi-check-circle"></i> Lifestyle Collection: Find the perfect watch to complement
+                            your unique lifestyle with our Lifestyle Collection.</li>
                     </ul>
-                    <p>
-                        Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                        reprehenderit in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                        proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum
-                    </p>
                 </div>
             </div>
 
@@ -67,27 +60,30 @@
                 <div class="col-lg-4" data-aos="fade-up">
                     <div class="box">
                         <span>01</span>
-                        <h4>Lorem Ipsum</h4>
-                        <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero
-                            placeat</p>
+                        <h4>Craftsmanship and Innovation</h4>
+                        <p>At WatchWorld, we believe in the seamless fusion of traditional craftsmanship and innovative
+                            technology. Every watch in our collection is meticulously crafted by skilled artisans and
+                            watchmakers who take pride in their art.</p>
                     </div>
                 </div>
 
                 <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="150">
                     <div class="box">
                         <span>02</span>
-                        <h4>Repellat Nihil</h4>
-                        <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire
-                            leno para dest</p>
+                        <h4>Customer Experience</h4>
+                        <p>We are committed to providing an exceptional customer experience from the moment you step into
+                            the world of WatchWorld. Our knowledgeable team is here to guide you in finding
+                            the timepiece that suits your preferences and requirements.</p>
                     </div>
                 </div>
 
                 <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
                     <div class="box">
                         <span>03</span>
-                        <h4> Ad ad velit qui</h4>
-                        <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam
-                            quis</p>
+                        <h4>WatchWorld Community:</h4>
+                        <p>Become a part of our vibrant community of watch enthusiasts by joining our forums and social
+                            media channels. Share your passion, engage in discussions, and stay updated with the latest
+                            trends and releases in the world of horology.</p>
                     </div>
                 </div>
 
@@ -136,9 +132,8 @@
         <div class="container">
 
             <div class="section-title">
-                <span>Services</span>
-                <h2>Services</h2>
-                <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+                <span>Top Brands</span>
+                <h2>Top Brands</h2>
             </div>
 
             <div class="row">
@@ -202,11 +197,12 @@
         <div class="container" data-aos="zoom-in">
 
             <div class="text-center">
-                <h3>Call To Action</h3>
-                <p> Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                    mollit anim id est laborum.</p>
-                <a class="cta-btn" href="#">Call To Action</a>
+                <h3>Introduction</h3>
+                <p>At WatchWorld, we invite you to experience the magic of timekeeping. Discover the perfect union of
+                    craftsmanship, elegance, and innovation as you embark on a journey through our exquisite collections.
+                    Your time is precious, and at WatchWorld, we ensure that every second is counted with impeccable style.
+                </p>
+                <a class="cta-btn" href="#">About</a>
             </div>
 
         </div>

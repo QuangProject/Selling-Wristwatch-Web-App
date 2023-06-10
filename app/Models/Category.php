@@ -13,8 +13,8 @@ class Category extends Model
         'name',
     ];
 
-    public function categoryWatches()
+    public function watchCategories()
     {
-        return $this->hasMany(CategoryWatch::class);
+        return $this->hasMany(WatchCategory::class);
     }
 }

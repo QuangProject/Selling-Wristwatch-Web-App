@@ -10,7 +10,7 @@
 
 @section('content')
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact mt-2">
+    <section id="contact" class="contact my-5">
         <div class="container">
 
             {{-- <div class="section-title">
