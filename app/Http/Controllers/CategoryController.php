@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function index()
+    {
+        $categories = Category::all();
+        // return view('admin.brand.index');
+        return view('admin.category.index')->with('categories', $categories);
+    }
+
     public function list()
     {
         $categories = Category::all();

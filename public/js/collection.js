@@ -17,11 +17,13 @@ const btnAddCollection = document.getElementById('btn-add-collection');
 
 // Display brand collection
 $(document).ready(function () {
+    $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     $.ajax({
         url: '/api/brands',
         type: 'GET',
         dataType: 'json',
         success: function (data) {
+            $('.overlay').remove()
             const selectBrand = document.getElementById('add-brand-id');
             // Loop through each data and append to select element
             $.each(data.brands, function (key, value) {
@@ -42,6 +44,7 @@ $(document).ready(function () {
 
         },
         error: function (error) {
+            $('.overlay').remove()
             console.log(error);
         }
     });
@@ -121,6 +124,7 @@ btnAddCollection.addEventListener('click', function (event) {
     formData.append('release_date', inputAddReleaseDate.value);
     formData.append('brand_id', inputAddBrandId.value);
 
+    $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     $.ajax({
         url: '/api/collections',
         type: 'POST',
@@ -128,7 +132,7 @@ btnAddCollection.addEventListener('click', function (event) {
         processData: false,
         contentType: false,
         success: function (response) {
-            console.log(response)
+            $('.overlay').remove()
             Swal.fire({
                 'icon': 'success',
                 'title': response.message,
@@ -163,6 +167,7 @@ btnAddCollection.addEventListener('click', function (event) {
             RemoveDataBSDismissOfAddButton();
         },
         error: function (error) {
+            $('.overlay').remove()
             console.error(error);
             if (error.status >= 500) {
                 Swal.fire(
@@ -256,10 +261,12 @@ inputUpdateBrandId.addEventListener('input', function (event) {
 
 // Fill data to update modal
 function updateCollection(id) {
+    $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     $.ajax({
         url: '/api/collections/' + id,
         type: 'GET',
         success: function (response) {
+            $('.overlay').remove()
             inputUpdateCollectionName.value = response.collection.name;
             inputUpdateReleaseDate.value = response.collection.release_date;
             inputUpdateBrandId.value = response.collection.brand_id;
@@ -267,6 +274,7 @@ function updateCollection(id) {
             btnUpdateCollection.setAttribute('onclick', 'updateCollectionSubmit(' + response.collection.id + ')');
         },
         error: function (error) {
+            $('.overlay').remove()
             console.error(error);
         }
     });
@@ -303,12 +311,13 @@ function updateCollectionSubmit(id) {
         'brand_id': inputUpdateBrandId.value
     };
 
+    $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     $.ajax({
         url: '/api/collections/' + id,
         type: 'PUT',
         data: data,
         success: function (response) {
-            console.log(response)
+            $('.overlay').remove()
             Swal.fire({
                 'icon': 'success',
                 'title': response.message,
@@ -338,6 +347,7 @@ function updateCollectionSubmit(id) {
             RemoveDataBSDismissOfUpdateButton();
         },
         error: function (error) {
+            $('.overlay').remove()
             console.error(error);
             if (error.status >= 500) {
                 Swal.fire(
@@ -391,12 +401,14 @@ function deleteCollection(id) {
         'cancelButtonText': 'No, keep it'
     }).then((result) => {
         if (result.isConfirmed) {
+            $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
             // DELETE A BRAND AJAX
             const path = '/api/collections/' + id;
             $.ajax({
                 url: path,
                 type: 'DELETE',
                 success: function (response) {
+                    $('.overlay').remove()
                     Swal.fire({
                         'icon': 'success',
                         'title': response.message,
@@ -414,6 +426,7 @@ function deleteCollection(id) {
                         })
                 },
                 error: function (error) {
+                    $('.overlay').remove()
                     console.error(error);
                     if (error.status === 400) {
                         Swal.fire(

@@ -101,6 +101,7 @@ buttonAddBrand.addEventListener('click', function () {
     formData.append('year_established', inputAddYearEstablished.value);
     formData.append('image', inputAddBrandImage.files[0]);
 
+    $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     // SEND DATA TO SERVER USING AJAX
     $.ajax({
         url: '/api/brands',
@@ -109,6 +110,7 @@ buttonAddBrand.addEventListener('click', function () {
         processData: false,
         contentType: false,
         success: function (response) {
+            $('.overlay').remove()
             Swal.fire({
                 'icon': 'success',
                 'title': 'Add brand successfully',
@@ -147,6 +149,7 @@ buttonAddBrand.addEventListener('click', function () {
             RemoveDataBSDismissOfAddButton();
         },
         error: function (error) {
+            $('.overlay').remove()
             console.error(error);
             if (error.status === 400) {
                 Swal.fire(
@@ -168,8 +171,8 @@ buttonAddBrand.addEventListener('click', function () {
 
 function AddDataBSDismissOfAddButton() {
     if (!buttonAddBrand.hasAttribute('data-bs-dismiss')
-        && errorAddBrandName.textContent == '' && errorAddBrandImage.textContent == ''
-        && inputAddBrandName.value != '' && inputAddBrandImage.value != '') {
+        && errorAddBrandName.textContent == '' && errorAddCountryOfOrigin.textContent == '' && errorAddYearEstablished.textContent == '' && errorAddBrandImage.textContent == ''
+        && inputAddBrandName.value != '' && inputAddCountryOfOrigin.value != '' && inputAddYearEstablished.value != '' && inputAddBrandImage.value != '') {
         buttonAddBrand.setAttribute('data-bs-dismiss', 'modal')
     }
 }
@@ -236,12 +239,14 @@ inputUpdateYearEstablished.addEventListener('input', function () {
 });
 
 function updateBrand(brandId) {
+    $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     // GET A BRAND AJAX
     const path = '/api/brands/' + brandId;
     $.ajax({
         url: path,
         type: 'GET',
         success: function (response) {
+            $('.overlay').remove()
             inputUpdateBrandName.value = response.brand.name;
             inputUpdateCountryOfOrigin.value = response.brand.country_of_origin;
             inputUpdateYearEstablished.value = response.brand.year_established;
@@ -251,6 +256,7 @@ function updateBrand(brandId) {
             buttonUpdateBrand.setAttribute('onclick', 'updateBrandSubmit(' + brandId + ')');
         },
         error: function (error) {
+            $('.overlay').remove()
             console.error(error);
         }
     })
@@ -287,7 +293,7 @@ function updateBrandSubmit(id) {
     } else {
         formData.append('image', inputUpdateBrandImage.files[0]);
     }
-
+    $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     // SEND DATA TO SERVER USING AJAX
     const path = '/api/brands/' + id;
     $.ajax({
@@ -297,6 +303,7 @@ function updateBrandSubmit(id) {
         processData: false,
         contentType: false,
         success: function (response) {
+            $('.overlay').remove()
             Swal.fire({
                 'icon': 'success',
                 'title': 'Update brand successfully',
@@ -330,6 +337,7 @@ function updateBrandSubmit(id) {
             RemoveDataBSDismissOfUpdateButton();
         },
         error: function (error) {
+            $('.overlay').remove()
             console.error(error);
             if (error.status === 400) {
                 Swal.fire(
@@ -368,12 +376,14 @@ function deleteBrand(brandId) {
         'cancelButtonText': 'No, keep it'
     }).then((result) => {
         if (result.isConfirmed) {
+            $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
             // DELETE A BRAND AJAX
             const path = '/api/brands/' + brandId;
             $.ajax({
                 url: path,
                 type: 'DELETE',
                 success: function (response) {
+                    $('.overlay').remove()
                     Swal.fire({
                         'icon': 'success',
                         'title': response.message,
@@ -391,6 +401,7 @@ function deleteBrand(brandId) {
                         })
                 },
                 error: function (error) {
+                    $('.overlay').remove()
                     console.error(error);
                     if (error.status === 400) {
                         Swal.fire(
@@ -414,8 +425,8 @@ function deleteBrand(brandId) {
 
 function AddDataBSDismissOfUpdateButton() {
     if (!buttonUpdateBrand.hasAttribute('data-bs-dismiss')
-        && errorUpdateBrandName.textContent == ''
-        && inputUpdateBrandName.value != '') {
+        && errorUpdateBrandName.textContent == '' && errorUpdateCountryOfOrigin.textContent == '' && errorUpdateYearEstablished.textContent == ''
+        && inputUpdateBrandName.value != '' && inputUpdateCountryOfOrigin.value != '' && inputUpdateYearEstablished.value != '') {
         buttonUpdateBrand.setAttribute('data-bs-dismiss', 'modal')
     }
 }

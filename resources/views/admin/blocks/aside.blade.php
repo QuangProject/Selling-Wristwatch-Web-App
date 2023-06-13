@@ -29,16 +29,16 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="index.html">
-                <i class="bi bi-watch"></i>
-                <span>Watch</span>
+            <a class="nav-link collapsed" href="{{ route('admin.category.index') }}">
+                <i class="bi bi-tag"></i>
+                <span>Category</span>
             </a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="index.html">
-                <i class="bi bi-tag"></i>
-                <span>Category</span>
+                <i class="bi bi-watch"></i>
+                <span>Watch</span>
             </a>
         </li>
 
@@ -48,7 +48,7 @@
                 <span>Watch Category</span>
             </a>
         </li>
-        
+
         <li class="nav-item">
             <a class="nav-link collapsed" href="pages-contact.html">
                 <i class="bi bi-envelope"></i>

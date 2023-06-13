@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
@@ -55,5 +56,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/brand', [BrandController::class, 'index'])->name('admin.brand.index');
 
         Route::get('/collection', [CollectionController::class, 'index'])->name('admin.collection.index');
+
+        Route::get('/category', [CategoryController::class, 'index'])->name('admin.category.index');
     });
 });
