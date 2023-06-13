@@ -42,8 +42,9 @@
     {{-- Data table --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
 
-    <!-- Template Main CSS File -->
+    <!-- CSS File -->
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/loader.css') }}">
 
     @yield('css')
 </head>

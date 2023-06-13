@@ -46,7 +46,7 @@ class LoginController extends Controller
         if ($user->is_admin) {
             return redirect()->route('admin.dashboard');
         }
-        return redirect('/home');
+        return redirect()->route('home');
     }
 
     public function redirectToGoogle()
@@ -65,6 +65,9 @@ class LoginController extends Controller
         $checkUser = User::where('email', $email)->first();
         if ($checkUser) {
             auth()->login($checkUser);
+            if ($checkUser->password == "") {
+                return redirect()->route('create.password');
+            }
             if ($checkUser->is_admin) {
                 return redirect()->route('admin.dashboard');
             }
@@ -74,7 +77,7 @@ class LoginController extends Controller
                 'firstname' => $firstName,
                 'lastname' => $lastName,
                 'email' => $email,
-                'password' => bcrypt('12345678'),
+                'password' => "",
             ]);
             auth()->login($user);
             if (!$user->hasVerifiedEmail()) {
@@ -83,7 +86,7 @@ class LoginController extends Controller
             if ($user->is_admin) {
                 return redirect()->route('admin.dashboard');
             }
-            return redirect()->route('home');
+            return redirect()->route('create.password');
         }
     }
 }

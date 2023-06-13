@@ -35,12 +35,18 @@ Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallb
 Auth::routes(['verify' => true]);
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', [UserController::class, 'profile'])->name('profile')->middleware('verified');
+    Route::prefix('user')->group(function () {
+        Route::get('/create-password', [UserController::class, 'createPassword'])->name('create.password');
+        Route::post('/create-password/save', [UserController::class, 'savePassword'])->name('create.password.save');
+        Route::get('/profile', [UserController::class, 'profile'])->name('profile')->middleware('verified');
+        Route::post('/profile/edit', [UserController::class, 'edit'])->name('profile.edit');
+        Route::post('/profile/edit/password', [UserController::class, 'editPassword'])->name('profile.edit.password');
+    });
 });
 
 // Admin
-Route::prefix('admin')->group(function () {
-    Route::middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [StatisticController::class, 'dashboard'])->name('admin.dashboard');
 
         Route::get('/order', [OrderController::class, 'index'])->name('admin.order.index');

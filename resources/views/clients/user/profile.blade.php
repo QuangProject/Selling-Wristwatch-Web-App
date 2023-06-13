@@ -39,58 +39,60 @@
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">First Name</div>
-                                <div class="col-lg-9 col-md-8">Quang</div>
+                                <div class="col-lg-9 col-md-8">{{ $user->firstname }}</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Last Name</div>
-                                <div class="col-lg-9 col-md-8">Nguyen</div>
+                                <div class="col-lg-9 col-md-8">{{ $user->lastname }}</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Gender</div>
-                                <div class="col-lg-9 col-md-8">Male</div>
+                                <div class="col-lg-9 col-md-8">{{ $user->gender }}</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Birthday</div>
-                                <div class="col-lg-9 col-md-8">August 5th, 2002</div>
+                                <div class="col-lg-9 col-md-8">{{ $user->birthday }}</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Phone</div>
-                                <div class="col-lg-9 col-md-8">0916843367</div>
+                                <div class="col-lg-9 col-md-8">{{ $user->telephone }}</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Address</div>
-                                <div class="col-lg-9 col-md-8">A108 Adam Street, New York, NY 535022</div>
+                                <div class="col-lg-9 col-md-8">{{ $user->address }}</div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-3 col-md-4 label">Email</div>
-                                <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                                <div class="col-lg-9 col-md-8">{{ $user->email }}</div>
                             </div>
 
                         </div>
 
                         <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
-
+                            <div id="profile-error" role="alert"></div>
                             <!-- Profile Edit Form -->
-                            <form>
+                            <form method="POST" id="update-profile-form">
+                                @csrf
+
                                 <div class="row mb-3">
-                                    <label for="firstname" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+                                    <label for="first-name" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="firstname" type="text" class="form-control" id="firstname"
-                                            value="Kevin Anderson">
+                                        <input name="firstname" type="text" class="form-control" id="first-name"
+                                            value="{{ $user->firstname }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="lastname" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                                    <label for="last-name" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="lastname" type="text" class="form-control" id="lastname"
-                                            value="Kevin Anderson">
+                                        <input name="lastname" type="text" class="form-control" id="last-name"
+                                            value="{{ $user->lastname }}">
                                     </div>
                                 </div>
 
@@ -98,15 +100,26 @@
                                     <label class="col-md-4 col-lg-3 col-form-label">Gender</label>
                                     <div class="col-md-8 col-lg-9 d-flex">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="maleGender" checked
-                                                name="gender" value="true" />
+                                            @if ($user->gender == 'male')
+                                                <input class="form-check-input" type="radio" id="maleGender" checked
+                                                    name="gender" value="male" />
+                                            @else
+                                                <input class="form-check-input" type="radio" id="maleGender"
+                                                    name="gender" value="male" />
+                                            @endif
                                             <label class="form-check-label" for="maleGender">
                                                 Male
                                             </label>
                                         </div>
                                         <div class="form-check ms-4">
-                                            <input class="form-check-input" id="femaleGender" type="radio" name="gender"
-                                                value="false" />
+                                            @if ($user->gender == 'female')
+                                                <input class="form-check-input" id="femaleGender" type="radio" checked
+                                                    name="gender" value="female" />
+                                            @else
+                                                <input class="form-check-input" id="femaleGender" type="radio"
+                                                    name="gender" value="female" />
+                                            @endif
+
                                             <label class="form-check-label" for="femaleGender">
                                                 Female
                                             </label>
@@ -118,15 +131,15 @@
                                     <label class="col-md-4 col-lg-3 col-form-label" for="birthday">Birthday</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input type="date" class="form-control" id="birthday" name="birthday"
-                                            value="2002-08-05">
+                                            value="{{ $user->birthday }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="Phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                                    <label for="telephone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="phone" type="text" class="form-control" id="phone"
-                                            value="0916843367">
+                                        <input name="telephone" type="text" class="form-control" id="telephone"
+                                            value="{{ $user->telephone }}">
                                     </div>
                                 </div>
 
@@ -134,15 +147,15 @@
                                     <label for="Address" class="col-md-4 col-lg-3 col-form-label">Address</label>
                                     <div class="col-md-8 col-lg-9">
                                         <input name="address" type="text" class="form-control" id="address"
-                                            value="A108 Adam Street, New York, NY 535022">
+                                            value="{{ $user->address }}">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="email" type="email" readonly class="form-control" id="Email"
-                                            value="k.anderson@example.com">
+                                        <input name="email" type="email" readonly class="form-control"
+                                            id="Email" value="{{ $user->email }}">
                                     </div>
                                 </div>
 
@@ -150,36 +163,37 @@
                                     <button type="submit" class="btn btn-primary">Save Changes</button>
                                 </div>
                             </form><!-- End Profile Edit Form -->
-
                         </div>
 
                         <div class="tab-pane fade pt-3" id="profile-change-password">
+                            <div id="change-password-error" role="alert"></div>
                             <!-- Change Password Form -->
-                            <form>
+                            <form method="POST" id="change-password-form">
+                                @csrf
 
                                 <div class="row mb-3">
-                                    <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current
+                                    <label for="current-password" class="col-md-4 col-lg-3 col-form-label">Current
                                         Password</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="password" type="password" class="form-control"
-                                            id="currentPassword">
+                                        <input name="oldPassword" type="password" class="form-control"
+                                            id="current-password">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New
+                                    <label for="new-password" class="col-md-4 col-lg-3 col-form-label">New
                                         Password</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="newpassword" type="password" class="form-control" id="newPassword">
+                                        <input name="newPassword" type="password" class="form-control" id="new-password">
                                     </div>
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New
+                                    <label for="re-new-password" class="col-md-4 col-lg-3 col-form-label">Re-enter New
                                         Password</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="renewpassword" type="password" class="form-control"
-                                            id="renewPassword">
+                                        <input name="ReNewPassword" type="password" class="form-control"
+                                            id="re-new-password">
                                     </div>
                                 </div>
 
@@ -193,4 +207,8 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/profile.js') }}"></script>
 @endsection
