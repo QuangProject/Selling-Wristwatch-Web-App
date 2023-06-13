@@ -22,7 +22,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="index.html">
+            <a class="nav-link collapsed" href="{{ route('admin.collection.index') }}">
                 <i class="bi bi-collection"></i>
                 <span>Collection</span>
             </a>
@@ -48,21 +48,12 @@
                 <span>Watch Category</span>
             </a>
         </li>
-
-        <li class="nav-heading">Pages</li>
-
+        
         <li class="nav-item">
             <a class="nav-link collapsed" href="pages-contact.html">
                 <i class="bi bi-envelope"></i>
                 <span>Contact</span>
             </a>
         </li><!-- End Contact Page Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-login.html">
-                <i class="bi bi-box-arrow-in-right"></i>
-                <span>Logout</span>
-            </a>
-        </li><!-- End Login Page Nav -->
     </ul>
 </aside>

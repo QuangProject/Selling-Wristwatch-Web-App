@@ -61,3 +61,10 @@ Route::post('/watch-categories', 'App\Http\Controllers\WatchCategoryController@s
 Route::get('/watch-categories/{watchId}/{categoryId}', 'App\Http\Controllers\WatchCategoryController@show');
 Route::put('/watch-categories/{watchId}/{categoryId}', 'App\Http\Controllers\WatchCategoryController@update');
 Route::delete('/watch-categories/{watchId}/{categoryId}', 'App\Http\Controllers\WatchCategoryController@destroy');
+
+// Contact
+Route::get('/contacts', 'App\Http\Controllers\ContactController@list');
+Route::post('/contacts', 'App\Http\Controllers\ContactController@store');
+Route::get('/contacts/{id}', 'App\Http\Controllers\ContactController@show');
+Route::put('/contacts/{id}', 'App\Http\Controllers\ContactController@update');
+Route::delete('/contacts/{id}', 'App\Http\Controllers\ContactController@destroy');

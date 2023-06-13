@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
 class LoginController extends Controller
@@ -40,6 +41,14 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->is_admin) {
+            return redirect()->route('admin.dashboard');
+        }
+        return redirect('/home');
+    }
+
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();
@@ -56,17 +65,23 @@ class LoginController extends Controller
         $checkUser = User::where('email', $email)->first();
         if ($checkUser) {
             auth()->login($checkUser);
+            if ($checkUser->is_admin) {
+                return redirect()->route('admin.dashboard');
+            }
             return redirect()->route('home');
         } else {
             $user = User::create([
                 'firstname' => $firstName,
                 'lastname' => $lastName,
                 'email' => $email,
-                // 'password' => bcrypt('12345678'),
+                'password' => bcrypt('12345678'),
             ]);
             auth()->login($user);
             if (!$user->hasVerifiedEmail()) {
                 $user->markEmailAsVerified();
+            }
+            if ($user->is_admin) {
+                return redirect()->route('admin.dashboard');
             }
             return redirect()->route('home');
         }

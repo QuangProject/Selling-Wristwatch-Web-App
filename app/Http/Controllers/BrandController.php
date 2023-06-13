@@ -13,7 +13,7 @@ class BrandController extends Controller
     {
         $brands = Brand::all();
         // return view('admin.brand.index');
-        return view('admin.brand.index', compact('brands'));
+        return view('admin.brand.index')->with('brands', $brands);
     }
 
     public function list()

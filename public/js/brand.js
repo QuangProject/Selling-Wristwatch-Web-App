@@ -109,7 +109,6 @@ buttonAddBrand.addEventListener('click', function () {
         processData: false,
         contentType: false,
         success: function (response) {
-            console.log(response)
             Swal.fire({
                 'icon': 'success',
                 'title': 'Add brand successfully',
@@ -396,14 +395,14 @@ function deleteBrand(brandId) {
                     if (error.status === 400) {
                         Swal.fire(
                             'Warning',
-                            error.responseJSON.error,
+                            error.responseJSON.message,
                             'warning'
                         )
                     }
                     if (error.status === 500) {
                         Swal.fire(
                             'Error',
-                            error.responseJSON.error,
+                            error.responseJSON.message,
                             'error'
                         )
                     }

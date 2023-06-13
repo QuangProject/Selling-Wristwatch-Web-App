@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StatisticController;
@@ -22,7 +23,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Auth::routes();
-Auth::routes(['verify' => true]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
@@ -32,15 +32,22 @@ Route::get('/detail/{slug}', [HomeController::class, 'detail'])->name('detail');
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
 
+Auth::routes(['verify' => true]);
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile')->middleware('verified');
 });
 
 // Admin
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [StatisticController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/order', [OrderController::class, 'index'])->name('admin.order.index');
-    Route::get('/order/{id}', [OrderController::class, 'detail'])->name('admin.order.detail');
+    Route::middleware(['auth', 'admin'])->group(function () {
+        Route::get('/dashboard', [StatisticController::class, 'dashboard'])->name('admin.dashboard');
 
-    Route::get('/brand', [BrandController::class, 'index'])->name('admin.brand.index');
+        Route::get('/order', [OrderController::class, 'index'])->name('admin.order.index');
+        Route::get('/order/{id}', [OrderController::class, 'detail'])->name('admin.order.detail');
+
+        Route::get('/brand', [BrandController::class, 'index'])->name('admin.brand.index');
+
+        Route::get('/collection', [CollectionController::class, 'index'])->name('admin.collection.index');
+    });
 });

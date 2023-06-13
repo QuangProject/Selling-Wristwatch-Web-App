@@ -12,7 +12,9 @@
     @if (session('msg'))
         <div class="alert alert-success">{{ session('msg') }}</div>
     @endif
-
+    @if (session('error'))
+        <div class="alert alert-danger mt-3">{{ session('error') }}</div>
+    @endif
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-xl-end" data-aos="fade-up" data-aos-delay="500">

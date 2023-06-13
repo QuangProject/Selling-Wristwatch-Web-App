@@ -12,13 +12,6 @@
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact my-5">
         <div class="container">
-
-            {{-- <div class="section-title">
-            <span>Contact</span>
-            <h2>Contact</h2>
-            <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
-        </div> --}}
-
             <div class="row" data-aos="fade-up">
                 <div class="col-lg-6">
                     <div class="info-box mb-4">
@@ -59,7 +52,7 @@
                     <form id="frmSendContact" method="post" role="form" class="php-email-form">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <input type="text" name="name" class="form-control" id="name"
+                                <input type="text" name="full_name" class="form-control" id="full_name"
                                     placeholder="Your Name">
                             </div>
                             <div class="col-md-6 form-group mt-3 mt-md-0">
@@ -71,13 +64,8 @@
                             <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
                         </div>
                         <div class="form-group mt-3">
-                            <textarea class="form-control" name="message" rows="5" placeholder="Message"></textarea>
+                            <textarea class="form-control" name="message" id="message" rows="5" placeholder="Message"></textarea>
                         </div>
-                        {{-- <div class="my-3">
-                        <div class="loading">Loading</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Your message has been sent. Thank you!</div>
-                    </div> --}}
                         <div class="text-center mt-3"><button type="submit">Send Message</button></div>
                     </form>
                 </div>
@@ -89,29 +77,5 @@
 @endsection
 
 @section('js')
-    <script>
-        $('#frmSendContact').submit(function(e) {
-            e.preventDefault();
-            const formData = new FormData(this);
-            for (const [key, value] of formData) {
-                if (value === "") {
-                    Swal.fire(
-                        'The Warning',
-                        'Please do not leave any fields blank',
-                        'warning'
-                    )
-                    return
-                }
-            }
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Your contact has been sent',
-                showConfirmButton: false,
-                timer: 2000
-            }).then(() => {
-                window.location.href = '/contact';
-            })
-        });
-    </script>
+    <script src="{{ asset('js/contact.js') }}"></script>
 @endsection
