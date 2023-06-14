@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
+    public function index()
+    {
+        $contacts = Contact::all();
+        return view('admin.contact.index')->with('contacts', $contacts);
+    }
+
     public function list()
     {
         $contacts = Contact::all();

@@ -36,7 +36,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="index.html">
+            <a class="nav-link collapsed" href="{{ route('admin.watch.index') }}">
                 <i class="bi bi-watch"></i>
                 <span>Watch</span>
             </a>
@@ -50,7 +50,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="pages-contact.html">
+            <a class="nav-link collapsed" href="{{ route('admin.contact.index') }}">
                 <i class="bi bi-envelope"></i>
                 <span>Contact</span>
             </a>

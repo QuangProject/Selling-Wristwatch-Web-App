@@ -26,6 +26,11 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         try {
+            // Check if name is exist
+            $check = Category::where('name', $request->input('name'))->first();
+            if ($check) {
+                return response()->json(['message' => 'Category name already exist'], 400);
+            }
             $category = Category::create($request->all());
             return response()->json([
                 'message' => 'Category created successfully',
@@ -57,6 +62,11 @@ class CategoryController extends Controller
             $category = Category::find($id);
             if (is_null($category)) {
                 return response()->json(['message' => 'Category not found'], 404);
+            }
+            // Check if name is exist
+            $check = Category::where('name', $request->input('name'))->first();
+            if ($check && $check->id != $id) {
+                return response()->json(['message' => 'Category name already exist'], 400);
             }
             $category->update($request->all());
             return response()->json([

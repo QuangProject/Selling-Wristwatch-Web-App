@@ -12,7 +12,6 @@ class BrandController extends Controller
     public function index()
     {
         $brands = Brand::all();
-        // return view('admin.brand.index');
         return view('admin.brand.index')->with('brands', $brands);
     }
 
@@ -28,6 +27,12 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         try {
+            // Check if name is exist
+            $check = Brand::where('name', $request->input('name'))->first();
+            if ($check) {
+                return response()->json(['message' => 'Brand name already exist'], 400);
+            }
+
             $imagePath = $request->file('image')->store('public/brands');
 
             $brand = new Brand();
@@ -83,6 +88,11 @@ class BrandController extends Controller
             $brand = Brand::find($id);
             if (is_null($brand)) {
                 return response()->json(['message' => 'Brand not found'], 404);
+            }
+            // Check if name is exist
+            $check = Brand::where('name', $request->input('name'))->first();
+            if ($check && $check->id != $id) {
+                return response()->json(['message' => 'Brand name already exist'], 400);
             }
             if ($request->hasFile('image')) {
                 // Delete the existing image from storage

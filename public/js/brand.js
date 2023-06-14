@@ -126,7 +126,7 @@ buttonAddBrand.addEventListener('click', function () {
                 <td>${response.brand.country_of_origin}</td>
                 <td>${response.brand.year_established}</td>
                 <td>
-                    <img src="/api/brands/image/${response.brand.id}" alt="${response.brand.name}" width="100">
+                    <img src="/admin/brand/image/${response.brand.id}" alt="${response.brand.name}" width="100">
                 </td>
                 <td>
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateBrand(${response.brand.id})" data-bs-target="#updateBrandModal">
@@ -250,7 +250,7 @@ function updateBrand(brandId) {
             inputUpdateBrandName.value = response.brand.name;
             inputUpdateCountryOfOrigin.value = response.brand.country_of_origin;
             inputUpdateYearEstablished.value = response.brand.year_established;
-            displayImageUpdateBrand.src = '/api/brands/image/' + response.brand.id;
+            displayImageUpdateBrand.src = '/admin/brand/image/' + response.brand.id;
             displayImageUpdateBrand.alt = response.brand.name;
             buttonUpdateBrand.setAttribute('data-bs-dismiss', 'modal');
             buttonUpdateBrand.setAttribute('onclick', 'updateBrandSubmit(' + brandId + ')');
@@ -311,13 +311,23 @@ function updateBrandSubmit(id) {
                 'timer': 2000
             })
 
+            const displayImageUpdateBrand = document.getElementById('image_' + response.brand.id);
+            fetch('/admin/brand/image/' + response.brand.id)
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    displayImageUpdateBrand.src = url;
+                    displayImageUpdateBrand.alt = response.brand.name;
+                })
+                .catch(error => console.error(error));
+
             const brand = document.getElementById('brand_' + response.brand.id);
             brand.innerHTML = `
                 <td>${response.brand.name}</td>
                 <td>${response.brand.country_of_origin}</td>
                 <td>${response.brand.year_established}</td>
                 <td>
-                    <img src="/api/brands/image/${response.brand.id}" alt="${response.brand.name}" width="100">
+                    <img src="/admin/brand/image/${response.brand.id}" id="image_${response.brand.id}" alt="${response.brand.name}" width="100">
                 </td>
                 <td>
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateBrand(${response.brand.id})" data-bs-target="#updateBrandModal">

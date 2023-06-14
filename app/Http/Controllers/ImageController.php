@@ -9,6 +9,12 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ImageController extends Controller
 {
+    public function index()
+    {
+        $images = Image::all();
+        return view('admin.watch.image')->with('images', $images);
+    }
+
     public function list($watchId)
     {
         $images = Image::where('watch_id', $watchId)->get();

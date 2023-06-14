@@ -4,11 +4,13 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CollectionController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\UserController;
-use App\Models\Brand;
+use App\Http\Controllers\WatchController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -49,14 +51,14 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [StatisticController::class, 'dashboard'])->name('admin.dashboard');
-
         Route::get('/order', [OrderController::class, 'index'])->name('admin.order.index');
         Route::get('/order/{id}', [OrderController::class, 'detail'])->name('admin.order.detail');
-
         Route::get('/brand', [BrandController::class, 'index'])->name('admin.brand.index');
-
+        Route::get('/brand/image/{id}', [BrandController::class, 'getImage'])->name('admin.brand.image');
         Route::get('/collection', [CollectionController::class, 'index'])->name('admin.collection.index');
-
         Route::get('/category', [CategoryController::class, 'index'])->name('admin.category.index');
+        Route::get('/watch', [WatchController::class, 'index'])->name('admin.watch.index');
+        Route::get('/watch/{id}/image', [ImageController::class, 'index'])->name('admin.watch.image');
+        Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.index');
     });
 });

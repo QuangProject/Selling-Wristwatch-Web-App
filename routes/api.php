@@ -27,7 +27,6 @@ Route::delete('/categories/{id}', 'App\Http\Controllers\CategoryController@destr
 
 // Brand
 Route::get('/brands', 'App\Http\Controllers\BrandController@list');
-Route::get('/brands/image/{id}', 'App\Http\Controllers\BrandController@getImage');
 Route::post('/brands', 'App\Http\Controllers\BrandController@store');
 Route::get('/brands/{id}', 'App\Http\Controllers\BrandController@show');
 Route::put('/brands/{id}', 'App\Http\Controllers\BrandController@update');

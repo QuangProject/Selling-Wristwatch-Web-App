@@ -31,8 +31,8 @@
                         <td>{{ $brand->country_of_origin }}</td>
                         <td>{{ $brand->year_established }}</td>
                         <td>
-                            <img src="/api/brands/image/{{ $brand->id }}" alt="{{ $brand->name }}" width="100"
-                                class="my-3" loading="lazy">
+                            <img src="{{ route('admin.brand.image', ['id' => $brand->id]) }}" id="image_{{ $brand->id }}"
+                                alt="{{ $brand->name }}" width="100" class="my-3" loading="lazy">
                         </td>
                         <td>
                             <button class="btn btn-primary" type="button" data-bs-toggle="modal"
@@ -159,8 +159,8 @@
                                         <h6 class="fw-bold">Brand Image</h6>
                                     </label>
                                     <div>
-                                        <img src="" id="display-image-update-brand" alt="brand's image" width="100"
-                                            class="my-3">
+                                        <img src="" id="display-image-update-brand" alt="brand's image"
+                                            width="100" class="my-3">
                                     </div>
                                     <input type="file" id="update-brand-image" class="form-control">
                                     <span class="text-danger" id="errorUpdateBrandImage"></span>

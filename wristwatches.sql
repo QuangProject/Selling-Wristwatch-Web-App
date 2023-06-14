@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2023 at 12:13 PM
+-- Generation Time: Jun 13, 2023 at 12:01 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -35,16 +35,16 @@ CREATE TABLE `brands` (
   `image` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `brands`
 --
 
 INSERT INTO `brands` (`id`, `name`, `country_of_origin`, `year_established`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'Rolex', 'Switzerland', 1905, 'public/brands/zWgtzXyvugLcooTmHtEIO9Xenu6fgu7wwW8w47q8.png', '2023-06-09 02:40:37', '2023-06-09 02:40:37'),
-(2, 'Omega', 'Switzerland', 1848, 'public/brands/Ikqm4fBoYxNI6cieymNuim8eErKfYyjjk0IZyKdS.png', '2023-06-09 02:41:45', '2023-06-09 02:41:45'),
-(3, 'Seiko', 'Japan', 1881, 'public/brands/UySimvU9cBp7BQuIWHwNT7VB45CNTQFA9T9dBwSI.webp', '2023-06-09 02:42:05', '2023-06-09 02:42:05');
+(4, 'Omega', 'Switzerland', 1800, 'public/brands/DCYkRozCAPXhnXV1FXYf3vx2WMXtX3XTUUDYzRbb.png', '2023-06-10 15:05:48', '2023-06-10 15:07:10'),
+(6, 'Rolex', 'Switzerland', 1905, 'public/brands/9fIfkdDFnBsPT1W1vCDl5Ln1GBdVzTxiQqkT3njG.png', '2023-06-10 15:08:01', '2023-06-10 15:08:01'),
+(7, 'Seiko', 'Japan', 1884, 'public/brands/k5uzIkHT3MbZPpSbJLvlm09szMlAxL1ASHeWHJra.webp', '2023-06-13 09:14:35', '2023-06-13 09:14:43');
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,7 @@ CREATE TABLE `carts` (
   `quantity` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -72,18 +72,14 @@ CREATE TABLE `categories` (
   `name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Sports', '2023-06-09 02:39:41', '2023-06-09 02:39:41'),
-(2, 'Luxury', '2023-06-09 02:39:47', '2023-06-09 02:39:47'),
-(3, 'Fashion', '2023-06-09 02:39:52', '2023-06-09 02:39:52'),
-(4, 'Smartwatches', '2023-06-09 02:39:57', '2023-06-09 02:39:57'),
-(5, 'Diving', '2023-06-09 02:40:01', '2023-06-09 02:40:01');
+(2, 'Fashion', '2023-06-13 09:37:32', '2023-06-13 09:37:32');
 
 -- --------------------------------------------------------
 
@@ -98,18 +94,40 @@ CREATE TABLE `collections` (
   `release_date` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `collections`
 --
 
 INSERT INTO `collections` (`id`, `brand_id`, `name`, `release_date`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Oyster Perpetual', '1926-01-01', '2023-06-09 02:42:22', '2023-06-09 02:42:22'),
-(2, 1, 'Submariner', '1953-03-01', '2023-06-09 02:42:38', '2023-06-09 02:42:38'),
-(3, 2, 'Speedmaster', '1957-04-01', '2023-06-09 02:42:56', '2023-06-09 02:42:56'),
-(4, 2, 'Seamaster', '1948-07-01', '2023-06-09 02:43:07', '2023-06-09 02:43:07'),
-(5, 3, 'Prospex', '1965-09-01', '2023-06-09 02:43:25', '2023-06-09 02:43:25');
+(1, 7, 'Prospex', '1965-09-01', '2023-06-13 01:43:31', '2023-06-13 09:19:49'),
+(4, 6, 'G-Shock', '1963-01-01', '2023-06-13 02:24:13', '2023-06-13 02:37:32'),
+(6, 4, 'Oyster Perpetual', '1926-01-01', '2023-06-13 09:19:39', '2023-06-13 09:19:39');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `full_name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `message` text NOT NULL,
+  `reply` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `full_name`, `email`, `subject`, `message`, `reply`, `created_at`, `updated_at`) VALUES
+(3, 'Quang Nguyen', 'quangndgcc200030@fpt.edu.vn', 'test', 'awfawfafawfawfawf', NULL, '2023-06-13 01:25:33', '2023-06-13 01:25:33');
 
 -- --------------------------------------------------------
 
@@ -125,7 +143,7 @@ CREATE TABLE `failed_jobs` (
   `payload` longtext NOT NULL,
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -139,7 +157,7 @@ CREATE TABLE `images` (
   `image_url` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -158,22 +176,23 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(96, '2014_10_12_000000_create_users_table', 1),
-(97, '2014_10_12_100000_create_password_reset_tokens_table', 1),
-(98, '2014_10_12_100000_create_password_resets_table', 1),
-(99, '2019_08_19_000000_create_failed_jobs_table', 1),
-(100, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(101, '2023_06_07_163136_create_categories_table', 1),
-(102, '2023_06_07_172431_create_brands_table', 1),
-(103, '2023_06_07_173214_create_collections_table', 1),
-(104, '2023_06_07_174716_create_watches_table', 1),
-(105, '2023_06_07_175728_create_watch_category_table', 1),
-(106, '2023_06_07_181622_create_receivers_table', 1),
-(107, '2023_06_07_182058_create_orders_table', 1),
-(108, '2023_06_07_182432_create_order_details_table', 1),
-(109, '2023_06_07_184532_create_images_table', 1),
-(110, '2023_06_07_185351_create_carts_table', 1),
-(111, '2023_06_07_185826_create_reviews_table', 1);
+(128, '2014_10_12_000000_create_users_table', 1),
+(129, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(130, '2014_10_12_100000_create_password_resets_table', 1),
+(131, '2019_08_19_000000_create_failed_jobs_table', 1),
+(132, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(133, '2023_06_07_163136_create_categories_table', 1),
+(134, '2023_06_07_172431_create_brands_table', 1),
+(135, '2023_06_07_173214_create_collections_table', 1),
+(136, '2023_06_07_174716_create_watches_table', 1),
+(137, '2023_06_07_175728_create_watch_category_table', 1),
+(138, '2023_06_07_181622_create_receivers_table', 1),
+(139, '2023_06_07_182058_create_orders_table', 1),
+(140, '2023_06_07_182432_create_order_details_table', 1),
+(141, '2023_06_07_184532_create_images_table', 1),
+(142, '2023_06_07_185351_create_carts_table', 1),
+(143, '2023_06_07_185826_create_reviews_table', 1),
+(145, '2023_06_12_224628_create_contacts_table', 2);
 
 -- --------------------------------------------------------
 
@@ -191,7 +210,7 @@ CREATE TABLE `orders` (
   `status` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -206,7 +225,7 @@ CREATE TABLE `order_details` (
   `price` decimal(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -218,7 +237,7 @@ CREATE TABLE `password_resets` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -230,7 +249,7 @@ CREATE TABLE `password_reset_tokens` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -249,7 +268,7 @@ CREATE TABLE `personal_access_tokens` (
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -266,7 +285,7 @@ CREATE TABLE `receivers` (
   `address` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -283,7 +302,7 @@ CREATE TABLE `reviews` (
   `review_date` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -302,10 +321,20 @@ CREATE TABLE `users` (
   `birthday` date DEFAULT NULL,
   `telephone` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
+  `is_admin` tinyint(1) NOT NULL DEFAULT 0,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `email_verified_at`, `password`, `gender`, `birthday`, `telephone`, `address`, `is_admin`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Nguyen Duy Quang', '(FGW CT)', 'quangndgcc200030@fpt.edu.vn', '2023-06-11 18:49:07', '$2y$10$hWbrux.2MGCQzWoNcrRNvOZ.wOzd2Ns.I2jNn0btK0K3.ZiFN/Bpe', NULL, NULL, NULL, NULL, 1, NULL, '2023-06-11 18:49:07', '2023-06-11 18:49:07'),
+(2, 'Tran', 'Nguyen Que', 'trannqgcc210042@fpt.edu.vn', '2023-06-12 15:31:32', '$2y$10$85CMDJ5IRe0/szye1v0pRump8iVRnmhtPRUnwq9LrkAIa4hIXtC66', 'female', '2003-03-09', '0843630939', 'Tan Hanh, Long Ho, Vinh Long', 0, NULL, '2023-06-12 15:31:32', '2023-06-13 09:01:42'),
+(6, 'Quang', 'Nguyen Duy', 'ndquang5802@gmail.com', '2023-06-13 09:04:48', '$2y$10$2U1l/xhk3VFhQEVdHQRNVuxM7oiuubw242XAHKFiHpiDbEezXSctK', NULL, NULL, NULL, NULL, 0, NULL, '2023-06-13 09:04:48', '2023-06-13 09:09:25');
 
 -- --------------------------------------------------------
 
@@ -333,16 +362,7 @@ CREATE TABLE `watches` (
   `availability` tinyint(1) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `watches`
---
-
-INSERT INTO `watches` (`id`, `collection_id`, `model`, `price`, `stock`, `gender`, `case_material`, `case_diameter`, `case_thickness`, `strap_material`, `dial_color`, `crystal_material`, `water_resistance`, `movement_type`, `power_reserve`, `complications`, `availability`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Datejust', '10000.00', 15, 'Unisex', 'Stainless', 36, 11, 'Leather', 'Black', 'Sapphire', 100, 'Automatic', 48, 'Date', 1, '2023-06-09 02:44:49', '2023-06-09 02:44:49'),
-(2, 2, 'Speedmaster', '5000.00', 10, 'Men', 'Stainless', 42, 14, 'Steel', 'Blue', 'Sapphire', 50, 'Automatic', 60, 'Chronograph', 1, '2023-06-09 02:45:36', '2023-06-09 02:45:36'),
-(3, 3, 'Prospex Diver', '1500.00', 15, 'Men', 'Stainless', 44, 13, 'Rubber', 'Black', 'Hardlex', 200, 'Automatic', 50, 'Date, Rotating Bezel', 1, '2023-06-09 02:45:43', '2023-06-09 02:45:43');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -355,19 +375,7 @@ CREATE TABLE `watch_categories` (
   `category_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `watch_categories`
---
-
-INSERT INTO `watch_categories` (`watch_id`, `category_id`, `created_at`, `updated_at`) VALUES
-(1, 1, '2023-06-09 02:52:56', '2023-06-09 02:52:56'),
-(2, 1, '2023-06-09 02:55:56', '2023-06-09 02:55:56'),
-(3, 1, '2023-06-09 02:56:06', '2023-06-09 02:56:06'),
-(1, 3, '2023-06-09 02:55:47', '2023-06-09 02:55:47'),
-(2, 4, '2023-06-09 02:55:59', '2023-06-09 02:55:59'),
-(3, 5, '2023-06-09 03:10:23', '2023-06-09 03:10:23');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -402,6 +410,12 @@ ALTER TABLE `collections`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `collections_name_unique` (`name`),
   ADD KEY `collections_brand_id_foreign` (`brand_id`);
+
+--
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -493,7 +507,7 @@ ALTER TABLE `watches`
 --
 ALTER TABLE `watch_categories`
   ADD PRIMARY KEY (`category_id`,`watch_id`),
-  ADD KEY `watch_category_watch_id_foreign` (`watch_id`);
+  ADD KEY `watch_categories_watch_id_foreign` (`watch_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -503,7 +517,7 @@ ALTER TABLE `watch_categories`
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `carts`
@@ -515,13 +529,19 @@ ALTER TABLE `carts`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `collections`
 --
 ALTER TABLE `collections`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -539,7 +559,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=146;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -569,13 +589,13 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `watches`
 --
 ALTER TABLE `watches`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -636,8 +656,8 @@ ALTER TABLE `watches`
 -- Constraints for table `watch_categories`
 --
 ALTER TABLE `watch_categories`
-  ADD CONSTRAINT `watch_category_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `watch_category_watch_id_foreign` FOREIGN KEY (`watch_id`) REFERENCES `watches` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `watch_categories_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `watch_categories_watch_id_foreign` FOREIGN KEY (`watch_id`) REFERENCES `watches` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
