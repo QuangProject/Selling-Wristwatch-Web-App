@@ -11,11 +11,11 @@
 @section('content')
     <main role="main" class="pb-3">
         <section class="container-fluid row my-3">
-            <nav class="accordion arrows col-lg-2 col-md-3 custom-dropdown">
+            <nav class="accordion arrows col-lg-2 col-md-3 custom-dropdown mb-3">
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-md navbar-light bg-danger rounded">
                     <!-- Toggle button -->
-                    <button class="navbar-toggler ms-2" type="button" data-toggle="collapse" data-target="#sidebarMenu">
+                    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu">
                         <span class="navbar-toggler-icon"></span>
                     </button>
 
