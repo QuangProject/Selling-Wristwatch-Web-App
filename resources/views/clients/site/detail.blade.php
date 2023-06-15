@@ -82,11 +82,11 @@
             <div class="product-info-tabs">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab"
+                        <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab"
                             aria-controls="description" aria-selected="true">Description</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                        <a class="nav-link" id="review-tab" data-bs-toggle="tab" href="#review" role="tab"
                             aria-controls="review" aria-selected="false">Reviews (0)</a>
                     </li>
                 </ul>

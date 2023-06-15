@@ -89,4 +89,16 @@ class LoginController extends Controller
             return redirect()->route('create.password');
         }
     }
+
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleFacebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+
+        return response()->json($user);
+    }
 }

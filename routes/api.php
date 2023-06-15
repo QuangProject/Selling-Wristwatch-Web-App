@@ -67,3 +67,6 @@ Route::post('/contacts', 'App\Http\Controllers\ContactController@store');
 Route::get('/contacts/{id}', 'App\Http\Controllers\ContactController@show');
 Route::put('/contacts/{id}', 'App\Http\Controllers\ContactController@update');
 Route::delete('/contacts/{id}', 'App\Http\Controllers\ContactController@destroy');
+
+// Search Suggestions
+Route::get('/search-suggestions', 'App\Http\Controllers\SearchController@suggestions');

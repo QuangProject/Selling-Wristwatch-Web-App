@@ -6,8 +6,8 @@
                     <div class="col-md-6 order-2 order-md-1 mb-2 mb-md-0">
                         <form action="#" class="searchform order-lg-first">
                             <div class="form-group d-flex">
-                                <input type="text" class="form-control pl-3" placeholder="Search">
-                                <button type="submit" placeholder="" class="form-control search">
+                                <input type="search" class="form-control search-input" placeholder="Search">
+                                <button type="submit" class="form-control search">
                                     <span class="fa-solid fa-magnifying-glass"></span>
                                 </button>
                             </div>

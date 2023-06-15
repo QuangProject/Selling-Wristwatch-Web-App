@@ -34,6 +34,8 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/detail/{slug}', [HomeController::class, 'detail'])->name('detail');
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
+Route::get('/login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('/login/facebook/callback', [LoginController::class, 'handleFacebookCallback'])->name('login.facebook.callback');
 
 Auth::routes(['verify' => true]);
 
