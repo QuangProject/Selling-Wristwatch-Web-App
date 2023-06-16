@@ -70,3 +70,5 @@ Route::delete('/contacts/{id}', 'App\Http\Controllers\ContactController@destroy'
 
 // Search Suggestions
 Route::get('/search-suggestions', 'App\Http\Controllers\SearchController@suggestions');
+Route::get('/watch/search-suggestions', 'App\Http\Controllers\SearchController@watchSuggestions');
+Route::get('/category/search-suggestions', 'App\Http\Controllers\SearchController@categorySuggestions');

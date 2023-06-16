@@ -106,8 +106,8 @@
                         <h5 class="modal-title fw-bold" id="addWatchModalLabel">Adding Watch</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <form method="post">
+                    <form method="post">
+                        <div class="modal-body">
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-12 col-lg-4">
@@ -157,14 +157,14 @@
                                             <div class="d-lg-flex" style="margin-top: 13px">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio" name="add-watch-gender"
-                                                        id="MaleGender" value="Male">
-                                                    <label class="form-check-label" for="MaleGender">Male</label>
+                                                        id="MaleGender" value="Men">
+                                                    <label class="form-check-label" for="MaleGender">Men</label>
                                                 </div>
 
                                                 <div class="form-check mx-lg-2 mx-xl-5">
                                                     <input class="form-check-input" type="radio" name="add-watch-gender"
-                                                        id="FemaleGender" value="Female">
-                                                    <label class="form-check-label" for="FemaleGender">Female</label>
+                                                        id="FemaleGender" value="Women">
+                                                    <label class="form-check-label" for="FemaleGender">Women</label>
                                                 </div>
 
                                                 <div class="form-check">
@@ -277,12 +277,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="button-add-watch">Add</button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="button-add-watch">Add</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -295,8 +295,8 @@
                         <h5 class="modal-title fw-bold" id="updateWatchModalLabel">Updating Watch</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <form method="post">
+                    <form method="post">
+                        <div class="modal-body">
                             <div class="col-md-12">
                                 <div class="row">
                                     {{-- Model --}}
@@ -316,14 +316,14 @@
                                         <div class="d-lg-flex mt-1">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="update-watch-gender"
-                                                    id="MaleGender" value="Male">
-                                                <label class="form-check-label" for="MaleGender">Male</label>
+                                                    id="MaleGender" value="Men">
+                                                <label class="form-check-label" for="MaleGender">Men</label>
                                             </div>
 
                                             <div class="form-check mx-lg-5">
                                                 <input class="form-check-input" type="radio" name="update-watch-gender"
-                                                    id="FemaleGender" value="Female">
-                                                <label class="form-check-label" for="FemaleGender">Female</label>
+                                                    id="FemaleGender" value="Women">
+                                                <label class="form-check-label" for="FemaleGender">Women</label>
                                             </div>
 
                                             <div class="form-check">
@@ -498,12 +498,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="button-update-watch">Update</button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="button-update-watch">Update</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

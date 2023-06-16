@@ -8,9 +8,22 @@ use Illuminate\Support\Facades\DB;
 
 class WatchCategoryController extends Controller
 {
+    public function index()
+    {
+        $watchCategories = WatchCategory::join('watches', 'watch_categories.watch_id', '=', 'watches.id')
+            ->join('categories', 'watch_categories.category_id', '=', 'categories.id')
+            ->select('watch_categories.*', 'watches.model as watch_model', 'categories.name as category_name')
+            ->get();
+        // return view('admin.brand.index');
+        return view('admin.watch_category.index')->with('watchCategories', $watchCategories);
+    }
+
     public function list()
     {
-        $watchCategories = WatchCategory::all();
+        $watchCategories = WatchCategory::join('watches', 'watch_categories.watch_id', '=', 'watches.id')
+            ->join('categories', 'watch_categories.category_id', '=', 'categories.id')
+            ->select('watch_categories.*', 'watches.model as watch_model', 'categories.name as category_name')
+            ->get();
         return response()->json([
             'message' => 'Watch Categories retrieved successfully',
             'categories' => $watchCategories
@@ -20,7 +33,19 @@ class WatchCategoryController extends Controller
     public function store(Request $request)
     {
         try {
+            // Check if watch category is exist
+            $check = WatchCategory::where('watch_id', $request->input('watch_id'))->where('category_id', $request->input('category_id'))->first();
+            if ($check) {
+                return response()->json(['message' => 'Watch Category already exist'], 400);
+            }
             $watchCategory = WatchCategory::create($request->all());
+            // display watch category
+            $watchCategory = WatchCategory::join('watches', 'watch_categories.watch_id', '=', 'watches.id')
+                ->join('categories', 'watch_categories.category_id', '=', 'categories.id')
+                ->select('watch_categories.*', 'watches.model as watch_model', 'categories.name as category_name')
+                ->where('watch_categories.watch_id', $watchCategory->watch_id)
+                ->where('watch_categories.category_id', $watchCategory->category_id)
+                ->first();
             return response()->json([
                 'message' => 'Watch Category created successfully',
                 'watchCategory' => $watchCategory
@@ -52,21 +77,27 @@ class WatchCategoryController extends Controller
             if (is_null($watchCategory)) {
                 return response()->json(['message' => 'Watch Category not found'], 404);
             }
+            // Check if watch category is exist
+            $check = WatchCategory::where('watch_id', $request->input('watch_id'))->where('category_id', $request->input('category_id'))->first();
+            if ($check) {
+                return response()->json(['message' => 'Watch Category already exist'], 400);
+            }
             // $watchCategory->update($request->all());
             $watchCategory = DB::update('update watch_categories set watch_id = ?, category_id = ? where watch_id = ? and category_id = ?', [$request->watch_id, $request->category_id, $watchId, $categoryId]);
             if ($watchCategory) {
-                $updatedRecords = DB::table('watch_categories')
-                    ->where('watch_id', $request->watch_id)
-                    ->where('category_id', $request->category_id)
-                    ->get();
+                $watchCategory = WatchCategory::join('watches', 'watch_categories.watch_id', '=', 'watches.id')
+                    ->join('categories', 'watch_categories.category_id', '=', 'categories.id')
+                    ->select('watch_categories.*', 'watches.model as watch_model', 'categories.name as category_name')
+                    ->where('watch_categories.watch_id', $request->watch_id)
+                    ->where('watch_categories.category_id', $request->category_id)
+                    ->first();
                 return response()->json([
                     'message' => 'Watch Category updated successfully',
-                    'watchCategory' => $updatedRecords
+                    'watchCategory' => $watchCategory
                 ], 200);
             } else {
                 return response()->json([
                     'message' => 'Watch Category updated failed',
-                    'watchCategory' => $watchCategory
                 ], 400);
             }
         } catch (\Throwable $th) {

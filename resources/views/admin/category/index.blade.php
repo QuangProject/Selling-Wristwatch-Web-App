@@ -45,15 +45,16 @@
             </tfoot>
         </table>
         {{-- Add Category --}}
-        <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+        <div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title fw-bold" id="addCategoryModalLabel">Adding Category</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <form method="post">
+                    <form method="post">
+                        <div class="modal-body">
                             <div class="col-md-12">
                                 {{-- Name --}}
                                 <div class="forms-inputs mt-3">
@@ -64,12 +65,12 @@
                                     <span class="text-danger" id="errorAddCategoryName"></span>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="buttonAddCategory">Add</button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="buttonAddCategory">Add</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -82,25 +83,24 @@
                         <h5 class="modal-title fw-bold" id="updateCategoryModalLabel">Updating Category</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <form method="post">
+                    <form method="post">
+                        <div class="modal-body">
                             <div class="col-md-12">
                                 {{-- Name --}}
                                 <div class="forms-inputs mt-3">
                                     <label for="update-category-name">
                                         <h6 class="fw-bold">Category Name</h6>
                                     </label>
-                                    <input type="text" id="update-category-name" class="form-control"
-                                        autocomplete="off">
+                                    <input type="text" id="update-category-name" class="form-control" autocomplete="off">
                                     <span class="text-danger" id="errorUpdateCategoryName"></span>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="buttonUpdateCategory">Update</button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="buttonUpdateCategory">Update</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

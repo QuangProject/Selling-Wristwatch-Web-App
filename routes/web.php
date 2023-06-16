@@ -10,6 +10,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WatchCategoryController;
 use App\Http\Controllers\WatchController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/category', [CategoryController::class, 'index'])->name('admin.category.index');
         Route::get('/watch', [WatchController::class, 'index'])->name('admin.watch.index');
         Route::get('/watch/{id}/image', [ImageController::class, 'index'])->name('admin.watch.image');
+        Route::get('/watch-category', [WatchCategoryController::class, 'index'])->name('admin.watchcategory.index');
         Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.index');
     });
 });

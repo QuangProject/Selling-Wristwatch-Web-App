@@ -66,8 +66,8 @@
                         <h5 class="modal-title fw-bold" id="updateContactModalLabel">Updating Contact</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                        <form method="post">
+                    <form method="post">
+                        <div class="modal-body">
                             <div class="col-md-12">
                                 {{-- Full Name --}}
                                 <div class="forms-inputs mt-3">
@@ -110,12 +110,12 @@
                                     <span class="text-danger" id="error-reply-contact"></span>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="btn-reply-contact">Update</button>
-                    </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="btn-reply-contact">Update</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

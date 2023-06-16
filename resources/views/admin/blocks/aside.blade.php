@@ -43,7 +43,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="index.html">
+            <a class="nav-link collapsed" href="{{ route('admin.watchcategory.index') }}">
                 <i class="bi bi-bookmark-plus"></i>
                 <span>Watch Category</span>
             </a>
