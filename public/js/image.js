@@ -1,12 +1,46 @@
+var format = /[!@#$%^&*()_+\=\[\]{};':"\\|<>\/?]+/;
+var regex = /^[+]?([0-9]*\.)?[0-9]+([eE][-+]?[0-9]+)?$/;
+
 // ADD NEW IMAGE
 // Get the input elements
+const inputAddImageName = document.getElementById("add-image-name");
+const inputAddImageStock = document.getElementById("add-image-stock");
 const inputAddImage = document.getElementById("add-image");
+
 // Get error element
+const errorAddImageName = document.getElementById("error-add-image-name");
+const errorAddImageStock = document.getElementById("error-add-image-stock");
 const errorAddImage = document.getElementById("error-add-image");
+
 // Get btn element
 const btnAddImage = document.getElementById("btn-add-image");
 
-// Add event listener
+// Add event listeners for the input elements
+inputAddImageName.addEventListener('input', function () {
+    var inputValue = inputAddImageName.value;
+    // Perform validation or error checking on the entered value
+    if (format.test(inputValue)) {
+        RemoveDataBSDismissOfAddButton();
+        errorAddImageName.textContent = 'Please enter image name';
+    } else {
+        errorAddImageName.textContent = ''; // Clear any previous error message
+        AddDataBSDismissOfAddButton();
+    }
+});
+
+// Add event listeners for the input elements
+inputAddImageStock.addEventListener('input', function () {
+    var inputValue = inputAddImageStock.value;
+    // Perform validation or error checking on the entered value
+    if (!regex.test(inputValue) || inputValue == 0) {
+        RemoveDataBSDismissOfAddButton();
+        errorAddImageStock.textContent = 'Stock must be a number';
+    } else {
+        errorAddImageStock.textContent = ''; // Clear any previous error message
+        AddDataBSDismissOfAddButton();
+    }
+});
+
 // Add event listeners for the input elements
 inputAddImage.addEventListener('input', function () {
     var inputValue = inputAddImage.value;
@@ -23,6 +57,16 @@ inputAddImage.addEventListener('input', function () {
 // Add event listener for the btn element
 btnAddImage.addEventListener('click', function () {
     // Perform validation or error checking on the entered value
+    if (inputAddImageName.value == '') {
+        RemoveDataBSDismissOfAddButton();
+        errorAddImageName.textContent = 'Please enter image name';
+        return;
+    }
+    if (inputAddImageStock.value == '') {
+        RemoveDataBSDismissOfAddButton();
+        errorAddImageStock.textContent = 'Please enter image stock';
+        return;
+    }
     if (inputAddImage.value == '') {
         RemoveDataBSDismissOfAddButton();
         errorAddImage.textContent = 'Please choose image';
@@ -37,6 +81,8 @@ btnAddImage.addEventListener('click', function () {
     var id = match[1];
 
     const formData = new FormData();
+    formData.append('name', inputAddImageName.value);
+    formData.append('stock', inputAddImageStock.value);
     formData.append('image', inputAddImage.files[0]);
     $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     $.ajax({
@@ -58,8 +104,10 @@ btnAddImage.addEventListener('click', function () {
             newImage.setAttribute('id', 'image_' + response.image.id);
             newImage.setAttribute('class', 'align-middle animate__animated animate__fadeInUp');
             newImage.innerHTML = `
+                <td>${response.image.name}</td>
+                <td>${response.image.stock}</td>
                 <td>
-                    <img src="/admin/watch/image/${response.image.id}" width="100">
+                    <img src="/watch/image/${response.image.id}" id="displayImage_${response.image.id}" alt="${response.image.name}" width="100">
                 </td>
                 <td>
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateImage(${response.image.id})" data-bs-target="#updateImageModal">
@@ -75,6 +123,10 @@ btnAddImage.addEventListener('click', function () {
             table.insertBefore(newImage, firstRow);
 
             // Clear input
+            inputAddImageName.value = '';
+            errorAddImageName.textContent = '';
+            inputAddImageStock.value = '';
+            errorAddImageStock.textContent = '';
             inputAddImage.value = '';
             errorAddImage.textContent = '';
             RemoveDataBSDismissOfAddButton();
@@ -102,8 +154,8 @@ btnAddImage.addEventListener('click', function () {
 
 function AddDataBSDismissOfAddButton() {
     if (!btnAddImage.hasAttribute('data-bs-dismiss')
-        && errorAddImage.textContent == ''
-        && inputAddImage.value != '') {
+        && errorAddImageName.textContent == '' && errorAddImageStock.textContent == '' && errorAddImage.textContent == ''
+        && inputAddImageName.value != '' && inputAddImageStock.value != '' && inputAddImage.value != '') {
         btnAddImage.setAttribute('data-bs-dismiss', 'modal')
     }
 }
@@ -116,21 +168,40 @@ function RemoveDataBSDismissOfAddButton() {
 
 // UPDATE IMAGE
 // Get the input elements
+const inputUpdateImageName = document.getElementById("update-image-name");
+const inputUpdateImageStock = document.getElementById("update-image-stock");
 const inputUpdateImage = document.getElementById("update-image");
+
 // Get error element
+const errorUpdateImageName = document.getElementById("error-update-image-name");
+const errorUpdateImageStock = document.getElementById("error-update-image-stock");
 const errorUpdateImage = document.getElementById("error-update-image");
+
 // Get btn element
 const btnUpdateImage = document.getElementById("btn-update-image");
 
 // Add event listeners for the input elements
-inputUpdateImage.addEventListener('input', function () {
-    var inputValue = inputUpdateImage.value;
+inputUpdateImageName.addEventListener('input', function () {
+    var inputValue = inputUpdateImageName.value;
     // Perform validation or error checking on the entered value
-    if (inputValue == '') {
+    if (format.test(inputValue)) {
         RemoveDataBSDismissOfUpdateButton();
-        errorUpdateImage.textContent = 'Please choose image';
+        errorUpdateImageName.textContent = 'Please enter image name';
     } else {
-        errorUpdateImage.textContent = ''; // Clear any previous error message
+        errorUpdateImageName.textContent = ''; // Clear any previous error message
+        AddDataBSDismissOfUpdateButton();
+    }
+});
+
+// Add event listeners for the input elements
+inputUpdateImageStock.addEventListener('input', function () {
+    var inputValue = inputUpdateImageStock.value;
+    // Perform validation or error checking on the entered value
+    if (!regex.test(inputValue) || inputValue == 0) {
+        RemoveDataBSDismissOfUpdateButton();
+        errorUpdateImageStock.textContent = 'Stock must be a number';
+    } else {
+        errorUpdateImageStock.textContent = ''; // Clear any previous error message
         AddDataBSDismissOfUpdateButton();
     }
 });
@@ -145,7 +216,9 @@ function updateImage(id) {
         success: function (response) {
             $('.overlay').remove()
             const displayImageUpdate = document.getElementById('display-image-update');
-            displayImageUpdate.src = '/admin/watch/image/' + response.image.id;
+            inputUpdateImageName.value = response.image.name;
+            inputUpdateImageStock.value = response.image.stock;
+            displayImageUpdate.src = '/watch/image/' + response.image.id;
             btnUpdateImage.setAttribute('data-bs-dismiss', 'modal');
             btnUpdateImage.setAttribute('onclick', 'updateImageSubmit(' + id + ')');
             RemoveDataBSDismissOfUpdateButton();
@@ -158,15 +231,31 @@ function updateImage(id) {
 }
 
 function updateImageSubmit(id) {
-    if (inputUpdateImage.value == '') {
+    // Perform validation or error checking on the entered value
+    if (inputUpdateImageName.value == '') {
         RemoveDataBSDismissOfUpdateButton();
-        errorUpdateImage.textContent = 'Please choose image';
+        errorUpdateImageName.textContent = 'Please enter image name';
+        return;
+    }
+    if (inputUpdateImageStock.value == '') {
+        RemoveDataBSDismissOfUpdateButton();
+        errorUpdateImageStock.textContent = 'Please enter image stock';
+        return;
+    }
+    if (errorAddImageName.textContent != '' || errorAddImageStock.textContent != '') {
+        RemoveDataBSDismissOfUpdateButton();
         return;
     }
 
     const formData = new FormData();
     formData.append('_method', 'PUT');
-    formData.append('image', inputUpdateImage.files[0]);
+    formData.append('name', inputUpdateImageName.value);
+    formData.append('stock', inputUpdateImageStock.value);
+    if (inputUpdateImage.value != '') {
+        formData.append('image', inputUpdateImage.files[0]);
+    } else {
+        formData.append('image', '');
+    }
 
     $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     $.ajax({
@@ -185,7 +274,7 @@ function updateImageSubmit(id) {
             })
 
             const displayImageUpdate = document.getElementById('displayImage_' + response.image.id);
-            fetch('/admin/watch/image/' + response.image.id)
+            fetch('/watch/image/' + response.image.id)
                 .then(response => response.blob())
                 .then(blob => {
                     const url = window.URL.createObjectURL(blob);
@@ -193,9 +282,27 @@ function updateImageSubmit(id) {
                 })
                 .catch(error => console.error(error));
 
+            const image = document.getElementById('image_' + response.image.id);
+            image.innerHTML = `
+                <td>${response.image.name}</td>
+                <td>${response.image.stock}</td>
+                <td>
+                    <img src="/watch/image/${response.image.id}" id="displayImage_${response.image.id}" alt="${response.image.name}" width="100">
+                </td>
+                <td>
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateImage(${response.image.id})" data-bs-target="#updateImageModal">
+                        Edit
+                    </button>
+                    <button class="btn btn-danger" type="button" onclick="deleteImage(${response.image.id})">
+                        Delete
+                    </button>
+                </td>
+            `;
+
             // Clear input
+            inputUpdateImageName.value = '';
+            errorUpdateImageName.textContent = '';
             inputUpdateImage.value = '';
-            errorUpdateImage.textContent = '';
             RemoveDataBSDismissOfUpdateButton();
         },
         error: function (error) {
@@ -221,8 +328,8 @@ function updateImageSubmit(id) {
 
 function AddDataBSDismissOfUpdateButton() {
     if (!btnUpdateImage.hasAttribute('data-bs-dismiss')
-        && errorUpdateImage.textContent == ''
-        && inputUpdateImage.value != '') {
+        && errorUpdateImageName.textContent == '' && errorUpdateImageStock.textContent == ''
+        && inputUpdateImageName.value != '' && inputUpdateImageStock.value != '') {
         btnUpdateImage.setAttribute('data-bs-dismiss', 'modal')
     }
 }

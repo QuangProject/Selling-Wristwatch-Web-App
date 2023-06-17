@@ -18,8 +18,9 @@
             <thead>
                 <tr>
                     <th>Model</th>
-                    <th>Price</th>
-                    <th>Stock</th>
+                    <th>Original Price</th>
+                    <th>Selling Price</th>
+                    <th>Discount</th>
                     <th>Gender</th>
                     <th>Case Material</th>
                     <th>Case Diameter</th>
@@ -41,8 +42,9 @@
                 @foreach ($watches as $watch)
                     <tr class="align-middle" id="watch_{{ $watch->id }}">
                         <td>{{ $watch->model }}</td>
-                        <td>${{ $watch->price }}</td>
-                        <td>{{ $watch->stock }}</td>
+                        <td>${{ $watch->original_price }}</td>
+                        <td>${{ $watch->selling_price }}</td>
+                        <td>{{ $watch->discount }}%</td>
                         <td>{{ $watch->gender }}</td>
                         <td>{{ $watch->case_material }}</td>
                         <td>{{ $watch->case_diameter }}mm</td>
@@ -78,8 +80,9 @@
             <tfoot>
                 <tr>
                     <th>Model</th>
-                    <th>Price</th>
-                    <th>Stock</th>
+                    <th>Original Price</th>
+                    <th>Selling Price</th>
+                    <th>Discount</th>
                     <th>Gender</th>
                     <th>Case Material</th>
                     <th>Case Diameter</th>
@@ -131,23 +134,23 @@
                                             </select>
                                             <span class="text-danger" id="error-add-watch-collection"></span>
                                         </div>
-                                        {{-- Price --}}
+                                        {{-- Original Price --}}
                                         <div class="forms-inputs mt-3">
-                                            <label for="add-watch-price">
-                                                <h6 class="fw-bold">Price</h6>
+                                            <label for="add-watch-original-price">
+                                                <h6 class="fw-bold">Original Price</h6>
                                             </label>
-                                            <input type="text" id="add-watch-price" class="form-control"
+                                            <input type="text" id="add-watch-original-price" class="form-control"
                                                 autocomplete="off">
-                                            <span class="text-danger" id="error-add-watch-price"></span>
+                                            <span class="text-danger" id="error-add-watch-original-price"></span>
                                         </div>
-                                        {{-- Stock --}}
+                                        {{-- Selling Price --}}
                                         <div class="forms-inputs mt-3">
-                                            <label for="add-watch-stock">
-                                                <h6 class="fw-bold">Stock</h6>
+                                            <label for="add-watch-selling-price">
+                                                <h6 class="fw-bold">Selling Price</h6>
                                             </label>
-                                            <input type="text" id="add-watch-stock" class="form-control"
+                                            <input type="text" id="add-watch-selling-price" class="form-control"
                                                 autocomplete="off">
-                                            <span class="text-danger" id="error-add-watch-stock"></span>
+                                            <span class="text-danger" id="error-add-watch-selling-price"></span>
                                         </div>
                                         {{-- Gender --}}
                                         <div class="form-inputs mt-3">
@@ -300,7 +303,7 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     {{-- Model --}}
-                                    <div class="forms-inputs mt-3 col-6">
+                                    <div class="forms-inputs mt-3 col-4">
                                         <label for="update-watch-model">
                                             <h6 class="fw-bold">Watch Model</h6>
                                         </label>
@@ -309,7 +312,7 @@
                                         <span class="text-danger" id="error-update-watch-model"></span>
                                     </div>
                                     {{-- Gender --}}
-                                    <div class="form-inputs mt-3 col-6">
+                                    <div class="form-inputs mt-3 col-4">
                                         <label for="update-watch-gender">
                                             <h6 class="fw-bold">Gender</h6>
                                         </label>
@@ -334,6 +337,15 @@
                                         </div>
                                         <span class="text-danger" id="error-update-watch-gender"></span>
                                     </div>
+                                    {{-- Discount --}}
+                                    <div class="forms-inputs mt-3 col-4">
+                                        <label for="update-watch-discount">
+                                            <h6 class="fw-bold">Discount</h6>
+                                        </label>
+                                        <input type="text" id="update-watch-discount" class="form-control"
+                                            autocomplete="off">
+                                        <span class="text-danger" id="error-update-watch-discount"></span>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -348,23 +360,23 @@
                                         </select>
                                         <span class="text-danger" id="error-update-watch-collection"></span>
                                     </div>
-                                    {{-- Price --}}
+                                    {{-- Original Price --}}
                                     <div class="forms-inputs mt-3 col-4">
-                                        <label for="update-watch-price">
-                                            <h6 class="fw-bold">Price</h6>
+                                        <label for="update-watch-original-price">
+                                            <h6 class="fw-bold">Original Price</h6>
                                         </label>
-                                        <input type="text" id="update-watch-price" class="form-control"
+                                        <input type="text" id="update-watch-original-price" class="form-control"
                                             autocomplete="off">
-                                        <span class="text-danger" id="error-update-watch-price"></span>
+                                        <span class="text-danger" id="error-update-watch-original-price"></span>
                                     </div>
-                                    {{-- Stock --}}
+                                    {{-- Selling Price --}}
                                     <div class="forms-inputs mt-3 col-4">
-                                        <label for="update-watch-stock">
-                                            <h6 class="fw-bold">Stock</h6>
+                                        <label for="update-watch-selling-price">
+                                            <h6 class="fw-bold">Selling Price</h6>
                                         </label>
-                                        <input type="text" id="update-watch-stock" class="form-control"
+                                        <input type="text" id="update-watch-selling-price" class="form-control"
                                             autocomplete="off">
-                                        <span class="text-danger" id="error-update-watch-stock"></span>
+                                        <span class="text-danger" id="error-update-watch-selling-price"></span>
                                     </div>
                                 </div>
 

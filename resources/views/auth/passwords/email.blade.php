@@ -4,8 +4,52 @@
     Email
 @endsection
 
+@section('css')
+    <link rel="stylesheet" href="{{ asset('fonts/material-icon/css/material-design-iconic-font.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/reset-password.css') }}">
+@endsection
+
 @section('content')
-    <div class="container my-5">
+    <div class="main">
+        <section class="signup">
+            <div class="container-register">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title fw-bold">Reset Password</h2>
+
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        <form method="POST" action="{{ route('password.email') }}" class="reset-password-form" id="reset-password-form">
+                            @csrf
+
+                            {{-- Email --}}
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" class="@error('email') is-invalid @enderror" name="email"
+                                    id="email" value="{{ old('email') }}" placeholder="Email" required
+                                    autocomplete="email" autofocus />
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Send Password Reset Link" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    {{-- <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -50,5 +94,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection

@@ -40,8 +40,8 @@ var regex = /^[+]?([0-9]*\.)?[0-9]+([eE][-+]?[0-9]+)?$/;
 // Get the input element
 inputAddWatchModel = document.getElementById('add-watch-model');
 inputAddWatchCollection = document.getElementById('add-watch-collection');
-inputAddWatchPrice = document.getElementById('add-watch-price');
-inputAddWatchStock = document.getElementById('add-watch-stock');
+inputAddWatchOriginalPrice = document.getElementById('add-watch-original-price');
+inputAddWatchSellingPrice = document.getElementById('add-watch-selling-price');
 inputAddWatchGender = document.getElementsByName('add-watch-gender');
 inputAddWatchCaseMaterial = document.getElementById('add-watch-case-material');
 inputAddWatchCaseDiameter = document.getElementById('add-watch-case-diameter');
@@ -57,8 +57,8 @@ inputAddWatchComplications = document.getElementById('add-watch-complications');
 // Get the error message elements
 errorAddWatchModel = document.getElementById('error-add-watch-model');
 errorAddWatchCollection = document.getElementById('error-add-watch-collection');
-errorAddWatchPrice = document.getElementById('error-add-watch-price');
-errorAddWatchStock = document.getElementById('error-add-watch-stock');
+errorAddWatchOriginalPrice = document.getElementById('error-add-watch-original-price');
+errorAddWatchSellingPrice = document.getElementById('error-add-watch-selling-price');
 errorAddWatchGender = document.getElementById('error-add-watch-gender');
 errorAddWatchCaseMaterial = document.getElementById('error-add-watch-case-material');
 errorAddWatchCaseDiameter = document.getElementById('error-add-watch-case-diameter');
@@ -101,27 +101,27 @@ inputAddWatchCollection.addEventListener('input', function () {
 });
 
 // Add event listeners for the input add watch price elements
-inputAddWatchPrice.addEventListener('input', function () {
-    var inputValue = inputAddWatchPrice.value;
+inputAddWatchOriginalPrice.addEventListener('input', function () {
+    var inputValue = inputAddWatchOriginalPrice.value;
     // Perform validation or error checking on the entered value
     if (!regex.test(inputValue) || inputValue == 0) {
         RemoveDataBSDismissOfAddButton();
-        errorAddWatchPrice.textContent = 'Price must be a number';
+        errorAddWatchOriginalPrice.textContent = 'Original price must be a number';
     } else {
-        errorAddWatchPrice.textContent = ''; // Clear any previous error message
+        errorAddWatchOriginalPrice.textContent = ''; // Clear any previous error message
         AddDataBSDismissOfAddButton();
     }
 });
 
 // Add event listeners for the input add watch stock elements
-inputAddWatchStock.addEventListener('input', function () {
-    var inputValue = inputAddWatchStock.value;
+inputAddWatchSellingPrice.addEventListener('input', function () {
+    var inputValue = inputAddWatchSellingPrice.value;
     // Perform validation or error checking on the entered value
     if (!regex.test(inputValue) || inputValue == 0) {
         RemoveDataBSDismissOfAddButton();
-        errorAddWatchStock.textContent = 'Stock must be a number';
+        errorAddWatchSellingPrice.textContent = 'Selling price must be a number';
     } else {
-        errorAddWatchStock.textContent = ''; // Clear any previous error message
+        errorAddWatchSellingPrice.textContent = ''; // Clear any previous error message
         AddDataBSDismissOfAddButton();
     }
 });
@@ -269,14 +269,14 @@ buttonAddWatch.addEventListener('click', function () {
         errorAddWatchCollection.textContent = 'Please select a collection';
         return;
     }
-    if (inputAddWatchPrice.value == '') {
+    if (inputAddWatchOriginalPrice.value == '') {
         RemoveDataBSDismissOfAddButton();
-        errorAddWatchPrice.textContent = 'Please enter a price';
+        errorAddWatchOriginalPrice.textContent = 'Please enter an original price';
         return;
     }
-    if (inputAddWatchStock.value == '') {
+    if (inputAddWatchSellingPrice.value == '') {
         RemoveDataBSDismissOfAddButton();
-        errorAddWatchStock.textContent = 'Please enter a stock';
+        errorAddWatchSellingPrice.textContent = 'Please enter a selling price';
         return;
     }
     var gender = '';
@@ -344,15 +344,16 @@ buttonAddWatch.addEventListener('click', function () {
         return;
     }
     // Valid error checking
-    if (errorAddWatchModel.textContent != '' || errorAddWatchCollection.textContent != '' || errorAddWatchPrice.textContent != '' || errorAddWatchStock.textContent != '' || errorAddWatchGender.textContent != '' || errorAddWatchCaseMaterial.textContent != '' || errorAddWatchCaseDiameter.textContent != '' || errorAddWatchCaseThickness.textContent != '' || errorAddWatchStrapMaterial.textContent != '' || errorAddWatchDialColor.textContent != '' || errorAddWatchCrystalMaterial.textContent != '' || errorAddWatchWaterResistance.textContent != '' || errorAddWatchMovementType.textContent != '' || errorAddWatchPowerReserve.textContent != '' || errorAddWatchComplications.textContent != '') {
+    if (errorAddWatchModel.textContent != '' || errorAddWatchCollection.textContent != '' || errorAddWatchOriginalPrice.textContent != '' || errorAddWatchSellingPrice.textContent != '' || errorAddWatchGender.textContent != '' || errorAddWatchCaseMaterial.textContent != '' || errorAddWatchCaseDiameter.textContent != '' || errorAddWatchCaseThickness.textContent != '' || errorAddWatchStrapMaterial.textContent != '' || errorAddWatchDialColor.textContent != '' || errorAddWatchCrystalMaterial.textContent != '' || errorAddWatchWaterResistance.textContent != '' || errorAddWatchMovementType.textContent != '' || errorAddWatchPowerReserve.textContent != '' || errorAddWatchComplications.textContent != '') {
         RemoveDataBSDismissOfAddButton();
         return;
     }
     // If all validation has passed, submit the form
     const formData = new FormData();
     formData.append('model', inputAddWatchModel.value);
-    formData.append('price', inputAddWatchPrice.value);
-    formData.append('stock', inputAddWatchStock.value);
+    formData.append('original_price', inputAddWatchOriginalPrice.value);
+    formData.append('selling_price', inputAddWatchSellingPrice.value);
+    formData.append('discount', 0);
     formData.append('gender', gender);
     formData.append('case_material', inputAddWatchCaseMaterial.value);
     formData.append('case_diameter', inputAddWatchCaseDiameter.value);
@@ -393,8 +394,9 @@ buttonAddWatch.addEventListener('click', function () {
             newWatch.setAttribute('class', 'align-middle animate__animated animate__fadeInUp');
             newWatch.innerHTML = `
                 <td>${response.watch.model}</td>
-                <td>$${response.watch.price}</td>
-                <td>${response.watch.stock}</td>
+                <td>$${response.watch.original_price}</td>
+                <td>$${response.watch.selling_price}</td>
+                <td>${response.watch.discount}%</td>
                 <td>${response.watch.gender}</td>
                 <td>${response.watch.case_material}</td>
                 <td>${response.watch.case_diameter}mm</td>
@@ -427,8 +429,8 @@ buttonAddWatch.addEventListener('click', function () {
             // clear input fields
             inputAddWatchModel.value = '';
             inputAddWatchCollection.value = 0;
-            inputAddWatchPrice.value = '';
-            inputAddWatchStock.value = '';
+            inputAddWatchOriginalPrice.value = '';
+            inputAddWatchSellingPrice.value = '';
             inputAddWatchGender.value = '';
             inputAddWatchCaseMaterial.value = '';
             inputAddWatchCaseDiameter.value = '';
@@ -466,8 +468,8 @@ buttonAddWatch.addEventListener('click', function () {
 // Change data bs dismiss of add button when input add watch collection is changed
 function AddDataBSDismissOfAddButton() {
     if (!buttonAddWatch.hasAttribute('data-bs-dismiss')
-        && errorAddWatchModel.textContent == '' && errorAddWatchCollection.textContent == '' && errorAddWatchPrice.textContent == '' && errorAddWatchStock.textContent == '' && errorAddWatchGender.textContent == '' && errorAddWatchCaseMaterial.textContent == '' && errorAddWatchCaseDiameter.textContent == '' && errorAddWatchCaseThickness.textContent == '' && errorAddWatchStrapMaterial.textContent == '' && errorAddWatchDialColor.textContent == '' && errorAddWatchCrystalMaterial.textContent == '' && errorAddWatchWaterResistance.textContent == '' && errorAddWatchMovementType.textContent == '' && errorAddWatchPowerReserve.textContent == '' && errorAddWatchComplications.textContent == ''
-        && inputAddWatchModel.value != '' && inputAddWatchCollection.value != 0 && inputAddWatchPrice.value != '' && inputAddWatchStock.value != '' && inputAddWatchGender.value != '' && inputAddWatchCaseMaterial.value != '' && inputAddWatchCaseDiameter.value != '' && inputAddWatchCaseThickness.value != '' && inputAddWatchStrapMaterial.value != '' && inputAddWatchDialColor.value != '' && inputAddWatchCrystalMaterial.value != '' && inputAddWatchWaterResistance.value != '' && inputAddWatchMovementType.value != 0 && inputAddWatchPowerReserve.value != '' && inputAddWatchComplications.value != '') {
+        && errorAddWatchModel.textContent == '' && errorAddWatchCollection.textContent == '' && errorAddWatchOriginalPrice.textContent == '' && errorAddWatchSellingPrice.textContent == '' && errorAddWatchGender.textContent == '' && errorAddWatchCaseMaterial.textContent == '' && errorAddWatchCaseDiameter.textContent == '' && errorAddWatchCaseThickness.textContent == '' && errorAddWatchStrapMaterial.textContent == '' && errorAddWatchDialColor.textContent == '' && errorAddWatchCrystalMaterial.textContent == '' && errorAddWatchWaterResistance.textContent == '' && errorAddWatchMovementType.textContent == '' && errorAddWatchPowerReserve.textContent == '' && errorAddWatchComplications.textContent == ''
+        && inputAddWatchModel.value != '' && inputAddWatchCollection.value != 0 && inputAddWatchOriginalPrice.value != '' && inputAddWatchSellingPrice.value != '' && inputAddWatchGender.value != '' && inputAddWatchCaseMaterial.value != '' && inputAddWatchCaseDiameter.value != '' && inputAddWatchCaseThickness.value != '' && inputAddWatchStrapMaterial.value != '' && inputAddWatchDialColor.value != '' && inputAddWatchCrystalMaterial.value != '' && inputAddWatchWaterResistance.value != '' && inputAddWatchMovementType.value != 0 && inputAddWatchPowerReserve.value != '' && inputAddWatchComplications.value != '') {
         buttonAddWatch.setAttribute('data-bs-dismiss', 'modal')
     }
 }
@@ -483,8 +485,9 @@ function RemoveDataBSDismissOfAddButton() {
 // Get the input element
 inputUpdateWatchModel = document.getElementById('update-watch-model');
 inputUpdateWatchCollection = document.getElementById('update-watch-collection');
-inputUpdateWatchPrice = document.getElementById('update-watch-price');
-inputUpdateWatchStock = document.getElementById('update-watch-stock');
+inputUpdateWatchOriginalPrice = document.getElementById('update-watch-original-price');
+inputUpdateWatchSellingPrice = document.getElementById('update-watch-selling-price');
+inputUpdateWatchDiscount = document.getElementById('update-watch-discount');
 inputUpdateWatchGender = document.getElementsByName('update-watch-gender');
 inputUpdateWatchCaseMaterial = document.getElementById('update-watch-case-material');
 inputUpdateWatchCaseDiameter = document.getElementById('update-watch-case-diameter');
@@ -501,8 +504,9 @@ inputUpdateWatchAvailability = document.getElementsByName('update-watch-availabi
 // Get the error message elements
 errorUpdateWatchModel = document.getElementById('error-update-watch-model');
 errorUpdateWatchCollection = document.getElementById('error-update-watch-collection');
-errorUpdateWatchPrice = document.getElementById('error-update-watch-price');
-errorUpdateWatchStock = document.getElementById('error-update-watch-stock');
+errorUpdateWatchOriginalPrice = document.getElementById('error-update-watch-original-price');
+errorUpdateWatchSellingPrice = document.getElementById('error-update-watch-selling-price');
+errorUpdateWatchDiscount = document.getElementById('error-update-watch-discount');
 errorUpdateWatchGender = document.getElementById('error-update-watch-gender');
 errorUpdateWatchCaseMaterial = document.getElementById('error-update-watch-case-material');
 errorUpdateWatchCaseDiameter = document.getElementById('error-update-watch-case-diameter');
@@ -545,27 +549,40 @@ inputUpdateWatchCollection.addEventListener('input', function () {
 });
 
 // Add event listeners for the input update watch price elements
-inputUpdateWatchPrice.addEventListener('input', function () {
-    var inputValue = inputUpdateWatchPrice.value;
+inputUpdateWatchOriginalPrice.addEventListener('input', function () {
+    var inputValue = inputUpdateWatchOriginalPrice.value;
     // Perform validation or error checking on the entered value
     if (!regex.test(inputValue) || inputValue == 0) {
         RemoveDataBSDismissOfUpdateButton();
-        errorUpdateWatchPrice.textContent = 'Price must be a number';
+        errorUpdateWatchOriginalPrice.textContent = 'Original price must be a number';
     } else {
-        errorUpdateWatchPrice.textContent = ''; // Clear any previous error message
+        errorUpdateWatchOriginalPrice.textContent = ''; // Clear any previous error message
         AddDataBSDismissOfUpdateButton();
     }
 });
 
 // Add event listeners for the input update watch stock elements
-inputUpdateWatchStock.addEventListener('input', function () {
-    var inputValue = inputUpdateWatchStock.value;
+inputUpdateWatchSellingPrice.addEventListener('input', function () {
+    var inputValue = inputUpdateWatchSellingPrice.value;
     // Perform validation or error checking on the entered value
     if (!regex.test(inputValue) || inputValue == 0) {
         RemoveDataBSDismissOfUpdateButton();
-        errorUpdateWatchStock.textContent = 'Stock must be a number';
+        errorUpdateWatchSellingPrice.textContent = 'Selling price must be a number';
     } else {
-        errorUpdateWatchStock.textContent = ''; // Clear any previous error message
+        errorUpdateWatchSellingPrice.textContent = ''; // Clear any previous error message
+        AddDataBSDismissOfUpdateButton();
+    }
+});
+
+// Add event listeners for the input update watch discount elements
+inputUpdateWatchDiscount.addEventListener('input', function () {
+    var inputValue = inputUpdateWatchDiscount.value;
+    // Perform validation or error checking on the entered value
+    if (!regex.test(inputValue) || inputValue > 100) {
+        RemoveDataBSDismissOfUpdateButton();
+        errorUpdateWatchDiscount.textContent = 'Discount must be a number and less than 100';
+    } else {
+        errorUpdateWatchDiscount.textContent = ''; // Clear any previous error message
         AddDataBSDismissOfUpdateButton();
     }
 });
@@ -711,8 +728,9 @@ function updateWatch(id) {
             $('.overlay').remove()
             inputUpdateWatchModel.value = response.watch.model;
             inputUpdateWatchCollection.value = response.watch.collection_id;
-            inputUpdateWatchPrice.value = response.watch.price;
-            inputUpdateWatchStock.value = response.watch.stock;
+            inputUpdateWatchOriginalPrice.value = response.watch.original_price;
+            inputUpdateWatchSellingPrice.value = response.watch.selling_price;
+            inputUpdateWatchDiscount.value = response.watch.discount;
             const gender = response.watch.gender;
             for (var i = 0; i < inputUpdateWatchGender.length; i++) {
                 if (inputUpdateWatchGender[i].value == gender) {
@@ -757,14 +775,19 @@ function updateWatchSubmit(id) {
         errorUpdateWatchCollection.textContent = 'Please select a collection';
         return;
     }
-    if (inputUpdateWatchPrice.value == '') {
+    if (inputUpdateWatchOriginalPrice.value == '') {
         RemoveDataBSDismissOfUpdateButton();
-        errorUpdateWatchPrice.textContent = 'Please enter a price';
+        errorUpdateWatchOriginalPrice.textContent = 'Please enter an original price';
         return;
     }
-    if (inputUpdateWatchStock.value == '') {
+    if (inputUpdateWatchSellingPrice.value == '') {
         RemoveDataBSDismissOfUpdateButton();
-        errorUpdateWatchStock.textContent = 'Please enter a stock';
+        errorUpdateWatchSellingPrice.textContent = 'Please enter a selling price';
+        return;
+    }
+    if (inputUpdateWatchDiscount.value == '') {
+        RemoveDataBSDismissOfUpdateButton();
+        errorUpdateWatchDiscount.textContent = 'Please enter a discount';
         return;
     }
     if (inputUpdateWatchCaseMaterial.value == '') {
@@ -818,7 +841,7 @@ function updateWatchSubmit(id) {
         return;
     }
     // Valid error checking
-    if (errorUpdateWatchModel.textContent != '' || errorUpdateWatchCollection.textContent != '' || errorUpdateWatchPrice.textContent != '' || errorUpdateWatchStock.textContent != '' || errorUpdateWatchGender.textContent != '' || errorUpdateWatchCaseMaterial.textContent != '' || errorUpdateWatchCaseDiameter.textContent != '' || errorUpdateWatchCaseThickness.textContent != '' || errorUpdateWatchStrapMaterial.textContent != '' || errorUpdateWatchDialColor.textContent != '' || errorUpdateWatchCrystalMaterial.textContent != '' || errorUpdateWatchWaterResistance.textContent != '' || errorUpdateWatchMovementType.textContent != '' || errorUpdateWatchPowerReserve.textContent != '' || errorUpdateWatchComplications.textContent != '') {
+    if (errorUpdateWatchModel.textContent != '' || errorUpdateWatchCollection.textContent != '' || errorUpdateWatchOriginalPrice.textContent != '' || errorUpdateWatchSellingPrice.textContent != '' || errorUpdateWatchDiscount.textContent != '' || errorUpdateWatchGender.textContent != '' || errorUpdateWatchCaseMaterial.textContent != '' || errorUpdateWatchCaseDiameter.textContent != '' || errorUpdateWatchCaseThickness.textContent != '' || errorUpdateWatchStrapMaterial.textContent != '' || errorUpdateWatchDialColor.textContent != '' || errorUpdateWatchCrystalMaterial.textContent != '' || errorUpdateWatchWaterResistance.textContent != '' || errorUpdateWatchMovementType.textContent != '' || errorUpdateWatchPowerReserve.textContent != '' || errorUpdateWatchComplications.textContent != '') {
         RemoveDataBSDismissOfUpdateButton();
         return;
     }
@@ -839,8 +862,9 @@ function updateWatchSubmit(id) {
     }
     const data = {
         'model': inputUpdateWatchModel.value,
-        'price': inputUpdateWatchPrice.value,
-        'stock': inputUpdateWatchStock.value,
+        'original_price': inputUpdateWatchOriginalPrice.value,
+        'selling_price': inputUpdateWatchSellingPrice.value,
+        'discount': inputUpdateWatchDiscount.value,
         'gender': gender,
         'case_material': inputUpdateWatchCaseMaterial.value,
         'case_diameter': inputUpdateWatchCaseDiameter.value,
@@ -877,8 +901,9 @@ function updateWatchSubmit(id) {
             const watch = document.getElementById('watch_' + response.watch.id);
             watch.innerHTML = `
                 <td>${response.watch.model}</td>
-                <td>$${response.watch.price}</td>
-                <td>${response.watch.stock}</td>
+                <td>$${response.watch.original_price}</td>
+                <td>$${response.watch.selling_price}</td>
+                <td>${response.watch.discount}%</td>
                 <td>${response.watch.gender}</td>
                 <td>${response.watch.case_material}</td>
                 <td>${response.watch.case_diameter}mm</td>
@@ -908,8 +933,9 @@ function updateWatchSubmit(id) {
             //clear input fields
             inputUpdateWatchModel.value = '';
             inputUpdateWatchCollection.value = 0;
-            inputUpdateWatchPrice.value = '';
-            inputUpdateWatchStock.value = '';
+            inputUpdateWatchOriginalPrice.value = '';
+            inputUpdateWatchSellingPrice.value = '';
+            inputUpdateWatchDiscount.value = '';
             inputUpdateWatchGender.value = '';
             inputUpdateWatchCaseMaterial.value = '';
             inputUpdateWatchCaseDiameter.value = '';
@@ -947,8 +973,8 @@ function updateWatchSubmit(id) {
 // Change data bs dismiss of update button when input update watch collection is changed
 function AddDataBSDismissOfUpdateButton() {
     if (!buttonUpdateWatch.hasAttribute('data-bs-dismiss')
-        && errorUpdateWatchModel.textContent == '' && errorUpdateWatchCollection.textContent == '' && errorUpdateWatchPrice.textContent == '' && errorUpdateWatchStock.textContent == '' && errorUpdateWatchGender.textContent == '' && errorUpdateWatchCaseMaterial.textContent == '' && errorUpdateWatchCaseDiameter.textContent == '' && errorUpdateWatchCaseThickness.textContent == '' && errorUpdateWatchStrapMaterial.textContent == '' && errorUpdateWatchDialColor.textContent == '' && errorUpdateWatchCrystalMaterial.textContent == '' && errorUpdateWatchWaterResistance.textContent == '' && errorUpdateWatchMovementType.textContent == '' && errorUpdateWatchPowerReserve.textContent == '' && errorUpdateWatchComplications.textContent == ''
-        && inputUpdateWatchModel.value != '' && inputUpdateWatchCollection.value != 0 && inputUpdateWatchPrice.value != '' && inputUpdateWatchStock.value != '' && inputUpdateWatchGender.value != '' && inputUpdateWatchCaseMaterial.value != '' && inputUpdateWatchCaseDiameter.value != '' && inputUpdateWatchCaseThickness.value != '' && inputUpdateWatchStrapMaterial.value != '' && inputUpdateWatchDialColor.value != '' && inputUpdateWatchCrystalMaterial.value != '' && inputUpdateWatchWaterResistance.value != '' && inputUpdateWatchMovementType.value != 0 && inputUpdateWatchPowerReserve.value != '' && inputUpdateWatchComplications.value != '') {
+        && errorUpdateWatchModel.textContent == '' && errorUpdateWatchCollection.textContent == '' && errorUpdateWatchOriginalPrice.textContent == '' && errorUpdateWatchSellingPrice.textContent == '' && errorUpdateWatchDiscount.textContent == '' && errorUpdateWatchGender.textContent == '' && errorUpdateWatchCaseMaterial.textContent == '' && errorUpdateWatchCaseDiameter.textContent == '' && errorUpdateWatchCaseThickness.textContent == '' && errorUpdateWatchStrapMaterial.textContent == '' && errorUpdateWatchDialColor.textContent == '' && errorUpdateWatchCrystalMaterial.textContent == '' && errorUpdateWatchWaterResistance.textContent == '' && errorUpdateWatchMovementType.textContent == '' && errorUpdateWatchPowerReserve.textContent == '' && errorUpdateWatchComplications.textContent == ''
+        && inputUpdateWatchModel.value != '' && inputUpdateWatchCollection.value != 0 && inputUpdateWatchOriginalPrice.value != '' && inputUpdateWatchSellingPrice.value != '' && inputUpdateWatchDiscount.value != '' && inputUpdateWatchGender.value != '' && inputUpdateWatchCaseMaterial.value != '' && inputUpdateWatchCaseDiameter.value != '' && inputUpdateWatchCaseThickness.value != '' && inputUpdateWatchStrapMaterial.value != '' && inputUpdateWatchDialColor.value != '' && inputUpdateWatchCrystalMaterial.value != '' && inputUpdateWatchWaterResistance.value != '' && inputUpdateWatchMovementType.value != 0 && inputUpdateWatchPowerReserve.value != '' && inputUpdateWatchComplications.value != '') {
         buttonUpdateWatch.setAttribute('data-bs-dismiss', 'modal')
     }
 }

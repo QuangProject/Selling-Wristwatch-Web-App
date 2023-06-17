@@ -41,14 +41,6 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function authenticated(Request $request, $user)
-    {
-        if ($user->is_admin) {
-            return redirect()->route('admin.dashboard');
-        }
-        return redirect()->route('home');
-    }
-
     public function redirectToGoogle()
     {
         return Socialite::driver('google')->redirect();

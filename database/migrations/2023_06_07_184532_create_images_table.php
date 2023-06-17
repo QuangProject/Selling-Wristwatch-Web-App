@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('watch_id');
+            $table->string('name');
             $table->string('image_url');
+            $table->integer('stock');
             $table->timestamps();
 
             $table->foreign('watch_id')->references('id')->on('watches')->onDelete('cascade');

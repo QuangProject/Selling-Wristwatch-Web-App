@@ -16,7 +16,7 @@
                     <div class="col-md-6 my-3 my-md-0 order-1 order-md-2">
                         <div class="text-center">
                             <a class="navbar-brand" href="/">
-                                <img src="{{asset('img/logo.png')}}" alt="Watch World" width="50">
+                                <img src="{{ asset('img/logo.png') }}" alt="Watch World" width="50">
                             </a>
                         </div>
                     </div>
@@ -168,6 +168,19 @@
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
+
+                                        @if (Auth::user()->is_admin)
+                                            <li>
+                                                <a class="dropdown-item d-flex align-items-center"
+                                                    href="{{ route('admin.dashboard') }}">
+                                                    <i class="bi bi-kanban"></i>
+                                                    <span>Administrator</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                        @endif
 
                                         <li>
                                             <button class="dropdown-item d-flex align-items-center" id="sign-out">

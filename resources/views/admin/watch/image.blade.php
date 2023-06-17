@@ -17,6 +17,8 @@
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
+                    <th>Name</th>
+                    <th>Stock</th>
                     <th>Image</th>
                     <th>Options</th>
                 </tr>
@@ -24,6 +26,8 @@
             <tbody id="imageList">
                 @foreach ($images as $image)
                     <tr class="align-middle" id="image_{{ $image->id }}">
+                        <td>{{ $image->name }}</td>
+                        <td>{{ $image->stock }}</td>
                         <td>
                             <img src="{{ route('admin.watch.image.get', ['id' => $image->id]) }}"
                                 id="displayImage_{{ $image->id }}" alt="{{ $image->name }}" width="100"
@@ -43,6 +47,8 @@
             </tbody>
             <tfoot>
                 <tr>
+                    <th>Name</th>
+                    <th>Stock</th>
                     <th>Image</th>
                     <th>Options</th>
                 </tr>
@@ -63,6 +69,22 @@
                     <form method="post">
                         <div class="modal-body">
                             <div class="col-md-12">
+                                {{-- Name --}}
+                                <div class="forms-inputs mt-3">
+                                    <label for="add-image-name">
+                                        <h6 class="fw-bold">Image Name</h6>
+                                    </label>
+                                    <input type="text" id="add-image-name" class="form-control" autocomplete="off">
+                                    <span class="text-danger" id="error-add-image-name"></span>
+                                </div>
+                                {{-- Stock --}}
+                                <div class="forms-inputs mt-3">
+                                    <label for="add-image-stock">
+                                        <h6 class="fw-bold">Image Stock</h6>
+                                    </label>
+                                    <input type="text" id="add-image-stock" class="form-control" autocomplete="off">
+                                    <span class="text-danger" id="error-add-image-stock"></span>
+                                </div>
                                 {{-- Image --}}
                                 <div class="forms-inputs mt-3">
                                     <label for="add-image">
@@ -93,6 +115,22 @@
                     <form method="post">
                         <div class="modal-body">
                             <div class="col-md-12">
+                                {{-- Name --}}
+                                <div class="forms-inputs mt-3">
+                                    <label for="update-image-name">
+                                        <h6 class="fw-bold">Image Name</h6>
+                                    </label>
+                                    <input type="text" id="update-image-name" class="form-control" autocomplete="off">
+                                    <span class="text-danger" id="error-update-image-name"></span>
+                                </div>
+                                {{-- Stock --}}
+                                <div class="forms-inputs mt-3">
+                                    <label for="update-image-stock">
+                                        <h6 class="fw-bold">Image Stock</h6>
+                                    </label>
+                                    <input type="text" id="update-image-stock" class="form-control" autocomplete="off">
+                                    <span class="text-danger" id="error-update-image-stock"></span>
+                                </div>
                                 {{-- Image --}}
                                 <div class="forms-inputs mt-3">
                                     <label for="update-image">

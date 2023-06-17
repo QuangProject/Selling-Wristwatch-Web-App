@@ -10,10 +10,10 @@
 
 @section('content')
     @if (session('msg'))
-        <div class="alert alert-success">{{ session('msg') }}</div>
+        <div class="alert alert-success my-1">{{ session('msg') }}</div>
     @endif
     @if (session('error'))
-        <div class="alert alert-danger mt-3">{{ session('error') }}</div>
+        <div class="alert alert-danger my-1">{{ session('error') }}</div>
     @endif
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">

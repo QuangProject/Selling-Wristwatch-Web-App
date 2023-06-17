@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('collection_id');
             $table->string('model')->unique();
-            $table->decimal('price');
-            $table->integer('stock');
+            $table->decimal('original_price');
+            $table->decimal('selling_price');
+            $table->integer('discount');
             $table->string('gender');
             $table->string('case_material');
             $table->integer('case_diameter');

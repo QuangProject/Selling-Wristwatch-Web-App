@@ -11,8 +11,9 @@ class Watch extends Model
 
     protected $fillable = [
         'model',
-        'price',
-        'stock',
+        'original_price',
+        'selling_price',
+        'discount',
         'gender',
         'case_material',
         'case_diameter',

@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('title')
-    About Us
+    Profile
 @endsection
 
 @section('css')

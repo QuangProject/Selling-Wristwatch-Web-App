@@ -27,9 +27,16 @@ class ImageController extends Controller
     public function store(Request $request, $watchId)
     {
         try {
+            // Check if name is exist
+            $check = Image::where('name', $request->input('name'))->first();
+            if ($check) {
+                return response()->json(['message' => 'Image name already exist'], 400);
+            }
             $imagePath = $request->file('image')->store('public/images');
 
             $image = new Image();
+            $image->name = $request->input('name');
+            $image->stock = $request->input('stock');
             $image->image_url = $imagePath;
             $image->watch_id = $watchId;
             $image->save();
@@ -81,6 +88,11 @@ class ImageController extends Controller
             if (is_null($image)) {
                 return response()->json(['message' => 'Image not found'], 404);
             }
+            // Check if name is exist
+            $check = Image::where('name', $request->input('name'))->first();
+            if ($check && $check->id != $id) {
+                return response()->json(['message' => 'Image name already exist'], 400);
+            }
             if ($request->hasFile('image')) {
                 // Delete the existing image from storage
                 Storage::disk('')->delete($image->image_url);
@@ -88,20 +100,21 @@ class ImageController extends Controller
                 // Store the new image
                 $imagePath = $request->file('image')->store('public/images');
 
+                $image->name = $request->input('name');
+                $image->stock = $request->input('stock');
                 $image->image_url = $imagePath;
-                $image->save();
-
-                return response()->json([
-                    'message' => 'Image updated successfully',
-                    'image' => $image
-                ], 200);
+            } else {
+                $image->name = $request->input('name');
+                $image->stock = $request->input('stock');
             }
+            $image->save();
             return response()->json([
-                'error' => 'No image file provided'
-            ], 400);
+                'message' => 'Image updated successfully',
+                'image' => $image
+            ], 200);
         } catch (\Throwable $th) {
             return response()->json([
-                'message' => 'Brand updated failed',
+                'message' => 'Image updated failed',
                 'error' => $th
             ], 400);
         }

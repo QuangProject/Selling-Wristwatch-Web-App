@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Watch;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -31,8 +32,9 @@ class HomeController extends Controller
     }
 
     // Action detail()
-    public function detail()
+    public function detail($id)
     {
-        return view('clients.site.detail');
+        $watch = Watch::with('images')->findOrFail($id);
+        return view('clients.site.detail')->with('watch', $watch);
     }
 }

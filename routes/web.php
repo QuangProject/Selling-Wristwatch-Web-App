@@ -32,11 +32,16 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-Route::get('/detail/{slug}', [HomeController::class, 'detail'])->name('detail');
+Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('detail');
 Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
 Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
 Route::get('/login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('/login/facebook/callback', [LoginController::class, 'handleFacebookCallback'])->name('login.facebook.callback');
+
+// Get brand image
+Route::get('/brand/image/{id}', [BrandController::class, 'getImage'])->name('admin.brand.image');
+// Get watch image
+Route::get('/watch/image/{id}', [ImageController::class, 'getImage'])->name('admin.watch.image.get');
 
 Auth::routes(['verify' => true]);
 
@@ -57,12 +62,10 @@ Route::middleware(['auth', 'admin'])->group(function () {
         Route::get('/order', [OrderController::class, 'index'])->name('admin.order.index');
         Route::get('/order/{id}', [OrderController::class, 'detail'])->name('admin.order.detail');
         Route::get('/brand', [BrandController::class, 'index'])->name('admin.brand.index');
-        Route::get('/brand/image/{id}', [BrandController::class, 'getImage'])->name('admin.brand.image');
         Route::get('/collection', [CollectionController::class, 'index'])->name('admin.collection.index');
         Route::get('/category', [CategoryController::class, 'index'])->name('admin.category.index');
         Route::get('/watch', [WatchController::class, 'index'])->name('admin.watch.index');
         Route::get('/watch/{id}/image', [ImageController::class, 'index'])->name('admin.watch.image');
-        Route::get('/watch/image/{id}', [ImageController::class, 'getImage'])->name('admin.watch.image.get');
         Route::get('/watch-category', [WatchCategoryController::class, 'index'])->name('admin.watchcategory.index');
         Route::get('/contact', [ContactController::class, 'index'])->name('admin.contact.index');
     });

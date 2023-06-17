@@ -7,6 +7,9 @@
 @section('content')
     <main id="main" class="main">
         <div class="pagetitle">
+            @if (session('msg'))
+                <div class="alert alert-success">{{ session('msg') }}</div>
+            @endif
             <h1>Dashboard</h1>
             <nav>
                 <ol class="breadcrumb">
