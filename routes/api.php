@@ -48,7 +48,6 @@ Route::delete('/watches/{id}', 'App\Http\Controllers\WatchController@destroy');
 
 // Image
 Route::get('/images/watch/{watchId}', 'App\Http\Controllers\ImageController@list');
-Route::get('/watch/image/{id}', 'App\Http\Controllers\ImageController@getImage');
 Route::post('/images/watch/{watchId}', 'App\Http\Controllers\ImageController@store');
 Route::get('/images/{id}', 'App\Http\Controllers\ImageController@show');
 Route::put('/images/{id}', 'App\Http\Controllers\ImageController@update');
