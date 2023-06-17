@@ -71,3 +71,7 @@ Route::delete('/contacts/{id}', 'App\Http\Controllers\ContactController@destroy'
 Route::get('/search-suggestions', 'App\Http\Controllers\SearchController@suggestions');
 Route::get('/watch/search-suggestions', 'App\Http\Controllers\SearchController@watchSuggestions');
 Route::get('/category/search-suggestions', 'App\Http\Controllers\SearchController@categorySuggestions');
+
+// Send Mail
+Route::post('/send-mail', 'App\Http\Controllers\MailController@sendMail');
+Route::post('/reply-contact', 'App\Http\Controllers\MailController@replyContact');

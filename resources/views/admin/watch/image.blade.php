@@ -25,8 +25,9 @@
                 @foreach ($images as $image)
                     <tr class="align-middle" id="image_{{ $image->id }}">
                         <td>
-                            <img src="{{ route('admin.watch.image.get', ['id' => $image->id]) }}" id="displayImage_{{ $image->id }}"
-                                alt="{{ $image->name }}" width="100" class="my-3" loading="lazy">
+                            <img src="{{ route('admin.watch.image.get', ['id' => $image->id]) }}"
+                                id="displayImage_{{ $image->id }}" alt="{{ $image->name }}" width="100"
+                                class="my-3" loading="lazy">
                         </td>
                         <td>
                             <button class="btn btn-primary" type="button" data-bs-toggle="modal"
@@ -47,6 +48,10 @@
                 </tr>
             </tfoot>
         </table>
+        <div class="text-center">
+            {{-- Back to watches --}}
+            <a href="{{ route('admin.watch.index') }}" class="btn btn-secondary mt-3">Back to Watches</a>
+        </div>
         {{-- Add Image --}}
         <div class="modal fade" id="addImageModal" tabindex="-1" aria-labelledby="addImageModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">

@@ -18,7 +18,7 @@
                     <th>Email</th>
                     <th>Subject</th>
                     <th>Message</th>
-                    <th>Reply</th>
+                    <th>Status</th>
                     <th>Options</th>
                 </tr>
             </thead>
@@ -30,9 +30,9 @@
                         <td>{{ $contact->subject }}</td>
                         <td>{{ $contact->message }}</td>
                         @if ($contact->reply == null)
-                            <td>No reply yet</td>
+                            <td class="text-danger">No reply yet</td>
                         @else
-                            <td>Replied</td>
+                            <td class="fw-bold text-success">Replied</td>
                         @endif
                         <td>
                             <button class="btn btn-primary" type="button" data-bs-toggle="modal"
@@ -52,7 +52,7 @@
                     <th>Email</th>
                     <th>Subject</th>
                     <th>Message</th>
-                    <th>Reply</th>
+                    <th>Status</th>
                     <th>Options</th>
                 </tr>
             </tfoot>
@@ -123,5 +123,5 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('js/contact.js') }}"></script>
+    <script src="{{ asset('js/manage_contact.js') }}"></script>
 @endsection
