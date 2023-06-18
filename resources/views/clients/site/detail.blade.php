@@ -9,7 +9,6 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
 @endsection
 
@@ -24,14 +23,14 @@
                     <div id="slider" class="owl-carousel product-slider">
                         @foreach ($watch->images as $image)
                             <div class="item">
-                                <img src="{{ route('admin.watch.image.get', ['id' => $image->id]) }}" />
+                                <img src="{{ route('watch.image.get', ['id' => $image->id]) }}" />
                             </div>
                         @endforeach
                     </div>
                     <div id="thumb" class="owl-carousel product-thumb">
                         @foreach ($watch->images as $image)
-                            <div class="item">
-                                <img src="{{ route('admin.watch.image.get', ['id' => $image->id]) }}" />
+                            <div class="item" onclick="changeName({{ $image->id }})">
+                                <img src="{{ route('watch.image.get', ['id' => $image->id]) }}" />
                             </div>
                         @endforeach
                     </div>
@@ -39,7 +38,7 @@
                 <div class="col-md-6">
                     <div class="product-dtl">
                         <div class="product-info">
-                            <div class="product-name">{{ $watch->model }}</div>
+                            <div class="product-name" id="product-name">{{ $watch->images[0]->name }}</div>
                             {{-- <div class="reviews-counter">
                                 <div class="rate">
                                     <input type="radio" id="star5" name="rate" value="5" checked />
@@ -56,106 +55,139 @@
                                 <span>3 Reviews</span>
                             </div> --}}
                             <div class="product-price-discount">
-                                <span class="fw-bold">$39.00</span><span class="line-through text-danger">$29.00</span>
+                                @if ($watch->discount > 0)
+                                    <span
+                                        class="fw-bold">${{ $watch->selling_price - ($watch->selling_price * $watch->discount) / 100 }}</span>
+                                    <span class="line-through text-danger">${{ $watch->selling_price }}</span>
+                                @else
+                                    <span class="fw-bold">${{ $watch->selling_price }}</span>
+                                @endif
                             </div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="size">Size</label>
-                                <select id="size" name="size" class="form-control">
-                                    <option>S</option>
-                                    <option>M</option>
-                                    <option>L</option>
-                                    <option>XL</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="color">Color</label>
-                                <select id="color" name="color" class="form-control">
-                                    <option>Blue</option>
-                                    <option>Green</option>
-                                    <option>Red</option>
-                                </select>
-                            </div>
+                        <h3 class="box-title my-3">General Info</h3>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-product">
+                                <tbody>
+                                    <tr>
+                                        <td width="190">Model</td>
+                                        <td>{{ $watch->model }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gender</td>
+                                        <td>{{ $watch->gender }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Material</td>
+                                        <td>{{ $watch->case_material }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Diameter</td>
+                                        <td>{{ $watch->case_diameter }}mm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Thinckness</td>
+                                        <td>{{ $watch->case_thickness }}mm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Strap Material</td>
+                                        <td>{{ $watch->strap_material }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dial Color</td>
+                                        <td>{{ $watch->dial_color }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Crystal Material</td>
+                                        <td>{{ $watch->crystal_material }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Water Resistance</td>
+                                        <td>{{ $watch->water_resistance }}m</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Movement Type</td>
+                                        <td>{{ $watch->movement_type }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Reserve</td>
+                                        <td>{{ $watch->power_reserve }} hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Complications</td>
+                                        <td>{{ $watch->complications }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="product-count">
-                            <label for="size">Quantity</label>
-                            <form action="#" class="display-flex">
-                                <div class="qtyminus">-</div>
-                                <input type="text" name="quantity" value="1" class="qty">
-                                <div class="qtyplus">+</div>
-                            </form>
-                            <a href="#" class="round-black-btn">Add to Cart</a>
+                        <button class="round-black-btn" data-bs-toggle="modal" data-bs-target="#addCartModal">Add to
+                            Cart</button>
+                    </div>
+                </div>
+                {{-- Add To Cart --}}
+                <div class="modal fade" id="addCartModal" tabindex="-1" aria-labelledby="addCartModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold" id="addCartModalLabel">Adding To Cart</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <input type="hidden" name="watch-id" value="{{ $watch->id }}">
+                                <div class="form-inputs">
+                                    <div>
+                                        <img src="" id="display-image" alt="" width="100" class="mb-3">
+                                    </div>
+                                    <label for="choose-watch">
+                                        <h6 class="fw-bold">Choose Watch</h6>
+                                    </label>
+                                    <select name='choose-watch' id="choose-watch" class='form-control'>
+                                        <option value='0'>Please choose watch</option>
+                                        @foreach ($watch->images as $image)
+                                            <option value="{{ $image->id }}">{{ $image->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <span class="text-danger" id="error-choose-watch"></span>
+                                </div>
+                                <div class="mt-3">
+                                    <strong>Stock:</strong> <span id="stock"></span>
+                                </div>
+                                <div class="product-count">
+                                    <label for="size fw-bold">Quantity</label>
+                                    <form action="#" class="display-flex">
+                                        <div class="qtyminus">-</div>
+                                        <input type="text" name="quantity" value="1" class="qty">
+                                        <div class="qtyplus">+</div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-dark" id="add-to-cart">Add</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="product-info-tabs">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description"
-                            role="tab" aria-controls="description" aria-selected="true">Description</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="review-tab" data-bs-toggle="tab" href="#review" role="tab"
-                            aria-controls="review" aria-selected="false">Reviews (0)</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="description" role="tabpanel"
-                        aria-labelledby="description-tab">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus
-                        error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
-                    </div>
-                    <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                        <div class="review-heading">REVIEWS</div>
-                        <p class="mb-20">There are no reviews yet.</p>
-                        <form class="review-form">
-                            <div class="form-group">
-                                <label>Your rating</label>
-                                <div class="reviews-counter">
-                                    <div class="rate">
-                                        <input type="radio" id="star5" name="rate" value="5" />
-                                        <label for="star5" title="text">5 stars</label>
-                                        <input type="radio" id="star4" name="rate" value="4" />
-                                        <label for="star4" title="text">4 stars</label>
-                                        <input type="radio" id="star3" name="rate" value="3" />
-                                        <label for="star3" title="text">3 stars</label>
-                                        <input type="radio" id="star2" name="rate" value="2" />
-                                        <label for="star2" title="text">2 stars</label>
-                                        <input type="radio" id="star1" name="rate" value="1" />
-                                        <label for="star1" title="text">1 star</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Your message</label>
-                                <textarea class="form-control" rows="10"></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" name="" class="form-control" placeholder="Name*">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" name="" class="form-control"
-                                            placeholder="Email Id*">
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="round-black-btn">Submit Review</button>
-                        </form>
-                    </div>
-                </div>
+                <h5>Reviews (0)</h5>
+                <table class="table table-striped table-product">
+                    <thead class="fw-bold">
+                        <tr>
+                            <td width="25%">Full Name</td>
+                            <td width="50%">Content</td>
+                            <td width="25%">Date</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FirstName LastName</td>
+                            <td>Content</td>
+                            <td>FeedDate</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -163,92 +195,5 @@
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            var slider = $("#slider");
-            var thumb = $("#thumb");
-            var slidesPerPage = 4; //globaly define number of elements per page
-            var syncedSecondary = true;
-            slider.owlCarousel({
-                items: 1,
-                slideSpeed: 2000,
-                nav: false,
-                autoplay: false,
-                dots: false,
-                loop: true,
-                responsiveRefreshRate: 200
-            }).on('changed.owl.carousel', syncPosition);
-            thumb
-                .on('initialized.owl.carousel', function() {
-                    thumb.find(".owl-item").eq(0).addClass("current");
-                })
-                .owlCarousel({
-                    items: slidesPerPage,
-                    dots: false,
-                    nav: true,
-                    item: 4,
-                    smartSpeed: 200,
-                    slideSpeed: 500,
-                    slideBy: slidesPerPage,
-                    navText: [
-                        '<svg width="18px" height="18px" viewBox="0 0 11 20"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M9.554,1.001l-8.607,8.607l8.607,8.606"/></svg>',
-                        '<svg width="25px" height="25px" viewBox="0 0 11 20" version="1.1"><path style="fill:none;stroke-width: 1px;stroke: #000;" d="M1.054,18.214l8.606,-8.606l-8.606,-8.607"/></svg>'
-                    ],
-                    responsiveRefreshRate: 100
-                }).on('changed.owl.carousel', syncPosition2);
-
-            function syncPosition(el) {
-                var count = el.item.count - 1;
-                var current = Math.round(el.item.index - (el.item.count / 2) - .5);
-                if (current < 0) {
-                    current = count;
-                }
-                if (current > count) {
-                    current = 0;
-                }
-                thumb
-                    .find(".owl-item")
-                    .removeClass("current")
-                    .eq(current)
-                    .addClass("current");
-                var onscreen = thumb.find('.owl-item.active').length - 1;
-                var start = thumb.find('.owl-item.active').first().index();
-                var end = thumb.find('.owl-item.active').last().index();
-                if (current > end) {
-                    thumb.data('owl.carousel').to(current, 100, true);
-                }
-                if (current < start) {
-                    thumb.data('owl.carousel').to(current - onscreen, 100, true);
-                }
-            }
-
-            function syncPosition2(el) {
-                if (syncedSecondary) {
-                    var number = el.item.index;
-                    slider.data('owl.carousel').to(number, 100, true);
-                }
-            }
-            thumb.on("click", ".owl-item", function(e) {
-                e.preventDefault();
-                var number = $(this).index();
-                slider.data('owl.carousel').to(number, 300, true);
-            });
-
-            $(".qtyminus").on("click", function() {
-                var now = $(".qty").val();
-                if ($.isNumeric(now)) {
-                    if (parseInt(now) - 1 > 0) {
-                        now--;
-                    }
-                    $(".qty").val(now);
-                }
-            })
-            $(".qtyplus").on("click", function() {
-                var now = $(".qty").val();
-                if ($.isNumeric(now)) {
-                    $(".qty").val(parseInt(now) + 1);
-                }
-            });
-        });
-    </script>
+    <script src="{{ asset('js/detail.js') }}"></script>
 @endsection

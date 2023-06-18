@@ -126,7 +126,7 @@ buttonAddBrand.addEventListener('click', function () {
                 <td>${response.brand.country_of_origin}</td>
                 <td>${response.brand.year_established}</td>
                 <td>
-                    <img src="/admin/brand/image/${response.brand.id}" alt="${response.brand.name}" width="100">
+                    <img src="/brand/image/${response.brand.id}" alt="${response.brand.name}" width="100">
                 </td>
                 <td>
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateBrand(${response.brand.id})" data-bs-target="#updateBrandModal">
@@ -250,7 +250,7 @@ function updateBrand(brandId) {
             inputUpdateBrandName.value = response.brand.name;
             inputUpdateCountryOfOrigin.value = response.brand.country_of_origin;
             inputUpdateYearEstablished.value = response.brand.year_established;
-            displayImageUpdateBrand.src = '/admin/brand/image/' + response.brand.id;
+            displayImageUpdateBrand.src = '/brand/image/' + response.brand.id;
             displayImageUpdateBrand.alt = response.brand.name;
             buttonUpdateBrand.setAttribute('data-bs-dismiss', 'modal');
             buttonUpdateBrand.setAttribute('onclick', 'updateBrandSubmit(' + brandId + ')');
@@ -327,7 +327,7 @@ function updateBrandSubmit(id) {
                 <td>${response.brand.country_of_origin}</td>
                 <td>${response.brand.year_established}</td>
                 <td>
-                    <img src="/admin/brand/image/${response.brand.id}" id="image_${response.brand.id}" alt="${response.brand.name}" width="100">
+                    <img src="/brand/image/${response.brand.id}" id="image_${response.brand.id}" alt="${response.brand.name}" width="100">
                 </td>
                 <td>
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateBrand(${response.brand.id})" data-bs-target="#updateBrandModal">

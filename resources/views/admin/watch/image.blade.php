@@ -29,7 +29,7 @@
                         <td>{{ $image->name }}</td>
                         <td>{{ $image->stock }}</td>
                         <td>
-                            <img src="{{ route('admin.watch.image.get', ['id' => $image->id]) }}"
+                            <img src="{{ route('watch.image.get', ['id' => $image->id]) }}"
                                 id="displayImage_{{ $image->id }}" alt="{{ $image->name }}" width="100"
                                 class="my-3" loading="lazy">
                         </td>
@@ -147,7 +147,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="btn-update-image">Update</button>
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="btn-update-image">Update</button>
                         </div>
                     </form>
                 </div>

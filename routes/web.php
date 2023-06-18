@@ -39,9 +39,9 @@ Route::get('/login/facebook', [LoginController::class, 'redirectToFacebook'])->n
 Route::get('/login/facebook/callback', [LoginController::class, 'handleFacebookCallback'])->name('login.facebook.callback');
 
 // Get brand image
-Route::get('/brand/image/{id}', [BrandController::class, 'getImage'])->name('admin.brand.image');
+Route::get('/brand/image/{id}', [BrandController::class, 'getImage'])->name('brand.image');
 // Get watch image
-Route::get('/watch/image/{id}', [ImageController::class, 'getImage'])->name('admin.watch.image.get');
+Route::get('/watch/image/{id}', [ImageController::class, 'getImage'])->name('watch.image.get');
 
 Auth::routes(['verify' => true]);
 
