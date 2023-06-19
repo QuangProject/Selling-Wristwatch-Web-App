@@ -10,9 +10,7 @@ class Image extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
         'image_url',
-        'stock',
         'watch_id',
     ];
 
