@@ -33,17 +33,17 @@
             <tbody id="watchCategoryList">
                 @foreach ($watchCategories as $watchCategory)
                     <tr class="align-middle"
-                        id="watchCategory_{{ $watchCategory->watch_id }}_{{ $watchCategory->category_id }}">
+                        id="watchCategory_{{ $watchCategory->id }}">
                         <td>{{ $watchCategory->watch_model }}</td>
                         <td>{{ $watchCategory->category_name }}</td>
                         <td>
                             <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                onclick="updateWatchCategory({{ $watchCategory->watch_id }}, {{ $watchCategory->category_id }})"
+                                onclick="updateWatchCategory({{ $watchCategory->id }})"
                                 data-bs-target="#updateWatchCategoryModal">
                                 Edit
                             </button>
                             <button class="btn btn-danger" type="button"
-                                onclick="deleteWatchCategory({{ $watchCategory->watch_id }}, {{ $watchCategory->category_id }})">
+                                onclick="deleteWatchCategory({{ $watchCategory->id }})">
                                 Delete
                             </button>
                         </td>

@@ -56,9 +56,9 @@ Route::delete('/images/{id}', 'App\Http\Controllers\ImageController@destroy');
 // Watch Category
 Route::get('/watch-categories', 'App\Http\Controllers\WatchCategoryController@list');
 Route::post('/watch-categories', 'App\Http\Controllers\WatchCategoryController@store');
-Route::get('/watch-categories/{watchId}/{categoryId}', 'App\Http\Controllers\WatchCategoryController@show');
-Route::put('/watch-categories/{watchId}/{categoryId}', 'App\Http\Controllers\WatchCategoryController@update');
-Route::delete('/watch-categories/{watchId}/{categoryId}', 'App\Http\Controllers\WatchCategoryController@destroy');
+Route::get('/watch-categories/{id}', 'App\Http\Controllers\WatchCategoryController@show');
+Route::put('/watch-categories/{id}', 'App\Http\Controllers\WatchCategoryController@update');
+Route::delete('/watch-categories/{id}', 'App\Http\Controllers\WatchCategoryController@destroy');
 
 // Contact
 Route::get('/contacts', 'App\Http\Controllers\ContactController@list');

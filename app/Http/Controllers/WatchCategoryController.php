@@ -58,9 +58,9 @@ class WatchCategoryController extends Controller
         }
     }
 
-    public function show($watchId, $categoryId)
+    public function show($id)
     {
-        $watchCategory = WatchCategory::where('watch_id', $watchId)->where('category_id', $categoryId)->first();
+        $watchCategory = WatchCategory::find($id);
         if (is_null($watchCategory)) {
             return response()->json(['message' => 'Watch Category not found'], 404);
         }
@@ -70,10 +70,10 @@ class WatchCategoryController extends Controller
         ], 200);
     }
 
-    public function update(Request $request, $watchId, $categoryId)
+    public function update(Request $request, $id)
     {
         try {
-            $watchCategory = WatchCategory::where('watch_id', $watchId)->where('category_id', $categoryId)->first();
+            $watchCategory = WatchCategory::find($id);
             if (is_null($watchCategory)) {
                 return response()->json(['message' => 'Watch Category not found'], 404);
             }
@@ -82,24 +82,18 @@ class WatchCategoryController extends Controller
             if ($check) {
                 return response()->json(['message' => 'Watch Category already exist'], 400);
             }
-            // $watchCategory->update($request->all());
-            $watchCategory = DB::update('update watch_categories set watch_id = ?, category_id = ? where watch_id = ? and category_id = ?', [$request->watch_id, $request->category_id, $watchId, $categoryId]);
-            if ($watchCategory) {
-                $watchCategory = WatchCategory::join('watches', 'watch_categories.watch_id', '=', 'watches.id')
-                    ->join('categories', 'watch_categories.category_id', '=', 'categories.id')
-                    ->select('watch_categories.*', 'watches.model as watch_model', 'categories.name as category_name')
-                    ->where('watch_categories.watch_id', $request->watch_id)
-                    ->where('watch_categories.category_id', $request->category_id)
-                    ->first();
-                return response()->json([
-                    'message' => 'Watch Category updated successfully',
-                    'watchCategory' => $watchCategory
-                ], 200);
-            } else {
-                return response()->json([
-                    'message' => 'Watch Category updated failed',
-                ], 400);
-            }
+            $watchCategory->update($request->all());
+            // display watch category
+            $watchCategory = WatchCategory::join('watches', 'watch_categories.watch_id', '=', 'watches.id')
+                ->join('categories', 'watch_categories.category_id', '=', 'categories.id')
+                ->select('watch_categories.*', 'watches.model as watch_model', 'categories.name as category_name')
+                ->where('watch_categories.watch_id', $request->watch_id)
+                ->where('watch_categories.category_id', $request->category_id)
+                ->first();
+            return response()->json([
+                'message' => 'Watch Category updated successfully',
+                'watchCategory' => $watchCategory
+            ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Watch Category updated failed',
@@ -108,14 +102,14 @@ class WatchCategoryController extends Controller
         }
     }
 
-    public function destroy($watchId, $categoryId)
+    public function destroy($id)
     {
         // Logic to delete a user by ID
-        $watchCategory = WatchCategory::where('watch_id', $watchId)->where('category_id', $categoryId)->first();
+        $watchCategory = WatchCategory::find($id);
         if (is_null($watchCategory)) {
             return response()->json(['message' => 'Watch Category not found'], 404);
         }
-        DB::delete('delete from watch_categories where watch_id = ? and category_id = ?', [$watchId, $categoryId]);
+        $watchCategory->delete();
         return response()->json(['message' => 'Watch Category was deleted'], 200);
     }
 }
