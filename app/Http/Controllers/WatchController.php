@@ -10,7 +10,7 @@ class WatchController extends Controller
     public function index()
     {
         $watches = Watch::join('collections', 'watches.collection_id', '=', 'collections.id')
-            ->select('watches.id', 'watches.model', 'watches.price', 'watches.stock', 'watches.gender', 'watches.case_material', 'watches.case_diameter', 'watches.case_thickness', 'watches.strap_material', 'watches.dial_color', 'watches.crystal_material', 'watches.water_resistance', 'watches.movement_type', 'watches.power_reserve', 'watches.complications', 'watches.availability', 'collections.id as collection_id', 'collections.name as collection_name')
+            ->select('watches.id', 'watches.model', 'watches.original_price', 'watches.selling_price', 'watches.discount', 'watches.stock', 'watches.gender', 'watches.case_material', 'watches.case_diameter', 'watches.case_thickness', 'watches.strap_material', 'watches.dial_color', 'watches.crystal_material', 'watches.water_resistance', 'watches.movement_type', 'watches.power_reserve', 'watches.complications', 'watches.availability', 'collections.id as collection_id', 'collections.name as collection_name')
             ->get();
         return view('admin.watch.index')->with('watches', $watches);
     }
@@ -19,7 +19,7 @@ class WatchController extends Controller
     {
         // $watches = Watch::all();
         $watches = Watch::join('collections', 'watches.collection_id', '=', 'collections.id')
-            ->select('watches.id', 'watches.model', 'watches.price', 'watches.stock', 'watches.gender', 'watches.case_material', 'watches.case_diameter', 'watches.case_thickness', 'watches.strap_material', 'watches.dial_color', 'watches.crystal_material', 'watches.water_resistance', 'watches.movement_type', 'watches.power_reserve', 'watches.complications', 'watches.availability', 'collections.id as collection_id', 'collections.name as collection_name')
+            ->select('watches.id', 'watches.model', 'watches.original_price', 'watches.selling_price', 'watches.discount', 'watches.stock', 'watches.gender', 'watches.case_material', 'watches.case_diameter', 'watches.case_thickness', 'watches.strap_material', 'watches.dial_color', 'watches.crystal_material', 'watches.water_resistance', 'watches.movement_type', 'watches.power_reserve', 'watches.complications', 'watches.availability', 'collections.id as collection_id', 'collections.name as collection_name')
             ->get();
         return response()->json([
             'message' => 'Watches retrieved successfully',
@@ -38,7 +38,7 @@ class WatchController extends Controller
             $watch = Watch::create($request->all());
             // display watch
             $display = Watch::join('collections', 'watches.collection_id', '=', 'collections.id')
-                ->select('watches.id', 'watches.model', 'watches.price', 'watches.stock', 'watches.gender', 'watches.case_material', 'watches.case_diameter', 'watches.case_thickness', 'watches.strap_material', 'watches.dial_color', 'watches.crystal_material', 'watches.water_resistance', 'watches.movement_type', 'watches.power_reserve', 'watches.complications', 'watches.availability', 'collections.id as collection_id', 'collections.name as collection_name')
+                ->select('watches.id', 'watches.model', 'watches.original_price', 'watches.selling_price', 'watches.discount', 'watches.stock', 'watches.gender', 'watches.case_material', 'watches.case_diameter', 'watches.case_thickness', 'watches.strap_material', 'watches.dial_color', 'watches.crystal_material', 'watches.water_resistance', 'watches.movement_type', 'watches.power_reserve', 'watches.complications', 'watches.availability', 'collections.id as collection_id', 'collections.name as collection_name')
                 ->where('watches.id', $watch->id)
                 ->first();
             return response()->json([
@@ -80,7 +80,7 @@ class WatchController extends Controller
             $watch->update($request->all());
             // display watch
             $display = Watch::join('collections', 'watches.collection_id', '=', 'collections.id')
-                ->select('watches.id', 'watches.model', 'watches.price', 'watches.stock', 'watches.gender', 'watches.case_material', 'watches.case_diameter', 'watches.case_thickness', 'watches.strap_material', 'watches.dial_color', 'watches.crystal_material', 'watches.water_resistance', 'watches.movement_type', 'watches.power_reserve', 'watches.complications', 'watches.availability', 'collections.id as collection_id', 'collections.name as collection_name')
+                ->select('watches.id', 'watches.model', 'watches.original_price', 'watches.selling_price', 'watches.discount', 'watches.stock', 'watches.gender', 'watches.case_material', 'watches.case_diameter', 'watches.case_thickness', 'watches.strap_material', 'watches.dial_color', 'watches.crystal_material', 'watches.water_resistance', 'watches.movement_type', 'watches.power_reserve', 'watches.complications', 'watches.availability', 'collections.id as collection_id', 'collections.name as collection_name')
                 ->where('watches.id', $watch->id)
                 ->first();
             return response()->json([

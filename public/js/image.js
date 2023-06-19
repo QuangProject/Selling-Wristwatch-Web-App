@@ -59,7 +59,7 @@ btnAddImage.addEventListener('click', function () {
             newImage.setAttribute('class', 'align-middle animate__animated animate__fadeInUp');
             newImage.innerHTML = `
                 <td>
-                    <img src="/admin/watch/image/${response.image.id}" width="100">
+                    <img src="/watch/image/${response.image.id}" width="100">
                 </td>
                 <td>
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateImage(${response.image.id})" data-bs-target="#updateImageModal">
@@ -145,7 +145,7 @@ function updateImage(id) {
         success: function (response) {
             $('.overlay').remove()
             const displayImageUpdate = document.getElementById('display-image-update');
-            displayImageUpdate.src = '/admin/watch/image/' + response.image.id;
+            displayImageUpdate.src = '/watch/image/' + response.image.id;
             btnUpdateImage.setAttribute('data-bs-dismiss', 'modal');
             btnUpdateImage.setAttribute('onclick', 'updateImageSubmit(' + id + ')');
             RemoveDataBSDismissOfUpdateButton();
@@ -185,7 +185,7 @@ function updateImageSubmit(id) {
             })
 
             const displayImageUpdate = document.getElementById('displayImage_' + response.image.id);
-            fetch('/admin/watch/image/' + response.image.id)
+            fetch('/watch/image/' + response.image.id)
                 .then(response => response.blob())
                 .then(blob => {
                     const url = window.URL.createObjectURL(blob);
