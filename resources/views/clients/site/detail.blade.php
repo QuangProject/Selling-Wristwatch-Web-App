@@ -38,7 +38,7 @@
                 <div class="col-md-6">
                     <div class="product-dtl">
                         <div class="product-info">
-                            <div class="product-name" id="product-name">{{ $watch->images[0]->name }}</div>
+                            <div class="product-name" id="product-name">{{ $watch->model }}</div>
                             {{-- <div class="reviews-counter">
                                 <div class="rate">
                                     <input type="radio" id="star5" name="rate" value="5" checked />
@@ -64,14 +64,28 @@
                                 @endif
                             </div>
                         </div>
-                        <h3 class="box-title my-3">General Info</h3>
+                        <div class="mt-3">
+                            <strong>Stock:</strong> <span id="stock">{{ $watch->stock }}</span>
+                        </div>
+                        <div class="product-count">
+                            <label for="size fw-bold">Quantity</label>
+                            <div class="display-flex">
+                                <div class="qtyminus">-</div>
+                                <input type="text" name="quantity" value="1" class="qty" id="quantity">
+                                <div class="qtyplus">+</div>
+                            </div>
+                        </div>
+                        <button class="round-black-btn" id="btn-add-to-cart">Add to Cart</button>
                         <div class="table-responsive">
                             <table class="table table-striped table-product">
-                                <tbody>
+                                <thead>
                                     <tr>
-                                        <td width="190">Model</td>
-                                        <td>{{ $watch->model }}</td>
+                                        <td colspan="2">
+                                            <h3>General Info</h3>
+                                        </td>
                                     </tr>
+                                </thead>
+                                <tbody>
                                     <tr>
                                         <td>Gender</td>
                                         <td>{{ $watch->gender }}</td>
@@ -118,54 +132,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                        <button class="round-black-btn" data-bs-toggle="modal" data-bs-target="#addCartModal">Add to
-                            Cart</button>
-                    </div>
-                </div>
-                {{-- Add To Cart --}}
-                <div class="modal fade" id="addCartModal" tabindex="-1" aria-labelledby="addCartModalLabel"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title fw-bold" id="addCartModalLabel">Adding To Cart</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" name="watch-id" value="{{ $watch->id }}">
-                                <div class="form-inputs">
-                                    <div>
-                                        <img src="" id="display-image" alt="" width="100" class="mb-3">
-                                    </div>
-                                    <label for="choose-watch">
-                                        <h6 class="fw-bold">Choose Watch</h6>
-                                    </label>
-                                    <select name='choose-watch' id="choose-watch" class='form-control'>
-                                        <option value='0'>Please choose watch</option>
-                                        @foreach ($watch->images as $image)
-                                            <option value="{{ $image->id }}">{{ $image->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    <span class="text-danger" id="error-choose-watch"></span>
-                                </div>
-                                <div class="mt-3">
-                                    <strong>Stock:</strong> <span id="stock"></span>
-                                </div>
-                                <div class="product-count">
-                                    <label for="size fw-bold">Quantity</label>
-                                    <form action="#" class="display-flex">
-                                        <div class="qtyminus">-</div>
-                                        <input type="text" name="quantity" value="1" class="qty">
-                                        <div class="qtyplus">+</div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-white" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-dark" id="add-to-cart">Add</button>
-                            </div>
                         </div>
                     </div>
                 </div>

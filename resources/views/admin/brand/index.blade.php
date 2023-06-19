@@ -31,7 +31,7 @@
                         <td>{{ $brand->country_of_origin }}</td>
                         <td>{{ $brand->year_established }}</td>
                         <td>
-                            <img src="{{ route('admin.brand.image', ['id' => $brand->id]) }}" id="image_{{ $brand->id }}"
+                            <img src="{{ route('brand.image', ['id' => $brand->id]) }}" id="image_{{ $brand->id }}"
                                 alt="{{ $brand->name }}" width="100" class="my-3" loading="lazy">
                         </td>
                         <td>

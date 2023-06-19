@@ -14,6 +14,10 @@ class Watch extends Model
         'original_price',
         'selling_price',
         'discount',
+<<<<<<< HEAD
+=======
+        'stock',
+>>>>>>> fix
         'gender',
         'case_material',
         'case_diameter',

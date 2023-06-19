@@ -12,7 +12,6 @@ class Review extends Model
     protected $fillable = [
         'rating',
         'comment',
-        'review_date',
     ];
 
     public function watch()

@@ -312,7 +312,7 @@ function updateBrandSubmit(id) {
             })
 
             const displayImageUpdateBrand = document.getElementById('image_' + response.brand.id);
-            fetch('/admin/brand/image/' + response.brand.id)
+            fetch('/brand/image/' + response.brand.id)
                 .then(response => response.blob())
                 .then(blob => {
                     const url = window.URL.createObjectURL(blob);

@@ -65,7 +65,7 @@
             <div class="col-lg-10 col-md-9">
                 <div class="row">
                     @foreach ($watches as $watch)
-                        <div class="col-md-3 col-sm-6 mt-3">
+                        <div class="col-xl-3 col-lg-4 col-sm-6 mt-3">
                             <div class="product-grid">
                                 <div class="product-image">
                                     <a href="{{ route('detail', ['id' => $watch->id]) }}" class="image">
@@ -85,7 +85,7 @@
                                 <div class="product-content">
                                     <h3 class="title">
                                         <a href="{{ route('detail', ['id' => $watch->id]) }}" class="content">
-                                            {{ $watch->images[0]->name }}
+                                            {{ $watch->model }}
                                         </a>
                                     </h3>
                                     @if ($watch->discount > 0)
@@ -109,7 +109,7 @@
 @section('js')
     <script>
         var content = document.getElementsByClassName('content');
-        var minWords = 4; // Minimum number of words to display
+        var minWords = 3; // Minimum number of words to display
         for (var i = 0; i < content.length; i++) {
             var words = content[i].innerText.split(' ');
             if (words.length > minWords) {

@@ -86,65 +86,14 @@ $(document).ready(function () {
         }
     });
 
-    // Process add to cart
-    const chooseWatch = document.getElementById('choose-watch');
-    chooseWatch.addEventListener('input', function () {
-        const id = chooseWatch.value;
-        if (id == 0) {
-            const errorChooseWatch = document.getElementById('error-choose-watch');
-            errorChooseWatch.innerHTML = 'Please choose a watch';
-            return;
-        }
-        $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
-        // GET A BRAND AJAX
-        const path = '/api/images/' + id;
-        $.ajax({
-            url: path,
-            type: 'GET',
-            success: function (response) {
-                $('.overlay').remove()
-                const displayImage = document.getElementById('display-image');
-                const stock = document.getElementById('stock');
-
-                displayImage.src = '/watch/image/' + response.image.id;
-                displayImage.alt = response.image.name;
-                stock.innerHTML = response.image.stock;
-            },
-            error: function (error) {
-                $('.overlay').remove()
-                console.error(error);
-            }
-        })
-    })
     // ADD TO CART AJAX
-    const addToCartBtn = document.getElementById('add-to-cart');
-    addToCartBtn.addEventListener('click', function () {
-        if (chooseWatch.value == 0) {
-            const errorChooseWatch = document.getElementById('error-choose-watch');
-            errorChooseWatch.innerHTML = 'Please choose a watch';
-            return;
-        }
-        const watchId = document.getElementById('choose-watch').value;
-        const quantity = document.getElementById('quantity').value;
-        alert('Add to cart successfully!')
+    const btnAddToCart = document.getElementById('btn-add-to-cart');
+    const inputQuantity = document.getElementById('quantity');
+    btnAddToCart.addEventListener('click', function () {
+        // Get watch id from url
+        const url = window.location.href;
+        const watch_id = url.substring(url.lastIndexOf('/') + 1);
+        const quantity = inputQuantity.value;
+        console.log(watch_id, quantity);
     })
 });
-
-function changeName(id) {
-    $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
-    // GET A BRAND AJAX
-    const path = '/api/images/' + id;
-    $.ajax({
-        url: path,
-        type: 'GET',
-        success: function (response) {
-            $('.overlay').remove()
-            const productName = document.getElementById('product-name');
-            productName.innerHTML = response.image.name;
-        },
-        error: function (error) {
-            $('.overlay').remove()
-            console.error(error);
-        }
-    })
-}

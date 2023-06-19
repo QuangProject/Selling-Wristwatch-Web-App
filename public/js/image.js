@@ -107,7 +107,7 @@ btnAddImage.addEventListener('click', function () {
                 <td>${response.image.name}</td>
                 <td>${response.image.stock}</td>
                 <td>
-                    <img src="/watch/image/${response.image.id}" id="displayImage_${response.image.id}" alt="${response.image.name}" width="100">
+                    <img src="/watch/image/${response.image.id}" width="100">
                 </td>
                 <td>
                     <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateImage(${response.image.id})" data-bs-target="#updateImageModal">
@@ -216,8 +216,6 @@ function updateImage(id) {
         success: function (response) {
             $('.overlay').remove()
             const displayImageUpdate = document.getElementById('display-image-update');
-            inputUpdateImageName.value = response.image.name;
-            inputUpdateImageStock.value = response.image.stock;
             displayImageUpdate.src = '/watch/image/' + response.image.id;
             btnUpdateImage.setAttribute('data-bs-dismiss', 'modal');
             btnUpdateImage.setAttribute('onclick', 'updateImageSubmit(' + id + ')');

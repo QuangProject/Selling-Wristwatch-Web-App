@@ -222,16 +222,16 @@ btnAddWatchCategory.addEventListener('click', function () {
 
             // Add new row to table
             const newWatchCategory = document.createElement('tr');
-            newWatchCategory.setAttribute('id', 'watchCategory_' + response.watchCategory.watch_id + '_' + response.watchCategory.category_id);
+            newWatchCategory.setAttribute('id', 'watchCategory_' + response.watchCategory.id);
             newWatchCategory.setAttribute('class', 'align-middle animate__animated animate__fadeInUp');
             newWatchCategory.innerHTML = `
                 <td>${response.watchCategory.watch_model}</td>
                 <td>${response.watchCategory.category_name}</td>
                 <td>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateWatchCategory(${response.watchCategory.watch_id}, ${response.watchCategory.category_id})" data-bs-target="#updateWatchCategoryModal">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateWatchCategory(${response.watchCategory.id})" data-bs-target="#updateWatchCategoryModal">
                         Edit
                     </button>
-                    <button class="btn btn-danger" type="button" onclick="deleteWatchCategory(${response.watchCategory.watch_id}, ${response.watchCategory.category_id})">
+                    <button class="btn btn-danger" type="button" onclick="deleteWatchCategory(${response.watchCategory.id})">
                         Delete
                     </button>
                 </td>
@@ -375,17 +375,17 @@ const errorUpdateCategoryId = document.getElementById('error-update-category-id'
 const btnUpdateWatchCategory = document.getElementById('btn-update-watch-category');
 
 // Display information of watch category to update
-function updateWatchCategory(watchId, categoryId) {
+function updateWatchCategory(id) {
     $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     $.ajax({
-        url: '/api/watch-categories/' + watchId + '/' + categoryId,
+        url: '/api/watch-categories/' + id,
         type: 'GET',
         success: function (response) {
             $('.overlay').remove()
             selectUpdateWatchModel.value = response.watchCategory.watch_id;
             selectUpdateCategoryName.value = response.watchCategory.category_id;
             btnUpdateWatchCategory.setAttribute('data-bs-dismiss', 'modal');
-            btnUpdateWatchCategory.setAttribute('onclick', 'updateWatchCategorySubmit(' + response.watchCategory.watch_id + ', ' + response.watchCategory.category_id + ')');
+            btnUpdateWatchCategory.setAttribute('onclick', 'updateWatchCategorySubmit(' + response.watchCategory.id + ')');
         },
         error: function (error) {
             $('.overlay').remove()
@@ -417,7 +417,7 @@ selectUpdateCategoryName.addEventListener('input', function (event) {
 })
 
 // Click update watch category
-function updateWatchCategorySubmit(watchId, categoryId) {
+function updateWatchCategorySubmit(id) {
     // Validate input watch id
     if (selectUpdateWatchModel.value == 0) {
         RemoveDataBSDismissOfUpdateButton();
@@ -443,7 +443,7 @@ function updateWatchCategorySubmit(watchId, categoryId) {
 
     $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     $.ajax({
-        url: '/api/watch-categories/' + watchId + '/' + categoryId,
+        url: '/api/watch-categories/' + id,
         type: 'PUT',
         data: data,
         success: function (response) {
@@ -455,20 +455,19 @@ function updateWatchCategorySubmit(watchId, categoryId) {
                 'timer': 2000
             })
 
-            const watchCategory = document.getElementById('watchCategory_' + watchId + '_' + categoryId);
+            const watchCategory = document.getElementById('watchCategory_' + id);
             watchCategory.innerHTML = `
                 <td>${response.watchCategory.watch_model}</td>
                 <td>${response.watchCategory.category_name}</td>
                 <td>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateWatchCategory(${response.watchCategory.watch_id}, ${response.watchCategory.category_id})" data-bs-target="#updateWatchCategoryModal">
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal" onclick="updateWatchCategory(${response.watchCategory.id})" data-bs-target="#updateWatchCategoryModal">
                         Edit
                     </button>
-                    <button class="btn btn-danger" type="button" onclick="deleteWatchCategory(${response.watchCategory.watch_id}, ${response.watchCategory.category_id})">
+                    <button class="btn btn-danger" type="button" onclick="deleteWatchCategory(${response.watchCategory.id})">
                         Delete
                     </button>
                 </td>
             `;
-            watchCategory.setAttribute('id', 'watchCategory_' + response.watchCategory.watch_id + '_' + response.watchCategory.category_id);
 
             // clear input
             selectUpdateWatchModel.value = 0;
@@ -515,7 +514,7 @@ function RemoveDataBSDismissOfUpdateButton() {
 }
 
 // DELETE WATCH CATEGORY
-function deleteWatchCategory(watchId, categoryId) {
+function deleteWatchCategory(id) {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success me-2',
@@ -535,7 +534,7 @@ function deleteWatchCategory(watchId, categoryId) {
         if (result.isConfirmed) {
             $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
             // DELETE A BRAND AJAX
-            const path = '/api/watch-categories/' + watchId + '/' + categoryId;
+            const path = '/api/watch-categories/' + id;
             $.ajax({
                 url: path,
                 type: 'DELETE',
@@ -548,13 +547,13 @@ function deleteWatchCategory(watchId, categoryId) {
                         'timer': 2000
                     })
 
-                    var el = document.getElementById('watchCategory_' + watchId + '_' + categoryId)
+                    var el = document.getElementById('watchCategory_' + id)
                     $(el)
-                        .closest('#watchCategory_' + watchId + '_' + categoryId)
+                        .closest('#watchCategory_' + id)
                         .css('background', '#f27474')
-                        .closest('#watchCategory_' + watchId + '_' + categoryId)
+                        .closest('#watchCategory_' + id)
                         .fadeOut(800, function () {
-                            $('#watchCategory_' + watchId + '_' + categoryId).remove()
+                            $('#watchCategory_' + id).remove()
                         })
                 },
                 error: function (error) {
