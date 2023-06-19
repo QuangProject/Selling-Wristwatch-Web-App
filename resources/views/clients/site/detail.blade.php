@@ -1,10 +1,14 @@
 @extends('layouts.base')
 
 @section('title')
-    About Us
+    Detail
 @endsection
 
 @section('css')
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
     <link rel="stylesheet" href="{{ asset('css/detail.css') }}">
 @endsection
 
@@ -17,17 +21,25 @@
             <div class="row">
                 <div class="col-md-6">
                     <div id="slider" class="owl-carousel product-slider">
-                        <div class="item text-center">
-                            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-                                height="50%" width="50%" />
-                        </div>
+                        @foreach ($watch->images as $image)
+                            <div class="item">
+                                <img src="{{ route('watch.image.get', ['id' => $image->id]) }}" />
+                            </div>
+                        @endforeach
+                    </div>
+                    <div id="thumb" class="owl-carousel product-thumb">
+                        @foreach ($watch->images as $image)
+                            <div class="item" onclick="changeName({{ $image->id }})">
+                                <img src="{{ route('watch.image.get', ['id' => $image->id]) }}" />
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="product-dtl">
                         <div class="product-info">
-                            <div class="product-name">Variable Product</div>
-                            <div class="reviews-counter">
+                            <div class="product-name" id="product-name">{{ $watch->model }}</div>
+                            {{-- <div class="reviews-counter">
                                 <div class="rate">
                                     <input type="radio" id="star5" name="rate" value="5" checked />
                                     <label for="star5" title="text">5 stars</label>
@@ -41,130 +53,113 @@
                                     <label for="star1" title="text">1 star</label>
                                 </div>
                                 <span>3 Reviews</span>
-                            </div>
-                            <div class="product-price-discount"><span>$39.00</span><span class="line-through">$29.00</span>
+                            </div> --}}
+                            <div class="product-price-discount">
+                                @if ($watch->discount > 0)
+                                    <span
+                                        class="fw-bold">${{ $watch->selling_price - ($watch->selling_price * $watch->discount) / 100 }}</span>
+                                    <span class="line-through text-danger">${{ $watch->selling_price }}</span>
+                                @else
+                                    <span class="fw-bold">${{ $watch->selling_price }}</span>
+                                @endif
                             </div>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                            laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="size">Size</label>
-                                <select id="size" name="size" class="form-control">
-                                    <option>S</option>
-                                    <option>M</option>
-                                    <option>L</option>
-                                    <option>XL</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="color">Color</label>
-                                <select id="color" name="color" class="form-control">
-                                    <option>Blue</option>
-                                    <option>Green</option>
-                                    <option>Red</option>
-                                </select>
-                            </div>
+                        <div class="mt-3">
+                            <strong>Stock:</strong> <span id="stock">{{ $watch->stock }}</span>
                         </div>
                         <div class="product-count">
-                            <label for="size">Quantity</label>
-                            <form action="#" class="display-flex">
+                            <label for="size fw-bold">Quantity</label>
+                            <div class="display-flex">
                                 <div class="qtyminus">-</div>
-                                <input type="text" name="quantity" value="1" class="qty">
+                                <input type="text" name="quantity" value="1" class="qty" id="quantity">
                                 <div class="qtyplus">+</div>
-                            </form>
-                            <a href="#" class="round-black-btn">Add to Cart</a>
+                            </div>
+                        </div>
+                        <button class="round-black-btn" id="btn-add-to-cart">Add to Cart</button>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-product">
+                                <thead>
+                                    <tr>
+                                        <td colspan="2">
+                                            <h3>General Info</h3>
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Gender</td>
+                                        <td>{{ $watch->gender }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Material</td>
+                                        <td>{{ $watch->case_material }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Diameter</td>
+                                        <td>{{ $watch->case_diameter }}mm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Case Thinckness</td>
+                                        <td>{{ $watch->case_thickness }}mm</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Strap Material</td>
+                                        <td>{{ $watch->strap_material }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dial Color</td>
+                                        <td>{{ $watch->dial_color }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Crystal Material</td>
+                                        <td>{{ $watch->crystal_material }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Water Resistance</td>
+                                        <td>{{ $watch->water_resistance }}m</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Movement Type</td>
+                                        <td>{{ $watch->movement_type }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Power Reserve</td>
+                                        <td>{{ $watch->power_reserve }} hours</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Complications</td>
+                                        <td>{{ $watch->complications }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="product-info-tabs">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description" role="tab"
-                            aria-controls="description" aria-selected="true">Description</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="review-tab" data-bs-toggle="tab" href="#review" role="tab"
-                            aria-controls="review" aria-selected="false">Reviews (0)</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="description" role="tabpanel"
-                        aria-labelledby="description-tab">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus
-                        error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.
-                    </div>
-                    <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                        <div class="review-heading">REVIEWS</div>
-                        <p class="mb-20">There are no reviews yet.</p>
-                        <form class="review-form">
-                            <div class="form-group">
-                                <label>Your rating</label>
-                                <div class="reviews-counter">
-                                    <div class="rate">
-                                        <input type="radio" id="star5" name="rate" value="5" />
-                                        <label for="star5" title="text">5 stars</label>
-                                        <input type="radio" id="star4" name="rate" value="4" />
-                                        <label for="star4" title="text">4 stars</label>
-                                        <input type="radio" id="star3" name="rate" value="3" />
-                                        <label for="star3" title="text">3 stars</label>
-                                        <input type="radio" id="star2" name="rate" value="2" />
-                                        <label for="star2" title="text">2 stars</label>
-                                        <input type="radio" id="star1" name="rate" value="1" />
-                                        <label for="star1" title="text">1 star</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Your message</label>
-                                <textarea class="form-control" rows="10"></textarea>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" name="" class="form-control" placeholder="Name*">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" name="" class="form-control"
-                                            placeholder="Email Id*">
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="round-black-btn">Submit Review</button>
-                        </form>
-                    </div>
-                </div>
+                <h5>Reviews (0)</h5>
+                <table class="table table-striped table-product">
+                    <thead class="fw-bold">
+                        <tr>
+                            <td width="25%">Full Name</td>
+                            <td width="50%">Content</td>
+                            <td width="25%">Date</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FirstName LastName</td>
+                            <td>Content</td>
+                            <td>FeedDate</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 @endsection
 
 @section('js')
-    <script>
-        $(document).ready(function() {
-            $(".qtyminus").on("click", function() {
-                var now = $(".qty").val();
-                if ($.isNumeric(now)) {
-                    if (parseInt(now) - 1 > 0) {
-                        now--;
-                    }
-                    $(".qty").val(now);
-                }
-            })
-            $(".qtyplus").on("click", function() {
-                var now = $(".qty").val();
-                if ($.isNumeric(now)) {
-                    $(".qty").val(parseInt(now) + 1);
-                }
-            });
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="{{ asset('js/detail.js') }}"></script>
 @endsection

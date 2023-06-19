@@ -3,16 +3,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 pr-md-5">
-                <a href="#" class="footer-site-logo d-block mb-4">Colorlib</a>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi quasi perferendis ratione
-                    perspiciatis accusantium.</p>
+                <a href="#" class="footer-site-logo d-block mb-4">Watch World</a>
+                <p>At WatchWorld, we believe that a watch is more than a mere accessory. It is a reflection of one's
+                    personality and style.</p>
             </div>
             <div class="col-md">
                 <ul class="list-unstyled nav-links">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Shop</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('shop') }}">Shop</a></li>
+                    <li><a href="{{ route('about') }}">About</a></li>
+                    <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>
             </div>
             <div class="col-md">
@@ -43,7 +43,7 @@
         <div class="row ">
             <div class="col-12 text-center">
                 <div class="copyright mt-5 pt-5">
-                    <p><small>&copy; 2019-2020 All Rights Reserved.</small></p>
+                    <p><small>&copy; 2022-2023 All Rights Reserved.</small></p>
                 </div>
             </div>
         </div>

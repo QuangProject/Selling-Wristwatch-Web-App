@@ -45,7 +45,7 @@
                         <td>{{ $watch->model }}</td>
                         <td>${{ $watch->original_price }}</td>
                         <td>${{ $watch->selling_price }}</td>
-                        <td>{{ $watch->discount }}</td>
+                        <td>{{ $watch->discount }}%</td>
                         <td>{{ $watch->stock }}</td>
                         <td>{{ $watch->gender }}</td>
                         <td>{{ $watch->case_material }}</td>
@@ -411,7 +411,7 @@
                                             <label for="update-watch-gender">
                                                 <h6 class="fw-bold">Gender</h6>
                                             </label>
-                                            <div class="d-lg-flex mt-1">
+                                            <div class="d-lg-flex" style="margin-top: 13px">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"
                                                         name="update-watch-gender" id="MaleGender" value="Men">
@@ -535,7 +535,7 @@
                                             <label for="update-watch-availability">
                                                 <h6 class="fw-bold">Status</h6>
                                             </label>
-                                            <div class="d-lg-flex mt-1">
+                                            <div class="d-lg-flex justify-content-lg-between" style="margin-top: 13px">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="radio"
                                                         name="update-watch-availability" id="OnSaleStatus"
@@ -544,7 +544,7 @@
                                                         Business</label>
                                                 </div>
 
-                                                <div class="form-check mx-lg-5">
+                                                <div class="form-check">
                                                     <input class="form-check-input" type="radio"
                                                         name="update-watch-availability" id="BusinessSuspensionStatus"
                                                         value="0">

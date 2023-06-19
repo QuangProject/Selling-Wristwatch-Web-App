@@ -145,140 +145,138 @@ input:checked+section.box .box-title:before {
   transform: rotate(90deg);
 }
 
-.mask {
+a {
+  text-decoration: none;
+}
+
+.product-grid {
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.product-grid .product-image {
+  background-color: rgb(255, 247, 247);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.product-grid .product-image a.image {
+  display: block;
+}
+
+.product-grid .product-image img {
+  width: 100%;
+  height: auto;
+}
+
+.product-grid .product-discount-label {
+  color: #fff;
+  background: #dc3545;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 25px;
+  padding: 0 20px;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 10px;
+  left: 0;
+}
+
+.product-grid .product-links {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: absolute;
+  top: 10px;
+  right: -50px;
+  transition: all .5s ease 0s;
+}
+
+.product-grid:hover .product-links {
+  right: 10px;
+}
+
+.product-grid .product-links li a {
+  color: #333;
+  background: transparent;
+  font-size: 17px;
+  line-height: 38px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #333;
+  border-bottom: none;
+  display: block;
+  transition: all 0.3s;
+}
+
+.product-grid .product-links li:last-child a {
+  border-bottom: 1px solid #333;
+}
+
+.product-grid .product-links li a:hover {
+  color: #fff;
+  background: #333;
+}
+
+.product-grid .add-to-cart {
+  background: #dc3545;
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  width: 100%;
+  padding: 10px 26px;
+  position: absolute;
+  left: 0;
+  bottom: -60px;
+  transition: all 0.3s ease 0s;
+}
+
+.product-grid:hover .add-to-cart {
   bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-attachment: fixed;
 }
 
-.bg-image {
-  position: relative;
-  overflow: hidden;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 50%;
+.product-grid .add-to-cart:hover {
+  text-shadow: 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-.card .bg-image {
-  border-top-left-radius: .5rem;
-  border-top-right-radius: .5rem;
+.product-grid .product-content {
+  background: #fff;
+  padding: 15px;
+  box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.1) inset;
 }
 
-.hover-zoom img {
-  transition: all .3s linear;
+.product-grid .title {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: capitalize;
+  margin: 0 0 7px;
 }
 
-.hover-zoom video {
-  transition: all .3s linear;
+.product-grid .title a {
+  color: #777;
+  transition: all 0.3s ease 0s;
 }
 
-.hover-zoom:hover img {
-  transform: scale(1.1);
+.product-grid .title a:hover {
+  color: #dc3545;
 }
 
-.hover-zoom:hover video {
-  transform: scale(1.1);
+.product-grid .price {
+  color: #0d0d0d;
+  font-size: 14px;
+  font-weight: 600;
 }
 
-.badge {
-  display: inline-block;
-  padding: .35em .65em;
-  font-size: .75em;
-  font-weight: 700;
-  line-height: 1;
-  color: #fff;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
+.product-grid .price span {
+  color: #888;
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: line-through;
 }
 
-.hover-overlay .mask {
-  opacity: 0;
-  transition: all .3s ease-in-out;
-}
-
-.hover-overlay .mask:hover {
-  opacity: 1;
-}
-
-.card-body {
-  flex: 1 1 auto;
-  padding: 1.5rem;
-}
-
-.card-body[class*=bg-] {
-  border-bottom-left-radius: .5rem;
-  border-bottom-right-radius: .5rem;
-}
-
-.card-title {
-  margin-bottom: .5rem;
-}
-
-.text-decoration-none {
-  text-decoration: none;
-}
-
-.pagination-container {
-  margin: 10px auto;
-  text-align: center;
-}
-
-.pagination {
-  position: relative;
-}
-
-.pagination a {
-  position: relative;
-  display: inline-block;
-  color: #2c3e50;
-  text-decoration: none;
-  font-size: 1.2rem;
-  padding: 8px 16px 10px;
-}
-
-.pagination a:before {
-  z-index: -1;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  content: "";
-  top: 0;
-  left: 0;
-  background-color: #2c3e50;
-  border-radius: 24px;
-  transform: scale(0);
-  transition: all 0.2s;
-}
-
-.pagination a:hover,
-.pagination a .pagination-active {
-  color: #fff;
-}
-
-.pagination a:hover:before,
-.pagination a .pagination-active:before {
-  transform: scale(1);
-}
-
-.pagination .pagination-active {
-  color: #fff;
-}
-
-.pagination .pagination-active:before {
-  transform: scale(1);
-}
-
-.pagination-newer {
-  margin-right: 50px;
-}
-
-.pagination-older {
-  margin-left: 50px;
+@media screen and (max-width: 990px) {
+  .product-grid {
+    margin-bottom: 30px;
+  }
 }
