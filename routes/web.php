@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\ContactController;
@@ -28,30 +29,33 @@ use Illuminate\Support\Facades\Route;
 
 // Auth::routes();
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
-Route::get('/about', [HomeController::class, 'about'])->name('about');
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('detail');
-Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
-Route::get('/login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
-Route::get('/login/facebook/callback', [LoginController::class, 'handleFacebookCallback'])->name('login.facebook.callback');
+Route::middleware(['count.cart'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
+    Route::get('/about', [HomeController::class, 'about'])->name('about');
+    Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+    Route::get('/detail/{id}', [HomeController::class, 'detail'])->name('detail');
+    Route::get('/login/google', [LoginController::class, 'redirectToGoogle'])->name('login.google');
+    Route::get('/login/google/callback', [LoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
+    Route::get('/login/facebook', [LoginController::class, 'redirectToFacebook'])->name('login.facebook');
+    Route::get('/login/facebook/callback', [LoginController::class, 'handleFacebookCallback'])->name('login.facebook.callback');
 
-// Get brand image
-Route::get('/brand/image/{id}', [BrandController::class, 'getImage'])->name('brand.image');
-// Get watch image
-Route::get('/watch/image/{id}', [ImageController::class, 'getImage'])->name('watch.image.get');
+    // Get brand image
+    Route::get('/brand/image/{id}', [BrandController::class, 'getImage'])->name('brand.image');
+    // Get watch image
+    Route::get('/watch/image/{id}', [ImageController::class, 'getImage'])->name('watch.image.get');
 
-Auth::routes(['verify' => true]);
+    Auth::routes(['verify' => true]);
 
-Route::middleware(['auth'])->group(function () {
-    Route::prefix('user')->group(function () {
-        Route::get('/create-password', [UserController::class, 'createPassword'])->name('create.password');
-        Route::post('/create-password/save', [UserController::class, 'savePassword'])->name('create.password.save');
-        Route::get('/profile', [UserController::class, 'profile'])->name('profile')->middleware('verified');
-        Route::post('/profile/edit', [UserController::class, 'edit'])->name('profile.edit');
-        Route::post('/profile/edit/password', [UserController::class, 'editPassword'])->name('profile.edit.password');
+    Route::middleware(['auth'])->group(function () {
+        Route::prefix('user')->group(function () {
+            Route::get('/create-password', [UserController::class, 'createPassword'])->name('create.password');
+            Route::post('/create-password/save', [UserController::class, 'savePassword'])->name('create.password.save');
+            Route::get('/profile', [UserController::class, 'profile'])->name('profile')->middleware('verified');
+            Route::post('/profile/edit', [UserController::class, 'edit'])->name('profile.edit');
+            Route::post('/profile/edit/password', [UserController::class, 'editPassword'])->name('profile.edit.password');
+            Route::get('/cart', [CartController::class, 'index'])->name('cart');
+        });
     });
 });
 

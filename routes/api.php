@@ -75,3 +75,10 @@ Route::get('/category/search-suggestions', 'App\Http\Controllers\SearchControlle
 // Send Mail
 Route::post('/send-mail', 'App\Http\Controllers\MailController@sendMail');
 Route::post('/reply-contact', 'App\Http\Controllers\MailController@replyContact');
+
+// Cart
+Route::get('/cart', 'App\Http\Controllers\CartController@list');
+Route::post('/cart', 'App\Http\Controllers\CartController@store');
+Route::get('/cart/{id}', 'App\Http\Controllers\CartController@show');
+Route::put('/cart/{id}', 'App\Http\Controllers\CartController@update');
+Route::delete('/cart/{id}', 'App\Http\Controllers\CartController@destroy');

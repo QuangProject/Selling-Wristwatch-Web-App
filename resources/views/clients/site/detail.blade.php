@@ -75,7 +75,8 @@
                                 <div class="qtyplus">+</div>
                             </div>
                         </div>
-                        <button class="round-black-btn" id="btn-add-to-cart">Add to Cart</button>
+                        <button class="round-black-btn" id="btn-add-to-cart" data-user-id="{{ Auth::user()->id }}">Add
+                            to Cart</button>
                         <div class="table-responsive">
                             <table class="table table-striped table-product">
                                 <thead>

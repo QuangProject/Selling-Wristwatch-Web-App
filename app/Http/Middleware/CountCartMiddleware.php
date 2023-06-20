@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Cart;
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
-class RoleMiddleware
+class CountCartMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,12 @@ class RoleMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->user() && $request->user()->is_admin) {
-            return $next($request);
+        if ($request->user() && !$request->user()->is_admin) {
+            $user = auth()->user();
+            // Count cart items
+            $cartItems = Cart::where('user_id', $user->id)->count();
+            session()->put('countCart', $cartItems);
         }
-        Session::flash('error', 'You are not an admin');
-        return redirect()->route('home');
+        return $next($request);
     }
 }

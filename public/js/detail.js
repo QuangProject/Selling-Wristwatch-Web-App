@@ -90,10 +90,63 @@ $(document).ready(function () {
     const btnAddToCart = document.getElementById('btn-add-to-cart');
     const inputQuantity = document.getElementById('quantity');
     btnAddToCart.addEventListener('click', function () {
-        // Get watch id from url
-        const url = window.location.href;
-        const watch_id = url.substring(url.lastIndexOf('/') + 1);
-        const quantity = inputQuantity.value;
-        console.log(watch_id, quantity);
+        const cartCount = document.getElementById('cart-count');
+        if (cartCount !== null) {
+            // Get watch id from url
+            const url = window.location.href;
+            const user_id = btnAddToCart.getAttribute('data-user-id');
+            const watch_id = url.substring(url.lastIndexOf('/') + 1);
+            const quantity = inputQuantity.value;
+            $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
+            // Send ajax request
+            $.ajax({
+                url: '/api/cart',
+                type: 'POST',
+                data: {
+                    user_id: user_id,
+                    watch_id: watch_id,
+                    quantity: quantity
+                },
+                success: function (response) {
+                    $('.overlay').remove()
+                    Swal.fire({
+                        'icon': 'success',
+                        'title': response.message,
+                        'showConfirmButton': false,
+                        'timer': 2000
+                    })
+
+                    let count = cartCount.textContent;
+                    count++;
+                    cartCount.textContent = count;
+
+                    inputQuantity.value = 1;
+                },
+                error: function (error) {
+                    $('.overlay').remove()
+                    console.error(error);
+                    if (error.status === 400) {
+                        Swal.fire(
+                            'Warning',
+                            error.responseJSON.message,
+                            'warning'
+                        )
+                    }
+                    if (error.status === 500) {
+                        Swal.fire(
+                            'Error',
+                            error.responseJSON.message,
+                            'error'
+                        )
+                    }
+                }
+            });
+        } else {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please login to add to cart!',
+            })
+        }
     })
 });

@@ -76,7 +76,7 @@
             <div class="col-lg-10 col-md-9">
                 @if ($watches->count() == 0)
                     <div class="text-center">
-                        <img src="{{asset('img/empty.jpg')}}" alt="Not found product">
+                        <img src="{{ asset('img/empty.jpg') }}" alt="Not found product">
                     </div>
                 @else
                     <div class="row">
@@ -96,7 +96,9 @@
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="#"><i class="fa fa-random"></i></a></li>
                                         </ul>
-                                        <button class="add-to-cart border-0">Add to Cart</button>
+                                        <button class="add-to-cart border-0"
+                                            onclick="addToCart({{ Auth::user()->id }}, {{ $watch->id }})">Add to
+                                            Cart</button>
                                     </div>
                                     <div class="product-content">
                                         <h3 class="title">
@@ -137,4 +139,5 @@
             }
         }
     </script>
+    <script src="{{ asset('js/shop.js') }}"></script>
 @endsection

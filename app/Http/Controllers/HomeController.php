@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Collection;
 use App\Models\Watch;
@@ -20,6 +21,7 @@ class HomeController extends Controller
             ->select('id', 'model', 'selling_price', 'discount')
             ->limit(6)
             ->get();
+
         return view('clients.home')->with('brands', $brands)->with('watches', $watches);
     }
 

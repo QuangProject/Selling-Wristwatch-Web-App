@@ -35,9 +35,10 @@
                         <nav class="header-nav ms-auto">
                             <ul class="d-flex align-items-center">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link nav-icon" href="#">
+                                    <a class="nav-link nav-icon" href="{{ route('cart') }}">
                                         <i class="bi bi-cart4"></i>
-                                        <span class="badge bg-success badge-number"></span>
+                                        <span class="badge bg-success badge-number"
+                                            id="cart-count">{{ session()->get('countCart') }}</span>
                                     </a>
                                 </li>
 
