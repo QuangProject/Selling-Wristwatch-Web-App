@@ -97,102 +97,16 @@
     <!-- ======= Clients Section ======= -->
     <section id="clients" class="clients">
         <div class="container" data-aos="zoom-in">
-
             <div class="row d-flex align-items-center">
-
-                <div class="col-lg-2 col-md-4 col-6">
-                    <img src="{{ asset('img/clients/client-1.png') }}" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6">
-                    <img src="{{ asset('img/clients/client-2.png') }}" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6">
-                    <img src="{{ asset('img/clients/client-3.png') }}" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6">
-                    <img src="{{ asset('img/clients/client-4.png') }}" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6">
-                    <img src="{{ asset('img/clients/client-5.png') }}" class="img-fluid" alt="">
-                </div>
-
-                <div class="col-lg-2 col-md-4 col-6">
-                    <img src="{{ asset('/img/clients/client-6.png') }}" class="img-fluid" alt="">
-                </div>
-
+                @foreach ($brands as $brand)
+                    <div class="col-lg-3 col-6">
+                        <img src="{{ route('brand.image', ['id' => $brand->id]) }}" class="img-fluid"
+                            alt="{{ $brand->name }}">
+                    </div>
+                @endforeach
             </div>
-
         </div>
     </section><!-- End Clients Section -->
-
-    <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
-        <div class="container">
-
-            <div class="section-title">
-                <span>Top Brands</span>
-                <h2>Top Brands</h2>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="fade-up">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                        <h4><a href="">Lorem Ipsum</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="fade-up"
-                    data-aos-delay="150">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-file"></i></div>
-                        <h4><a href="">Sed ut perspiciatis</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="fade-up"
-                    data-aos-delay="300">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-tachometer"></i></div>
-                        <h4><a href="">Magni Dolores</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="fade-up" data-aos-delay="450">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-world"></i></div>
-                        <h4><a href="">Nemo Enim</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="fade-up" data-aos-delay="600">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-slideshow"></i></div>
-                        <h4><a href="">Dele cardo</a></h4>
-                        <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="fade-up" data-aos-delay="750">
-                    <div class="icon-box">
-                        <div class="icon"><i class="bx bx-arch"></i></div>
-                        <h4><a href="">Divera don</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </section><!-- End Services Section -->
 
     <!-- ======= Cta Section ======= -->
     <section id="cta" class="cta">
@@ -210,75 +124,62 @@
         </div>
     </section><!-- End Cta Section -->
 
-    <!-- ======= Team Section ======= -->
-    <section id="team" class="team">
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services">
         <div class="container">
 
             <div class="section-title">
-                <span>Team</span>
-                <h2>Team</h2>
-                <p>Sit sint consectetur velit quisquam cupiditate impedit suscipit alias</p>
+                <span>Best Selling</span>
+                <h2>Best Selling</h2>
             </div>
 
             <div class="row">
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
-                    <div class="member">
-                        <img src="{{ asset('img/team/team-1.jpg') }}" alt="">
-                        <h4>Walter White</h4>
-                        <span>Chief Executive Officer</span>
-                        <p>
-                            Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis
-                            quaerat qui aut aut aut
-                        </p>
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
+                @foreach ($watches as $watch)
+                    <div class="col-md-4 col-sm-6 mt-3">
+                        <div class="product-grid">
+                            <div class="product-image">
+                                <a href="#" class="image">
+                                    <img class="pic-1"
+                                        src="{{ route('watch.image.get', ['id' => $watch->images[0]->id]) }}">
+                                    <img class="pic-2"
+                                        src="{{ route('watch.image.get', ['id' => $watch->images[0]->id]) }}ng">
+                                </a>
+                                @if ($watch->discount > 0)
+                                    <span class="product-discount-label">-{{ $watch->discount }}%</span>
+                                @endif
+                                <ul class="product-links">
+                                    <li><a href="#" data-tip="Add to Wishlist"><i class="far fa-heart"></i></a></li>
+                                    <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
+                                    <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="product-content">
+                                <a class="add-to-cart" href="#">
+                                    <i class="fas fa-plus"></i>Add to cart
+                                </a>
+                                <h3 class="title"><a href="#">Men's Jacket</a></h3>
+                                <ul class="rating">
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                    <li class="fas fa-star"></li>
+                                    <li class="far fa-star"></li>
+                                    <li class="far fa-star"></li>
+                                </ul>
+                                @if ($watch->discount > 0)
+                                    <div class="price">
+                                        ${{ $watch->selling_price - ($watch->selling_price * $watch->discount) / 100 }}
+                                        <span>${{ $watch->selling_price }}</span></div>
+                                @else
+                                    <div class="price">${{ $watch->selling_price }}</div>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
-                    <div class="member">
-                        <img src="{{ asset('img/team/team-2.jpg') }}" alt="">
-                        <h4>Sarah Jhinson</h4>
-                        <span>Product Manager</span>
-                        <p>
-                            Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto rerum
-                            rerum temporibus
-                        </p>
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in">
-                    <div class="member">
-                        <img src="{{ asset('img/team/team-3.jpg') }}" alt="">
-                        <h4>William Anderson</h4>
-                        <span>CTO</span>
-                        <p>
-                            Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et laborum
-                            toro des clara
-                        </p>
-                        <div class="social">
-                            <a href=""><i class="bi bi-twitter"></i></a>
-                            <a href=""><i class="bi bi-facebook"></i></a>
-                            <a href=""><i class="bi bi-instagram"></i></a>
-                            <a href=""><i class="bi bi-linkedin"></i></a>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
-
         </div>
-    </section><!-- End Team Section -->
+    </section><!-- End Services Section -->
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
     <div id="preloader"></div>

@@ -13,7 +13,14 @@ class HomeController extends Controller
     // Action index()
     public function index()
     {
-        return view('clients.home');
+        // Get 6 brands
+        $brands = Brand::select('id', 'name')->limit(6)->get();
+        // Get 6 watches
+        $watches = Watch::with('images')
+            ->select('id', 'model', 'selling_price', 'discount')
+            ->limit(6)
+            ->get();
+        return view('clients.home')->with('brands', $brands)->with('watches', $watches);
     }
 
     // Action shop()
@@ -26,24 +33,37 @@ class HomeController extends Controller
                 ->join('collections', 'watches.collection_id', '=', 'collections.id')
                 ->select('watches.id', 'watches.model', 'watches.selling_price', 'watches.discount')
                 ->where('collections.brand_id', $brandId)
-                ->get();
+                ->paginate(8);
         } elseif ($request->has('collection_id')) {
             $collectionId = $request->input('collection_id');
             $watches = Watch::with('images')
                 ->select('id', 'model', 'selling_price', 'discount')
                 ->where('collection_id', $collectionId)
-                ->get();
+                ->paginate(8);
         } elseif ($request->has('category_id')) {
             $categoryId = $request->input('category_id');
             $watches = Watch::with('images')
                 ->join('watch_categories', 'watches.id', '=', 'watch_categories.watch_id')
                 ->select('watches.id', 'watches.model', 'watches.selling_price', 'watches.discount')
                 ->where('watch_categories.category_id', $categoryId)
-                ->get();
+                ->paginate(8);
+        } elseif ($request->has('gender')) {
+            $gender = $request->input('gender');
+            if ($gender == 'men') {
+                $watches = Watch::with('images')
+                    ->select('id', 'model', 'selling_price', 'discount')
+                    ->where('gender', 'Men')
+                    ->paginate(8);
+            } else {
+                $watches = Watch::with('images')
+                    ->select('id', 'model', 'selling_price', 'discount')
+                    ->where('gender', 'Women')
+                    ->paginate(8);
+            }
         } else {
             $watches = Watch::with('images')
                 ->select('id', 'model', 'selling_price', 'discount')
-                ->get();
+                ->paginate(8);
         }
         $brands = Brand::select('id', 'name')->get();
         $collections = Collection::select('id', 'name')->get();

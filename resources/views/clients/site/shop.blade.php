@@ -59,48 +59,68 @@
                             </div>
                         @endforeach
                     </section>
+                    <input type="radio" name="accordion" id="cb4" />
+                    <section class="box">
+                        <label class="box-title" for="cb4">Style</label>
+                        <label class="box-close" for="acc-close"></label>
+                        <div class="box-content">
+                            <a class="nav-link text-reset" href="{{ route('shop', ['gender' => 'men']) }}">Men</a>
+                        </div>
+                        <div class="box-content">
+                            <a class="nav-link text-reset" href="{{ route('shop', ['gender' => 'women']) }}">Women</a>
+                        </div>
+                    </section>
                     <input type="radio" name="accordion" id="acc-close" />
                 </nav>
             </nav>
             <div class="col-lg-10 col-md-9">
-                <div class="row">
-                    @foreach ($watches as $watch)
-                        <div class="col-xl-3 col-lg-4 col-sm-6 mt-3">
-                            <div class="product-grid">
-                                <div class="product-image">
-                                    <a href="{{ route('detail', ['id' => $watch->id]) }}" class="image">
-                                        <img src="{{ route('watch.image.get', ['id' => $watch->images[0]->id]) }}"
-                                            loading="lazy">
-                                    </a>
-                                    @if ($watch->discount > 0)
-                                        <span class="product-discount-label">-{{ $watch->discount }}%</span>
-                                    @endif
-                                    <ul class="product-links">
-                                        <li><a href="#"><i class="fa fa-search"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-random"></i></a></li>
-                                    </ul>
-                                    <button class="add-to-cart border-0">Add to Cart</button>
-                                </div>
-                                <div class="product-content">
-                                    <h3 class="title">
-                                        <a href="{{ route('detail', ['id' => $watch->id]) }}" class="content">
-                                            {{ $watch->model }}
+                @if ($watches->count() == 0)
+                    <div class="text-center">
+                        <img src="{{asset('img/empty.jpg')}}" alt="Not found product">
+                    </div>
+                @else
+                    <div class="row">
+                        @foreach ($watches as $watch)
+                            <div class="col-xl-3 col-lg-4 col-sm-6 mt-3">
+                                <div class="product-grid">
+                                    <div class="product-image">
+                                        <a href="{{ route('detail', ['id' => $watch->id]) }}" class="image">
+                                            <img src="{{ route('watch.image.get', ['id' => $watch->images[0]->id]) }}"
+                                                loading="lazy">
                                         </a>
-                                    </h3>
-                                    @if ($watch->discount > 0)
-                                        <div class="price">
-                                            ${{ $watch->selling_price - ($watch->selling_price * $watch->discount) / 100 }}
-                                            <span class="text-danger">${{ $watch->selling_price }}</span>
-                                        </div>
-                                    @else
-                                        <div class="price">${{ $watch->selling_price }}</div>
-                                    @endif
+                                        @if ($watch->discount > 0)
+                                            <span class="product-discount-label">-{{ $watch->discount }}%</span>
+                                        @endif
+                                        <ul class="product-links">
+                                            <li><a href="#"><i class="fa fa-search"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                                        </ul>
+                                        <button class="add-to-cart border-0">Add to Cart</button>
+                                    </div>
+                                    <div class="product-content">
+                                        <h3 class="title">
+                                            <a href="{{ route('detail', ['id' => $watch->id]) }}" class="content">
+                                                {{ $watch->model }}
+                                            </a>
+                                        </h3>
+                                        @if ($watch->discount > 0)
+                                            <div class="price">
+                                                ${{ $watch->selling_price - ($watch->selling_price * $watch->discount) / 100 }}
+                                                <span class="text-danger">${{ $watch->selling_price }}</span>
+                                            </div>
+                                        @else
+                                            <div class="price">${{ $watch->selling_price }}</div>
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
-                </div>
+                        @endforeach
+                    </div>
+                    <div class="mt-3">
+                        {{ $watches->links('vendor.pagination.bootstrap-5') }}
+                    </div>
+                @endif
             </div>
         </section>
     </main>

@@ -30,7 +30,7 @@
                         <td>{{ $image->stock }}</td>
                         <td>
                             <img src="{{ route('watch.image.get', ['id' => $image->id]) }}"
-                                id="displayImage_{{ $image->id }}" alt="{{ $image->name }}" width="100"
+                                id="displayImage_{{ $image->id }}" width="100"
                                 class="my-3" loading="lazy">
                         </td>
                         <td>
