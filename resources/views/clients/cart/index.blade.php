@@ -68,7 +68,8 @@
                                 to shop</span>
                         </div>
                     </div>
-                    <div class="col-xl-4 summary">
+                    <form action="{{ route('payment') }}" method="POST" class="col-xl-4 summary">
+                        @csrf
                         <div>
                             <h5><b>Summary</b></h5>
                         </div>
@@ -80,7 +81,7 @@
                         </div>
                         <div>
                             <p class="mb-1">SHIPPING</p>
-                            <select id="shipping">
+                            <select id="shipping" name="shipping">
                                 <option class="text-muted" value="3">Economical-Delivery - &dollar;3.00</option>
                                 <option class="text-muted" value="5" selected>Standard-Delivery - &dollar;5.00</option>
                                 <option class="text-muted" value="10">Fast-Delivery - &dollar;10.00</option>
@@ -93,8 +94,8 @@
                             <div>TOTAL PRICE</div>
                             <div class="text-right">&dollar;<span id="total-price">{{ $totalPrice + 5 }}</span></div>
                         </div>
-                        <button class="btn-cart">CHECKOUT</button>
-                    </div>
+                        <button class="btn-cart" type="submit">CHECKOUT</button>
+                    </form>
                 </div>
             @endif
         </div>

@@ -9,7 +9,7 @@ shipping.addEventListener('change', function () {
     const shippingValue = shipping.value
     const subTotalValue = subTotal.textContent
     const total = parseFloat(subTotalValue) + parseFloat(shippingValue)
-    totalPrice.textContent = '$' + total
+    totalPrice.textContent = total
 })
 
 function changeQuantity(id, action) {
