@@ -1,16 +1,7 @@
-const subTotal = document.getElementById('sub-total')
-const shipping = document.getElementById('shipping')
 const totalPrice = document.getElementById('total-price')
 const item = document.getElementsByClassName('item')
 const items = document.getElementsByClassName('item');
 const itemsArray = Array.from(items);
-
-shipping.addEventListener('change', function () {
-    const shippingValue = shipping.value
-    const subTotalValue = subTotal.textContent
-    const total = parseFloat(subTotalValue) + parseFloat(shippingValue)
-    totalPrice.textContent = total
-})
 
 function changeQuantity(id, action) {
     const quantity = document.getElementById('quantity_' + id)
@@ -31,13 +22,13 @@ function changeQuantity(id, action) {
 
                 const watchPrice = document.getElementById('watchPrice_' + id)
                 if (action === 'plus') {
-                    $sum = parseFloat(subTotal.textContent) + parseFloat(watchPrice.textContent)
-                    subTotal.textContent = $sum
+                    // $sum = parseFloat(subTotal.textContent) + parseFloat(watchPrice.textContent)
+                    // subTotal.textContent = $sum
                     $total = parseFloat(totalPrice.textContent) + parseFloat(watchPrice.textContent)
                     totalPrice.textContent = $total
                 } else {
-                    $minus = parseFloat(subTotal.textContent) - parseFloat(watchPrice.textContent)
-                    subTotal.textContent = $minus
+                    // $minus = parseFloat(subTotal.textContent) - parseFloat(watchPrice.textContent)
+                    // subTotal.textContent = $minus
                     $total = parseFloat(totalPrice.textContent) - parseFloat(watchPrice.textContent)
                     totalPrice.textContent = $total
                 }

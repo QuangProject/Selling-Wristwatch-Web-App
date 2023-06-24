@@ -92,17 +92,28 @@
                                 </div>
                             @endforeach
                             <hr>
+                            <div>
+                                <p class="mb-1">SHIPPING</p>
+                                <select id="shipping" name="shipping">
+                                    <option class="text-muted" value="3">Economical-Delivery - &dollar;3.00</option>
+                                    <option class="text-muted" value="5" selected>Standard-Delivery - &dollar;5.00
+                                    </option>
+                                    <option class="text-muted" value="10">Fast-Delivery - &dollar;10.00</option>
+                                </select>
+                                {{-- <p class="mb-1">GIVE CODE</p>
+                                <input id="code" class="input-cart" placeholder="Enter your code"> --}}
+                            </div>
                             <div class="row lower">
                                 <div class="col text-left">Subtotal</div>
-                                <div class="col text-right">${{ $totalPrice }}</div>
+                                <div class="col text-right">$<span id="sub-total">{{ $totalPrice }}</span></div>
                             </div>
                             <div class="row lower">
                                 <div class="col text-left">Delivery</div>
-                                <div class="col text-right">{{ $shipping }}</div>
+                                <div class="col text-right" id="shipping-price">$5.00</div>
                             </div>
                             <div class="row lower">
                                 <div class="col text-left"><b>Total to pay</b></div>
-                                <div class="col text-right"><b>${{ $totalPrice + $shipping }}</b></div>
+                                <div class="col text-right"><b id="total-price">${{ $totalPrice + 5 }}</b></div>
                             </div>
                             <button class="btn-payment" id="btn-payment">Place order</button>
                         </div>

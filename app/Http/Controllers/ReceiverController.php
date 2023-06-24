@@ -9,7 +9,30 @@ class ReceiverController extends Controller
 {
     public function index()
     {
-        return view('clients.receiver.index');
+        $receivers = Receiver::all();
+        // Separate subaddress from address
+        for ($i = 0; $i < count($receivers); $i++) {
+            $getAddress = $receivers[$i]->address;
+            $address = '';
+            $subAddress = '';
+            $addressArr = explode(', ', $getAddress);
+            // dd($addressArr);
+            for ($j = count($addressArr) - 1; $j >= 0; $j--) {
+                if ($j < 2) {
+                    $subAddress = $addressArr[$j] . ', ' . $subAddress;
+                } else {
+                    $address = $addressArr[$j] . ', ' . $address;
+                }
+            }
+            // Remove the last comma from $subAddress
+            $subAddress = rtrim($subAddress, ', ');
+            // Remove the last comma from $address
+            $address = rtrim($address, ', ');
+            
+            $receivers[$i]->address = $address;
+            $receivers[$i]->sub_address = $subAddress;
+        }
+        return view('clients.receiver.index')->with('receivers', $receivers);
     }
 
     public function list()

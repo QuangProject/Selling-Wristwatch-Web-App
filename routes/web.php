@@ -57,7 +57,7 @@ Route::middleware(['count.cart'])->group(function () {
             Route::post('/profile/edit', [UserController::class, 'edit'])->name('profile.edit');
             Route::post('/profile/edit/password', [UserController::class, 'editPassword'])->name('profile.edit.password');
             Route::get('/cart', [CartController::class, 'index'])->name('cart');
-            Route::post('/payment', [PaymentController::class, 'index'])->name('payment');
+            Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
             Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
         });
     });

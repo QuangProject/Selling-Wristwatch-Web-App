@@ -19,27 +19,25 @@
             </div>
         </div>
         <ul class="address-list" id="listReceiver">
-            <li>
-                <div class="card">
-                    <h3 class="name">John Doe</h3>
-                    <p class="address">
-                        123 Main Street<br>
-                        New York City, New York, 10001
-                    </p>
-                    <p class="phone">Phone: (555) 123-4567</p>
-                </div>
-            </li>
-            <li>
-                <div class="card">
-                    <h3 class="name">Jane Smith</h3>
-                    <p class="address">
-                        456 Elm Street<br>
-                        Los Angeles, California, 90001
-                    </p>
-                    <p class="phone">Phone: (555) 987-6543</p>
-                </div>
-            </li>
+            @foreach ($receivers as $receiver)
+                <li>
+                    <div class="card">
+                        <h3 class="name">{{ $receiver->first_name }} {{ $receiver->last_name }}</h3>
+                        <p class="address">
+                            {{ $receiver->sub_address }}<br>
+                            {{ $receiver->address }}
+                        </p>
+                        <p class="phone">Phone: {{ $receiver->telephone }}</p>
+                    </div>
+                </li>
+            @endforeach
         </ul>
+        <div class="text-center mb-5">
+            {{-- Back to payment --}}
+            <a href="{{ route('payment') }}">
+                <button class="btn btn-primary" id="btn-back-to-payment">Back to payment</button>
+            </a>
+        </div>
         <!-- Add Receiver -->
         <div class="modal fade" id="addReceiverModal" tabindex="-1" aria-labelledby="addReceiverModalLabel"
             aria-hidden="true">
@@ -53,6 +51,8 @@
                         <div class="modal-body">
                             <div class="col-md-12">
                                 <div class="row mt-3">
+                                    {{-- User Id --}}
+                                    <input type="hidden" name="user-id" id="user-id" value="{{ Auth::user()->id }}">
                                     <!-- First Name -->
                                     <div class="forms-inputs col-lg-6">
                                         <label for="add-first-name">
