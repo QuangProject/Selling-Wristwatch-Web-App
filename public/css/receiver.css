@@ -1,0 +1,32 @@
+.address-list {
+    list-style: none;
+    padding: 0;
+}
+
+.address-list li {
+    margin-bottom: 20px;
+}
+
+.card {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.address {
+    margin: 0;
+    font-size: 18px;
+    color: #555;
+}
+
+.phone {
+    margin-top: 10px;
+    color: #888;
+}

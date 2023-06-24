@@ -28,17 +28,20 @@
                                     <div class="form-inputs">
                                         <label>Choose Reciver:</label>
                                         <div class="d-flex">
-                                            <select name="" id="" class="input-payment">
-                                                <option value="1">Current User</option>
+                                            <select name="choose-receiver" id="choose-receiver" class="input-payment">
+                                                <option value="{{ Auth::user()->id }}">{{ Auth::user()->firstname }}
+                                                    {{ Auth::user()->lastname }}</option>
                                                 <option value="2">Mr. John</option>
                                                 <option value="3">Mr. John</option>
                                                 <option value="4">Mr. John</option>
                                             </select>
                                             <span class="input-group-append">
-                                                <button class="btn-add-reciver" id="btn-search-add-watch-model"
-                                                    type="button">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
+                                                <a href="{{ route('receiver') }}">
+                                                    <button class="btn-add-reciver" id="btn-search-add-watch-model"
+                                                        type="button">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </a>
                                             </span>
                                         </div>
                                     </div>

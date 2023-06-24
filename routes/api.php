@@ -82,3 +82,24 @@ Route::post('/cart', 'App\Http\Controllers\CartController@store');
 Route::get('/cart/{id}', 'App\Http\Controllers\CartController@show');
 Route::put('/cart/{id}', 'App\Http\Controllers\CartController@update');
 Route::delete('/cart/{id}', 'App\Http\Controllers\CartController@destroy');
+
+// Province
+Route::get('/provinces', 'App\Http\Controllers\ProvinceController@list');
+Route::get('/provinces/{id}', 'App\Http\Controllers\ProvinceController@show');
+
+// District
+Route::get('/districts', 'App\Http\Controllers\DistrictController@list');
+Route::get('/districts/{id}', 'App\Http\Controllers\DistrictController@show');
+Route::get('/districts/province/{provinceId}', 'App\Http\Controllers\DistrictController@listByProvince');
+
+// Commune
+Route::get('/communes', 'App\Http\Controllers\CommuneController@list');
+Route::get('/communes/{id}', 'App\Http\Controllers\CommuneController@show');
+Route::get('/communes/district/{districtId}', 'App\Http\Controllers\CommuneController@listByDistrict');
+
+// Receiver
+Route::get('/receivers', 'App\Http\Controllers\ReceiverController@list');
+Route::post('/receivers', 'App\Http\Controllers\ReceiverController@store');
+Route::get('/receivers/{id}', 'App\Http\Controllers\ReceiverController@show');
+Route::put('/receivers/{id}', 'App\Http\Controllers\ReceiverController@update');
+Route::delete('/receivers/{id}', 'App\Http\Controllers\ReceiverController@destroy');

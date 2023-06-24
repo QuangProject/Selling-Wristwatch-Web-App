@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReceiverController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WatchCategoryController;
@@ -57,6 +58,7 @@ Route::middleware(['count.cart'])->group(function () {
             Route::post('/profile/edit/password', [UserController::class, 'editPassword'])->name('profile.edit.password');
             Route::get('/cart', [CartController::class, 'index'])->name('cart');
             Route::post('/payment', [PaymentController::class, 'index'])->name('payment');
+            Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
         });
     });
 });
