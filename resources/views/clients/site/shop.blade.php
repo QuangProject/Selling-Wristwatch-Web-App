@@ -96,9 +96,15 @@
                                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                             <li><a href="#"><i class="fa fa-random"></i></a></li>
                                         </ul>
-                                        <button class="add-to-cart border-0"
-                                            onclick="addToCart({{ Auth::user()->id }}, {{ $watch->id }})">Add to
-                                            Cart</button>
+                                        @guest
+                                            <a href="{{ route('login') }}">
+                                                <button class="add-to-cart border-0">Add to Cart</button>
+                                            </a>
+                                        @else
+                                            <button class="add-to-cart border-0"
+                                                onclick="addToCart({{ Auth::user()->id }}, {{ $watch->id }})">Add to
+                                                Cart</button>
+                                        @endguest
                                     </div>
                                     <div class="product-content">
                                         <h3 class="title">

@@ -10,6 +10,11 @@ class PaymentController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
+        // Get receivers of user
+        $receivers = DB::table('receivers')
+            ->select('id', 'first_name', 'last_name')
+            ->where('user_id', $user->id)
+            ->get();
         // Select cart with image
         $carts = DB::table('carts as c')
             ->join('watches as w', 'c.watch_id', '=', 'w.id')
@@ -22,6 +27,6 @@ class PaymentController extends Controller
         foreach ($carts as $cart) {
             $totalPrice += $cart->selling_price * $cart->quantity;
         }
-        return view('clients.payment.index')->with('carts', $carts)->with('totalPrice', $totalPrice);
+        return view('clients.payment.index')->with('carts', $carts)->with('totalPrice', $totalPrice)->with('receivers', $receivers);
     }
 }

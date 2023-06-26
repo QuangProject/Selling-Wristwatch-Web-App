@@ -28,12 +28,13 @@
                                     <div class="form-inputs">
                                         <label>Choose Reciver:</label>
                                         <div class="d-flex">
-                                            <select name="choose-receiver" id="choose-receiver" class="input-payment">
+                                            <select name="select-receiver" id="select-receiver" class="input-payment">
                                                 <option value="{{ Auth::user()->id }}">{{ Auth::user()->firstname }}
                                                     {{ Auth::user()->lastname }}</option>
-                                                <option value="2">Mr. John</option>
-                                                <option value="3">Mr. John</option>
-                                                <option value="4">Mr. John</option>
+                                                @foreach ($receivers as $receiver)
+                                                    <option value="{{ $receiver->id }}">{{ $receiver->first_name }}
+                                                        {{ $receiver->last_name }}</option>
+                                                @endforeach
                                             </select>
                                             <span class="input-group-append">
                                                 <a href="{{ route('receiver') }}">
@@ -49,21 +50,21 @@
                                 <div class="row">
                                     <div class="form-inputs col-lg-6">
                                         <label>First name:</label>
-                                        <input class="input-payment">
+                                        <input class="input-payment" value="{{ Auth::user()->firstname }}">
                                     </div>
                                     <div class="form-inputs col-lg-6">
                                         <label>Last name:</label>
-                                        <input class="input-payment">
+                                        <input class="input-payment" value="{{ Auth::user()->lastname }}">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-inputs col-12">
                                         <label>Telephone:</label>
-                                        <input class="input-payment">
+                                        <input class="input-payment" value="{{ Auth::user()->telephone }}">
                                     </div>
                                     <div class="form-inputs col-12">
                                         <label>Address:</label>
-                                        <input class="input-payment">
+                                        <input class="input-payment" value="{{ Auth::user()->address }}">
                                     </div>
                                 </div>
                             </div>

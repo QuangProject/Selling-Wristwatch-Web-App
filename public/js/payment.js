@@ -14,3 +14,8 @@ shipping.addEventListener('change', function () {
 const btnPayment = document.getElementById('btn-payment');
 btnPayment.addEventListener('click', () => {
 });
+
+const selectReceiver = document.getElementById('select-receiver');
+selectReceiver.addEventListener('change', () => {
+    const receiverValue = selectReceiver.value;
+});

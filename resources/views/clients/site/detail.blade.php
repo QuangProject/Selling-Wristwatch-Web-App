@@ -75,8 +75,14 @@
                                 <div class="qtyplus">+</div>
                             </div>
                         </div>
-                        <button class="round-black-btn" id="btn-add-to-cart" data-user-id="{{ Auth::user()->id }}">Add
-                            to Cart</button>
+                        @guest
+                            <a href="{{ route('login') }}">
+                                <button class="round-black-btn">Add to Cart</button>
+                            </a>
+                        @else
+                            <button class="round-black-btn" id="btn-add-to-cart" data-user-id="{{ Auth::user()->id }}">Add to
+                                Cart</button>
+                        @endguest
                         <div class="table-responsive">
                             <table class="table table-striped table-product">
                                 <thead>

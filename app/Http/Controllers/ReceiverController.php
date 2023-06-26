@@ -18,7 +18,7 @@ class ReceiverController extends Controller
             $addressArr = explode(', ', $getAddress);
             // dd($addressArr);
             for ($j = count($addressArr) - 1; $j >= 0; $j--) {
-                if ($j < 2) {
+                if ($j < count($addressArr) - 3) {
                     $subAddress = $addressArr[$j] . ', ' . $subAddress;
                 } else {
                     $address = $addressArr[$j] . ', ' . $address;
@@ -28,7 +28,7 @@ class ReceiverController extends Controller
             $subAddress = rtrim($subAddress, ', ');
             // Remove the last comma from $address
             $address = rtrim($address, ', ');
-            
+
             $receivers[$i]->address = $address;
             $receivers[$i]->sub_address = $subAddress;
         }
@@ -53,7 +53,7 @@ class ReceiverController extends Controller
                 ->where('first_name', $request->input('first_name'))
                 ->where('last_name', $request->input('last_name'))
                 ->first();
-            if ($check) {
+            if ($check && $check->user_id == $userId) {
                 return response()->json(['message' => 'Receiver already exist'], 400);
             }
             $receiver = Receiver::create($request->all());
@@ -69,51 +69,75 @@ class ReceiverController extends Controller
         }
     }
 
-    // public function show($id)
-    // {
-    //     $category = Category::find($id);
-    //     if (is_null($category)) {
-    //         return response()->json(['message' => 'Category not found'], 404);
-    //     }
-    //     return response()->json([
-    //         'message' => 'Category retrieved successfully',
-    //         'category' => $category
-    //     ], 200);
-    // }
+    public function show($id)
+    {
+        $receiver = Receiver::find($id);
+        if (is_null($receiver)) {
+            return response()->json(['message' => 'Receiver not found'], 404);
+        }
+        // Separate subaddress from address
+        $getAddress = $receiver->address;
+        $address = '';
+        $subAddress = '';
+        $addressArr = explode(', ', $getAddress);
 
-    // public function update(Request $request, $id)
-    // {
-    //     try {
-    //         $category = Category::find($id);
-    //         if (is_null($category)) {
-    //             return response()->json(['message' => 'Category not found'], 404);
-    //         }
-    //         // Check if name is exist
-    //         $check = Category::where('name', $request->input('name'))->first();
-    //         if ($check && $check->id != $id) {
-    //             return response()->json(['message' => 'Category name already exist'], 400);
-    //         }
-    //         $category->update($request->all());
-    //         return response()->json([
-    //             'message' => 'Category updated successfully',
-    //             'category' => $category
-    //         ], 200);
-    //     } catch (\Throwable $th) {
-    //         return response()->json([
-    //             'message' => 'Category updated failed',
-    //             'error' => $th
-    //         ], 400);
-    //     }
-    // }
+        for ($j = count($addressArr) - 1; $j >= 0; $j--) {
+            if ($j < count($addressArr) - 3) {
+                $subAddress = $addressArr[$j] . ', ' . $subAddress;
+            } else {
+                $address = $addressArr[$j] . ', ' . $address;
+            }
+        }
 
-    // public function destroy($id)
-    // {
-    //     // Logic to delete a user by ID
-    //     $category = Category::find($id);
-    //     if (is_null($category)) {
-    //         return response()->json(['message' => 'Category not found'], 404);
-    //     }
-    //     $category->delete();
-    //     return response()->json(['message' => 'Category was deleted'], 200);
-    // }
+        // Remove the last comma from $subAddress
+        $subAddress = rtrim($subAddress, ', ');
+        // Remove the last comma from $address
+        $address = rtrim($address, ', ');
+
+        $receiver->address = $address;
+        $receiver->sub_address = $subAddress;
+        return response()->json([
+            'message' => 'Receiver retrieved successfully',
+            'receiver' => $receiver
+        ], 200);
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $receiver = Receiver::find($id);
+            if (is_null($receiver)) {
+                return response()->json(['message' => 'Receiver not found'], 404);
+            }
+            // Check if first and last name is exist
+            $check = Receiver::where('user_id', $receiver->user_id)
+                ->where('first_name', $request->input('first_name'))
+                ->where('last_name', $request->input('last_name'))
+                ->first();
+            if ($check && $check->id != $id) {
+                return response()->json(['message' => 'Receiver name already exist'], 400);
+            }
+            $receiver->update($request->all());
+            return response()->json([
+                'message' => 'Receiver updated successfully',
+                'receiver' => $receiver
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Receiver updated failed',
+                'error' => $th
+            ], 400);
+        }
+    }
+
+    public function destroy($id)
+    {
+        // Logic to delete a user by ID
+        $receiver = Receiver::find($id);
+        if (is_null($receiver)) {
+            return response()->json(['message' => 'Receiver not found'], 404);
+        }
+        $receiver->delete();
+        return response()->json(['message' => 'Receiver was deleted'], 200);
+    }
 }
