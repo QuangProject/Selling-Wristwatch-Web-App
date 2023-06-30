@@ -22,15 +22,17 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="left border">
-                            <span class="header">Payment</span>
+                            <span class="ms-3 header">Payment</span>
                             <div class="form-payment">
+                                <div class="text-center">
+                                    <span class="text-danger text-center" id="error-payment"></span>
+                                </div>
                                 <div class="row">
                                     <div class="form-inputs">
                                         <label>Choose Reciver:</label>
                                         <div class="d-flex">
                                             <select name="select-receiver" id="select-receiver" class="input-payment">
-                                                <option value="{{ Auth::user()->id }}">{{ Auth::user()->firstname }}
-                                                    {{ Auth::user()->lastname }}</option>
+                                                <option value="0">Choose receiver</option>
                                                 @foreach ($receivers as $receiver)
                                                     <option value="{{ $receiver->id }}">{{ $receiver->first_name }}
                                                         {{ $receiver->last_name }}</option>
@@ -50,21 +52,21 @@
                                 <div class="row">
                                     <div class="form-inputs col-lg-6">
                                         <label>First name:</label>
-                                        <input class="input-payment" value="{{ Auth::user()->firstname }}">
+                                        <input class="input-payment" id="first-name" value="">
                                     </div>
                                     <div class="form-inputs col-lg-6">
                                         <label>Last name:</label>
-                                        <input class="input-payment" value="{{ Auth::user()->lastname }}">
+                                        <input class="input-payment" id="last-name" value="">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-inputs col-12">
                                         <label>Telephone:</label>
-                                        <input class="input-payment" value="{{ Auth::user()->telephone }}">
+                                        <input class="input-payment" id="telephone" value="">
                                     </div>
                                     <div class="form-inputs col-12">
                                         <label>Address:</label>
-                                        <input class="input-payment" value="{{ Auth::user()->address }}">
+                                        <input class="input-payment" id="address" value="">
                                     </div>
                                 </div>
                             </div>
@@ -114,9 +116,10 @@
                             </div>
                             <div class="row lower">
                                 <div class="col text-left"><b>Total to pay</b></div>
-                                <div class="col text-right"><b id="total-price">${{ $totalPrice + 5 }}</b></div>
+                                <div class="col text-right">$<b id="total-price">{{ $totalPrice + 5 }}</b></div>
                             </div>
-                            <button class="btn-payment" id="btn-payment">Place order</button>
+                            <button class="btn-payment" id="btn-payment" data-user-id="{{ Auth::user()->id }}">Place
+                                order</button>
                         </div>
                     </div>
                 </div>

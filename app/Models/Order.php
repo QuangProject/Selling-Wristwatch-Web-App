@@ -10,9 +10,10 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
+        'receiver_id',
         'order_date',
         'delivery_date',
-        'shipping_address',
+        'shipping_fee',
         'total_price',
         'status',
     ];

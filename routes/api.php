@@ -103,3 +103,17 @@ Route::post('/receivers', 'App\Http\Controllers\ReceiverController@store');
 Route::get('/receivers/{id}', 'App\Http\Controllers\ReceiverController@show');
 Route::put('/receivers/{id}', 'App\Http\Controllers\ReceiverController@update');
 Route::delete('/receivers/{id}', 'App\Http\Controllers\ReceiverController@destroy');
+
+// Order
+Route::get('/orders', 'App\Http\Controllers\OrderController@list');
+Route::post('/orders', 'App\Http\Controllers\OrderController@store');
+Route::get('/orders/{id}', 'App\Http\Controllers\OrderController@show');
+Route::put('/orders/{id}', 'App\Http\Controllers\OrderController@update');
+Route::delete('/orders/{id}', 'App\Http\Controllers\OrderController@destroy');
+
+// Order Detail
+Route::get('/order-details', 'App\Http\Controllers\OrderDetailController@list');
+Route::post('/order-details', 'App\Http\Controllers\OrderDetailController@store');
+Route::get('/order-details/{id}', 'App\Http\Controllers\OrderDetailController@show');
+Route::put('/order-details/{id}', 'App\Http\Controllers\OrderDetailController@update');
+Route::delete('/order-details/{id}', 'App\Http\Controllers\OrderDetailController@destroy');

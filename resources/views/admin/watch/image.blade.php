@@ -17,8 +17,6 @@
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Stock</th>
                     <th>Image</th>
                     <th>Options</th>
                 </tr>
@@ -26,8 +24,6 @@
             <tbody id="imageList">
                 @foreach ($images as $image)
                     <tr class="align-middle" id="image_{{ $image->id }}">
-                        <td>{{ $image->name }}</td>
-                        <td>{{ $image->stock }}</td>
                         <td>
                             <img src="{{ route('watch.image.get', ['id' => $image->id]) }}"
                                 id="displayImage_{{ $image->id }}" width="100"
@@ -47,8 +43,6 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>Name</th>
-                    <th>Stock</th>
                     <th>Image</th>
                     <th>Options</th>
                 </tr>

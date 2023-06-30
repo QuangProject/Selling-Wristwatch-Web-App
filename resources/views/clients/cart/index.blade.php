@@ -72,7 +72,7 @@
                                     style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
                                     <div>TOTAL PRICE</div>
                                     <div class="text-right fw-bold">&dollar;<span
-                                            id="total-price">{{ $totalPrice + 5 }}</span>
+                                            id="total-price">{{ $totalPrice }}</span>
                                     </div>
                                 </div>
                                 <a href="{{ route('payment') }}">

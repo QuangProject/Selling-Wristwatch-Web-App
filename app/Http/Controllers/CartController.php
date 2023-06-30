@@ -23,6 +23,12 @@ class CartController extends Controller
         // Get total price
         $totalPrice = 0;
         foreach ($carts as $cart) {
+            $watch = Watch::find($cart->watch_id);
+            if ($watch->stock < $cart->quantity) {
+                $changeCart = Cart::find($cart->id);
+                $changeCart->quantity = $watch->stock;
+                $changeCart->save();
+            }
             $totalPrice += $cart->selling_price * $cart->quantity;
         }
         return view('clients.cart.index')->with('carts', $carts)->with('totalPrice', $totalPrice);

@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('receiver_id');
             $table->dateTime('order_date');
             $table->dateTime('delivery_date');
-            $table->string('shipping_address');
+            $table->decimal('shipping_fee');
             $table->decimal('total_price');
-            $table->string('status');
+            $table->integer('status');
             $table->timestamps();
 
             $table->foreign('receiver_id')->references('id')->on('receivers')->onDelete('cascade');
