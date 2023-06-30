@@ -14,6 +14,7 @@
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
+                    <th>Order ID</th>
                     <th>Full Name</th>
                     <th>Telephone</th>
                     <th>Address</th>
@@ -28,6 +29,7 @@
             <tbody>
                 @foreach ($orders as $order)
                     <tr>
+                        <td>{{ $order->id }}</td>
                         <td>{{ $order->first_name }} {{ $order->last_name }}</td>
                         <td>{{ $order->telephone }}</td>
                         <td>{{ $order->address }}</td>
@@ -41,10 +43,11 @@
                         </td>
                         <td>
                             <select class="form-select orderStatus" aria-label="Default select example" data-id="{{ $order->id }}">
-                                <option value="1" {{ $order->status == 1 ? 'selected' : '' }}>Pending</option>
-                                <option value="2" {{ $order->status == 2 ? 'selected' : '' }}>In progress</option>
-                                <option value="3" {{ $order->status == 3 ? 'selected' : '' }}>Delivered</option>
-                                <option value="4" {{ $order->status == 4 ? 'selected' : '' }}>Canceled</option>
+                                <option value="1" {{ $order->status == 1 ? 'selected' : '' }}>Processed</option>
+                                <option value="2" {{ $order->status == 2 ? 'selected' : '' }}>Order sent</option>
+                                <option value="3" {{ $order->status == 3 ? 'selected' : '' }}>Order en route</option>
+                                <option value="4" {{ $order->status == 4 ? 'selected' : '' }}>Arrived</option>
+                                <option value="5" {{ $order->status == 5 ? 'selected' : '' }}>Canceled</option>
                             </select>
                         </td>
                     </tr>
@@ -52,6 +55,7 @@
             </tbody>
             <tfoot>
                 <tr>
+                    <th>Order ID</th>
                     <th>Full Name</th>
                     <th>Telephone</th>
                     <th>Address</th>

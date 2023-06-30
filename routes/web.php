@@ -59,6 +59,9 @@ Route::middleware(['count.cart'])->group(function () {
             Route::get('/cart', [CartController::class, 'index'])->name('cart');
             Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
             Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
+            Route::get('/order-information', [UserController::class, 'orderInformation'])->name('order.information');
+            Route::get('/purchase-history', [UserController::class, 'purchaseHistory'])->name('purchase.history');
+            Route::get('/detail-information/{id}', [UserController::class, 'detailedInformation'])->name('detailed.information');
         });
     });
 });

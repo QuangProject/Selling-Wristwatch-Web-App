@@ -9,7 +9,8 @@ class ReceiverController extends Controller
 {
     public function index()
     {
-        $receivers = Receiver::all();
+        $userId = auth()->user()->id;
+        $receivers = Receiver::where('user_id', $userId)->get();
         // Separate subaddress from address
         for ($i = 0; $i < count($receivers); $i++) {
             $getAddress = $receivers[$i]->address;

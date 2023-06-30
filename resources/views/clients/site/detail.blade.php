@@ -64,25 +64,29 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <strong>Stock:</strong> <span id="stock">{{ $watch->stock }}</span>
-                        </div>
-                        <div class="product-count">
-                            <label for="size fw-bold">Quantity</label>
-                            <div class="display-flex">
-                                <div class="qtyminus">-</div>
-                                <input type="text" name="quantity" value="1" class="qty" id="quantity">
-                                <div class="qtyplus">+</div>
+                        @if ($watch->stock > 0)
+                            <div class="mt-3">
+                                <strong>Stock:</strong> <span id="stock">{{ $watch->stock }}</span>
                             </div>
-                        </div>
-                        @guest
-                            <a href="{{ route('login') }}">
-                                <button class="round-black-btn">Add to Cart</button>
-                            </a>
+                            <div class="product-count">
+                                <label for="size fw-bold">Quantity</label>
+                                <div class="display-flex">
+                                    <div class="qtyminus">-</div>
+                                    <input type="text" name="quantity" value="1" class="qty" id="quantity">
+                                    <div class="qtyplus">+</div>
+                                </div>
+                            </div>
+                            @guest
+                                <a href="{{ route('login') }}">
+                                    <button class="round-black-btn">Add to Cart</button>
+                                </a>
+                            @else
+                                <button class="round-black-btn" id="btn-add-to-cart" data-user-id="{{ Auth::user()->id }}">Add
+                                    to Cart</button>
+                            @endguest
                         @else
-                            <button class="round-black-btn" id="btn-add-to-cart" data-user-id="{{ Auth::user()->id }}">Add to
-                                Cart</button>
-                        @endguest
+                            <strong class="text-danger">Out of stock</span>
+                        @endif
                         <div class="table-responsive">
                             <table class="table table-striped table-product">
                                 <thead>

@@ -66,16 +66,8 @@ selectReceiver.addEventListener('change', () => {
 const errorPayment = document.getElementById('error-payment');
 const btnPayment = document.getElementById('btn-payment');
 btnPayment.addEventListener('click', (e) => {
-    if (inputFirstName.value == '' || inputLastName.value == '' || inputTelephone.value == '' || inputAddress.value == '') {
-        errorPayment.textContent = 'Please fill in all fields';
-        return;
-    }
-    if (format.test(inputFirstName.value) || format.test(inputLastName.value)) {
-        errorPayment.textContent = 'Invalid name';
-        return;
-    }
-    if (phone_pattern.test(inputTelephone.value) == false) {
-        errorPayment.textContent = 'Invalid telephone';
+    if (selectReceiver.value == 0) {
+        errorPayment.textContent = 'Please select receiver';
         return;
     }
     errorPayment.textContent = '';

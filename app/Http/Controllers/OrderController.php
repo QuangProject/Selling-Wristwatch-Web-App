@@ -63,6 +63,9 @@ class OrderController extends Controller
 
         $order = Order::find($id);
         $order->status = $status;
+        if ($status == 4) {
+            $order->delivery_date = now();
+        }
         $order->save();
 
         return response()->json([

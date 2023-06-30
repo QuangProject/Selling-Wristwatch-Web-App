@@ -22,16 +22,16 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($orderDetals as $orderDetal)
+                @foreach ($orderDetails as $orderDetail)
                     <tr>
-                        <td>{{ $orderDetal->model }}</td>
+                        <td>{{ $orderDetail->model }}</td>
                         <td>
-                            <img src="{{ route('watch.image.get', ['id' => $orderDetal->image_id]) }}" width="100"
+                            <img src="{{ route('watch.image.get', ['id' => $orderDetail->image_id]) }}" width="100"
                                 class="my-3" loading="lazy">
                         </td>
-                        <td>${{ $orderDetal->selling_price }}</td>
-                        <td>{{ $orderDetal->quantity }}</td>
-                        <td><b>${{ $orderDetal->price }}</b></td>
+                        <td>${{ $orderDetail->selling_price }}</td>
+                        <td>{{ $orderDetail->quantity }}</td>
+                        <td><b>${{ $orderDetail->price }}</b></td>
                     </tr>
                 @endforeach
             </tbody>

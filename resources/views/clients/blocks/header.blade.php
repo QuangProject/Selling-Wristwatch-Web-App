@@ -7,7 +7,7 @@
                         <form action="#" class="searchform order-lg-first">
                             <div class="form-group d-flex">
                                 <input type="search" class="form-control search-input" placeholder="Search">
-                                <button type="submit" class="form-control search">
+                                <button type="submit" class="form-control search" aria-label="Search watches button">
                                     <span class="fa-solid fa-magnifying-glass"></span>
                                 </button>
                             </div>
@@ -151,7 +151,7 @@
                                         </li>
 
                                         <li>
-                                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ route('order.information') }}">
                                                 <i class="bi bi-list-ul"></i>
                                                 <span>Order infomation</span>
                                             </a>
@@ -161,7 +161,7 @@
                                         </li>
 
                                         <li>
-                                            <a class="dropdown-item d-flex align-items-center" href="#">
+                                            <a class="dropdown-item d-flex align-items-center" href="{{ route('purchase.history') }}">
                                                 <i class="bi bi-clock-history"></i>
                                                 <span>Purchase History</span>
                                             </a>

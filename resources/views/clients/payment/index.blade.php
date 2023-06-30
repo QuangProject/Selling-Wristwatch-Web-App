@@ -52,21 +52,21 @@
                                 <div class="row">
                                     <div class="form-inputs col-lg-6">
                                         <label>First name:</label>
-                                        <input class="input-payment" id="first-name" value="">
+                                        <input class="input-payment" id="first-name" value="" readonly>
                                     </div>
                                     <div class="form-inputs col-lg-6">
                                         <label>Last name:</label>
-                                        <input class="input-payment" id="last-name" value="">
+                                        <input class="input-payment" id="last-name" value="" readonly>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="form-inputs col-12">
                                         <label>Telephone:</label>
-                                        <input class="input-payment" id="telephone" value="">
+                                        <input class="input-payment" id="telephone" value="" readonly>
                                     </div>
                                     <div class="form-inputs col-12">
                                         <label>Address:</label>
-                                        <input class="input-payment" id="address" value="">
+                                        <input class="input-payment" id="address" value="" readonly>
                                     </div>
                                 </div>
                             </div>

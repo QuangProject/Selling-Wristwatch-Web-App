@@ -17,7 +17,7 @@
                     <div class="info-box mb-4">
                         <i class="bx bx-map"></i>
                         <h3>Our Address</h3>
-                        <p>A108 Adam Street, New York, NY 535022</p>
+                        <p>No. 160, 30/4 Street, An Phu Ward, Ninh Kieu District, Can Tho City</p>
                     </div>
                 </div>
 
@@ -25,7 +25,7 @@
                     <div class="info-box  mb-4">
                         <i class="bx bx-envelope"></i>
                         <h3>Email Us</h3>
-                        <p>contact@example.com</p>
+                        <p>ndquang5802@gmail.com</p>
                     </div>
                 </div>
 
@@ -33,7 +33,7 @@
                     <div class="info-box  mb-4">
                         <i class="bx bx-phone-call"></i>
                         <h3>Call Us</h3>
-                        <p>+1 5589 55488 55</p>
+                        <p>+84 916 843 367</p>
                     </div>
                 </div>
 

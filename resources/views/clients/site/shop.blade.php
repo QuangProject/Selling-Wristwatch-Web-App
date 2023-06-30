@@ -84,31 +84,36 @@
                             <div class="col-xl-3 col-lg-4 col-sm-6 mt-3">
                                 <div class="product-grid">
                                     <div class="product-image">
-                                        <a href="{{ route('detail', ['id' => $watch->id]) }}" class="image">
+                                        <a href="{{ route('detail', ['id' => $watch->id]) }}" class="image"
+                                            aria-label="Click here to view detail">
                                             <img src="{{ route('watch.image.get', ['id' => $watch->images[0]->id]) }}"
-                                                loading="lazy">
+                                                loading="lazy" alt="{{ $watch->model }}">
                                         </a>
                                         @if ($watch->discount > 0)
                                             <span class="product-discount-label">-{{ $watch->discount }}%</span>
                                         @endif
                                         <ul class="product-links">
-                                            <li><a href="#"><i class="fa fa-search"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-random"></i></a></li>
+                                            <li><a href="#" aria-label="Click here to search"><i
+                                                        class="fa fa-search"></i></a></li>
+                                            <li><a href="#" aria-label="Click here to add to favorites list"><i
+                                                        class="fa fa-heart"></i></a></li>
                                         </ul>
-                                        @guest
-                                            <a href="{{ route('login') }}">
-                                                <button class="add-to-cart border-0">Add to Cart</button>
-                                            </a>
-                                        @else
-                                            <button class="add-to-cart border-0"
-                                                onclick="addToCart({{ Auth::user()->id }}, {{ $watch->id }})">Add to
-                                                Cart</button>
-                                        @endguest
+                                        @if ($watch->stock > 0)
+                                            @guest
+                                                <a href="{{ route('login') }}" aria-label="Click here to add to cart">
+                                                    <button class="add-to-cart border-0">Add to Cart</button>
+                                                </a>
+                                            @else
+                                                <button class="add-to-cart border-0"
+                                                    onclick="addToCart({{ Auth::user()->id }}, {{ $watch->id }})">Add to
+                                                    Cart</button>
+                                            @endguest
+                                        @endif
                                     </div>
                                     <div class="product-content">
                                         <h3 class="title">
-                                            <a href="{{ route('detail', ['id' => $watch->id]) }}" class="content">
+                                            <a href="{{ route('detail', ['id' => $watch->id]) }}" class="content"
+                                                aria-label="Click here to view detail">
                                                 {{ $watch->model }}
                                             </a>
                                         </h3>

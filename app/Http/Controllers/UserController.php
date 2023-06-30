@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -102,5 +104,46 @@ class UserController extends Controller
                 'message' => 'Edit password failed'
             ], 500);
         }
+    }
+
+    // Action orderInformation()
+    public function orderInformation()
+    {
+        $user = auth()->user();
+        $orders = Order::join('receivers', 'orders.receiver_id', '=', 'receivers.id')
+            ->join('users', 'receivers.user_id', '=', 'users.id')
+            ->select('orders.id', 'orders.order_date', 'orders.delivery_date', 'orders.shipping_fee', 'orders.total_price', 'orders.status')
+            ->where('receivers.user_id', $user->id)
+            ->whereNotIn('orders.status', [4])
+            ->orderBy('orders.delivery_date', 'desc')
+            ->get();
+        return view('clients.order.index')->with('orders', $orders);
+    }
+
+    // Action detailedInformation()
+    public function detailedInformation($id)
+    {
+        $orderDetail = DB::table('order_details as od')
+            ->join('orders as o', 'od.order_id', '=', 'o.id')
+            ->join('watches as w', 'od.watch_id', '=', 'w.id')
+            ->join(DB::raw('(SELECT MIN(id) as id, watch_id FROM images GROUP BY watch_id) as i'), 'w.id', '=', 'i.watch_id')
+            ->select('od.order_id', 'od.watch_id', 'od.quantity', 'od.price', 'w.model', 'w.selling_price', 'w.gender', 'i.id as image_id', 'o.shipping_fee', 'o.total_price')
+            ->where('od.order_id', $id)
+            ->get();
+        return view('clients.order.detail')->with('orderDetails', $orderDetail);
+    }
+
+    // Action purchaseHistory()
+    public function purchaseHistory()
+    {
+        $user = auth()->user();
+        $purchaseHistories = Order::join('receivers', 'orders.receiver_id', '=', 'receivers.id')
+            ->join('users', 'receivers.user_id', '=', 'users.id')
+            ->select('orders.id', 'orders.delivery_date', 'orders.shipping_fee', 'orders.total_price')
+            ->where('receivers.user_id', $user->id)
+            ->where('orders.status', 4)
+            ->orderBy('orders.delivery_date', 'desc')
+            ->get();
+        return view('clients.history.index')->with('purchaseHistories', $purchaseHistories);
     }
 }
