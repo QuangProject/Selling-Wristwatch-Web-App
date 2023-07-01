@@ -5,6 +5,7 @@ const subTotal = document.getElementById('sub-total')
 const shipping = document.getElementById('shipping')
 const shippingPrice = document.getElementById('shipping-price')
 const totalPrice = document.getElementById('total-price')
+const amount = document.getElementById('amount')
 
 shipping.addEventListener('change', function () {
     const shippingValue = shipping.value
@@ -12,6 +13,7 @@ shipping.addEventListener('change', function () {
     shippingPrice.textContent = '$' + shippingValue
     const total = parseFloat(subTotalValue) + parseFloat(shippingValue)
     totalPrice.textContent = total
+    amount.value = total
 })
 
 // Get input

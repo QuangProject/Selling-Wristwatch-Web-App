@@ -58,6 +58,9 @@ Route::middleware(['count.cart'])->group(function () {
             Route::post('/profile/edit/password', [UserController::class, 'editPassword'])->name('profile.edit.password');
             Route::get('/cart', [CartController::class, 'index'])->name('cart');
             Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
+            Route::post('/paypal', [PaymentController::class, 'paypal'])->name('paypal');
+            Route::get('/paypal/success', [PaymentController::class, 'success'])->name('paypal.success');
+            Route::get('/paypal/cancel', [PaymentController::class, 'cancel'])->name('paypal.cancel');
             Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
             Route::get('/order-information', [UserController::class, 'orderInformation'])->name('order.information');
             Route::get('/purchase-history', [UserController::class, 'purchaseHistory'])->name('purchase.history');

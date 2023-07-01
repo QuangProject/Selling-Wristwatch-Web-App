@@ -22,7 +22,18 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="left border">
-                            <span class="ms-3 header">Payment</span>
+                            <div class="d-flex justify-content-between">
+                                <span class="ms-3 header">Payment</span>
+                                <div class="icons me-3">
+                                    <form action="{{ route('paypal') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="amount" id="amount" value="{{ $totalPrice + 5 }}">
+                                        <button type="submit" class="btn">
+                                            <img src="{{ asset('img/paypal.png') }}" />
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                             <div class="form-payment">
                                 <div class="text-center">
                                     <span class="text-danger text-center" id="error-payment"></span>

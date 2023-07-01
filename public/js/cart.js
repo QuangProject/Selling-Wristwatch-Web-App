@@ -1,5 +1,5 @@
 const totalPrice = document.getElementById('total-price')
-const item = document.getElementsByClassName('item')
+// const item = document.getElementsByClassName('item')
 const items = document.getElementsByClassName('item');
 const itemsArray = Array.from(items);
 
@@ -24,13 +24,13 @@ function changeQuantity(id, action) {
                 if (action === 'plus') {
                     // $sum = parseFloat(subTotal.textContent) + parseFloat(watchPrice.textContent)
                     // subTotal.textContent = $sum
-                    $total = parseFloat(totalPrice.textContent) + parseFloat(watchPrice.textContent)
-                    totalPrice.textContent = $total
+                    var total = parseFloat(totalPrice.textContent) + parseFloat(watchPrice.textContent)
+                    totalPrice.textContent = total
                 } else {
                     // $minus = parseFloat(subTotal.textContent) - parseFloat(watchPrice.textContent)
                     // subTotal.textContent = $minus
-                    $total = parseFloat(totalPrice.textContent) - parseFloat(watchPrice.textContent)
-                    totalPrice.textContent = $total
+                    var total = parseFloat(totalPrice.textContent) - parseFloat(watchPrice.textContent)
+                    totalPrice.textContent = total
                 }
             },
             error: function (error) {
@@ -57,6 +57,9 @@ function changeQuantity(id, action) {
 
 // Remove item from cart
 function removeItem(user_id, id) {
+    const quantity = document.getElementById('quantity_' + id)
+    const watchPrice = document.getElementById('watchPrice_' + id)
+
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: 'btn btn-success me-2',
@@ -109,6 +112,23 @@ function removeItem(user_id, id) {
                     itemsArray.forEach(item => {
                         item.textContent = count
                     });
+
+                    var total = parseFloat(totalPrice.textContent) - (parseFloat(watchPrice.textContent) * parseFloat(quantity.textContent))
+                    totalPrice.textContent = total
+
+                    if (total == 0) {
+                        const cart = document.getElementById('cart')
+                        cart.innerHTML = `
+                            <div class="row">
+                                <div class="text-center">
+                                    <img src="/img/shopping-bag.gif" alt="Empty cart" style="width: 50%">
+                                </div>
+                                <div class="text-center my-3">
+                                    <a href="/shop" class="btn btn-danger">Continue shopping</a>
+                                </div>
+                            </div>
+                        `
+                    }
                 },
                 error: function (error) {
                     $('.overlay').remove()
