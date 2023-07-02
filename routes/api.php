@@ -119,6 +119,7 @@ Route::put('/order-details/{id}', 'App\Http\Controllers\OrderDetailController@up
 Route::delete('/order-details/{id}', 'App\Http\Controllers\OrderDetailController@destroy');
 
 // Statistic
+Route::get('/statistic/sale', 'App\Http\Controllers\StatisticController@sale');
 Route::get('/statistic/revenue', 'App\Http\Controllers\StatisticController@revenue');
 Route::get('/statistic/order', 'App\Http\Controllers\StatisticController@order');
 Route::get('/statistic/watch', 'App\Http\Controllers\StatisticController@watch');

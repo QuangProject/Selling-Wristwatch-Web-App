@@ -45,10 +45,37 @@ class StatisticController extends Controller
             'topSellingInMonth' => $topSellingInMonth,
             'recentSale' => $recentSale
         ]);
-        // return response()->json([
-        //     'topSellingInMonth' => $topSellingInMonth,
-        //     'recentSale' => $recentSale
-        // ]);
+    }
+
+    public function sale()
+    {
+        // SELECT DATE(order_date) as today, SUM(total_price)
+        // FROM `orders` 
+        // WHERE DATE(order_date) = CURDATE() AND status = 2
+        // GROUP BY DATE(order_date)
+        $saleToday = Order::select(DB::raw('DATE(order_date) as today'), DB::raw('SUM(total_price) as total'))
+            ->whereDate('order_date', '=', DB::raw('CURDATE()'))
+            ->where('status', '>=', 2)
+            ->groupBy(DB::raw('DATE(order_date)'))
+            ->get();
+
+        // SELECT DATE(order_date) as today, SUM(total_price)
+        // FROM `orders` 
+        // WHERE DATE(order_date) = DATE_SUB(CURDATE(), INTERVAL 1 DAY) AND status = 2
+        // GROUP BY DATE(order_date)
+        $saleYesterday = Order::select(DB::raw('DATE(order_date) as today'), DB::raw('SUM(total_price) as total'))
+            ->whereDate('order_date', '=', DB::raw('DATE_SUB(CURDATE(), INTERVAL 1 DAY)'))
+            ->where('status', '>=', 2)
+            ->groupBy(DB::raw('DATE(order_date)'))
+            ->get();
+
+        $percentDifference = ($saleToday[0]->total - $saleYesterday[0]->total) / ($saleYesterday[0]->total / 100);
+
+        return response()->json([
+            'saleToday' => $saleToday[0],
+            'saleYesterday' => $saleYesterday[0],
+            'percentDifference' => number_format($percentDifference, 2)
+        ]);
     }
 
     public function revenue()
@@ -60,6 +87,7 @@ class StatisticController extends Controller
         // GROUP BY MONTH(delivery_date)
         $revenueThisMonth  = Order::select(DB::raw('MONTH(delivery_date) as this_month'), DB::raw('SUM(total_price) as total'))
             ->whereMonth('delivery_date', DB::raw('MONTH(CURDATE())'))
+            ->where('status', 4)
             ->groupBy(DB::raw('MONTH(delivery_date)'))
             ->get();
 
@@ -70,6 +98,7 @@ class StatisticController extends Controller
         // GROUP BY MONTH(delivery_date)
         $revenueLastMonth = Order::select(DB::raw('MONTH(delivery_date) as last_month'), DB::raw('SUM(total_price) as total'))
             ->whereMonth('delivery_date', '=', DB::raw('MONTH(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))'))
+            ->where('status', 4)
             ->groupBy(DB::raw('MONTH(delivery_date)'))
             ->get();
 
