@@ -117,3 +117,11 @@ Route::post('/order-details', 'App\Http\Controllers\OrderDetailController@store'
 Route::get('/order-details/{id}', 'App\Http\Controllers\OrderDetailController@show');
 Route::put('/order-details/{id}', 'App\Http\Controllers\OrderDetailController@update');
 Route::delete('/order-details/{id}', 'App\Http\Controllers\OrderDetailController@destroy');
+
+// Statistic
+Route::get('/statistic/revenue', 'App\Http\Controllers\StatisticController@revenue');
+Route::get('/statistic/order', 'App\Http\Controllers\StatisticController@order');
+Route::get('/statistic/watch', 'App\Http\Controllers\StatisticController@watch');
+Route::get('/statistic/brand', 'App\Http\Controllers\StatisticController@brand');
+Route::get('/statistic/category', 'App\Http\Controllers\StatisticController@category');
+Route::get('/statistic/user', 'App\Http\Controllers\StatisticController@user');
