@@ -110,10 +110,9 @@ class UserController extends Controller
     public function orderInformation()
     {
         $user = auth()->user();
-        $orders = Order::join('receivers', 'orders.receiver_id', '=', 'receivers.id')
-            ->join('users', 'receivers.user_id', '=', 'users.id')
+        $orders = Order::join('users', 'orders.user_id', '=', 'users.id')
             ->select('orders.id', 'orders.order_date', 'orders.delivery_date', 'orders.shipping_fee', 'orders.total_price', 'orders.status')
-            ->where('receivers.user_id', $user->id)
+            ->where('orders.user_id', $user->id)
             ->whereNotIn('orders.status', [4])
             ->orderBy('orders.delivery_date', 'desc')
             ->get();
@@ -121,8 +120,15 @@ class UserController extends Controller
     }
 
     // Action detailedInformation()
-    public function detailedInformation($id)
+    public function detailedInformation($id, $type)
     {
+        $returnUrl = "";
+        if ($type == 'order') {
+            $returnUrl = route('order.information');
+        } else {
+            $returnUrl = route('purchase.history');
+        }
+
         $orderDetail = DB::table('order_details as od')
             ->join('orders as o', 'od.order_id', '=', 'o.id')
             ->join('watches as w', 'od.watch_id', '=', 'w.id')
@@ -130,17 +136,17 @@ class UserController extends Controller
             ->select('od.order_id', 'od.watch_id', 'od.quantity', 'od.price', 'w.model', 'w.selling_price', 'w.gender', 'i.id as image_id', 'o.shipping_fee', 'o.total_price')
             ->where('od.order_id', $id)
             ->get();
-        return view('clients.order.detail')->with('orderDetails', $orderDetail);
+            
+        return view('clients.order.detail')->with('orderDetails', $orderDetail)->with('returnUrl', $returnUrl);
     }
 
     // Action purchaseHistory()
     public function purchaseHistory()
     {
         $user = auth()->user();
-        $purchaseHistories = Order::join('receivers', 'orders.receiver_id', '=', 'receivers.id')
-            ->join('users', 'receivers.user_id', '=', 'users.id')
+        $purchaseHistories = Order::join('users', 'orders.user_id', '=', 'users.id')
             ->select('orders.id', 'orders.delivery_date', 'orders.shipping_fee', 'orders.total_price')
-            ->where('receivers.user_id', $user->id)
+            ->where('orders.user_id', $user->id)
             ->where('orders.status', 4)
             ->orderBy('orders.delivery_date', 'desc')
             ->get();

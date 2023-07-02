@@ -97,36 +97,18 @@ class PaymentController extends Controller
                 $lastNames = $arr['payer']['payer_info']['last_name'];
                 $addresses = $arr['payer']['payer_info']['shipping_address']['line1'] . ', ' . $arr['payer']['payer_info']['shipping_address']['city'] . ', ' . $arr['payer']['payer_info']['shipping_address']['state'] . ', ' . $arr['payer']['payer_info']['shipping_address']['postal_code'] . ', ' . $arr['payer']['payer_info']['shipping_address']['country_code'];
 
-                // Check if receiver exists
-                $receiver = DB::table('receivers')
-                    ->where('user_id', $user->id)
-                    ->where('first_name', $firstNames)
-                    ->where('last_name', $lastNames)
-                    ->where('address', $addresses)
-                    ->first();
-                if ($receiver) {
-                    $receiver = $receiver->id;
-                } else {
-                    $receiver = DB::table('receivers')
-                        ->insertGetId([
-                            'user_id' => $user->id,
-                            'first_name' => $firstNames,
-                            'last_name' => $lastNames,
-                            'address' => $addresses,
-                            'created_at' => now(),
-                            'updated_at' => now()
-                        ]);
-                }
-
                 // Create new order
                 $shippingFee = 0;
                 $totalPrice = $arr['transactions'][0]['amount']['total'];
 
                 $order = DB::table('orders')
                     ->insertGetId([
-                        'receiver_id' => $receiver,
+                        'user_id' => $user->id,
                         'order_date' => now(),
                         'delivery_date' => now()->addDays(7),
+                        'receiver_name' => $firstNames . ' ' . $lastNames,
+                        'receiver_telephone' => $user->telephone,
+                        'receiver_address' => $addresses,
                         'shipping_fee' => $shippingFee,
                         'total_price' => $totalPrice,
                         'status' => 1,

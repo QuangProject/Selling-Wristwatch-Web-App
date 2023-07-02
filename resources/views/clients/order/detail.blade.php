@@ -15,6 +15,11 @@
                 <div class="col-lg-10 col-xl-9">
                     <div class="card" style="border-radius: 10px;">
                         <div class="card-header px-4 py-5">
+                            <div class="mb-4">
+                                <a href="{{ $returnUrl }}">
+                                    <i class="fa-solid fa-arrow-left-long"></i> Back
+                                </a>
+                            </div>
                             <h5 class="text-muted mb-0">Thanks for your Order, <span
                                     style="color: #a8729a;">{{ Auth::user()->firstname }}</span>!
                             </h5>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Receiver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -28,10 +29,16 @@ class OrderController extends Controller
         $shippingFee = $request->input('shipping_fee');
         $totalPrice = $request->input('total_price');
 
+        // Find receiver by id
+        $receiver = Receiver::find($receiverId);
+
         $order = Order::create([
-            'receiver_id' => $receiverId,
+            'user_id' => $receiver->user_id,
             'order_date' => now(),
             'delivery_date' => now()->addDays(7),
+            'receiver_name' => $receiver->first_name . ' ' . $receiver->last_name,
+            'receiver_telephone' => $receiver->telephone,
+            'receiver_address' => $receiver->address,
             'shipping_fee' => $shippingFee,
             'total_price' => $totalPrice,
             'status' => 1

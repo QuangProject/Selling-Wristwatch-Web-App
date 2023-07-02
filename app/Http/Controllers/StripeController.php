@@ -63,35 +63,15 @@ class StripeController extends Controller
         $totalPrice = $request->get('totalPrice');
         $shippingFee = $request->get('shippingFee');
 
-        // Check if receiver exists
-        $receiver = DB::table('receivers')
-            ->where('user_id', $user->id)
-            ->where('first_name', $user->firstname)
-            ->where('last_name', $user->lastname)
-            ->where('telephone', $user->telephone)
-            ->where('address', $user->address)
-            ->first();
-        if ($receiver) {
-            $receiver = $receiver->id;
-        } else {
-            $receiver = DB::table('receivers')
-                ->insertGetId([
-                    'user_id' => $user->id,
-                    'first_name' => $user->firstname,
-                    'last_name' => $user->lastname,
-                    'telephone' => $user->telephone,
-                    'address' => $user->address,
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
-        }
-
         // Create order
         $order = DB::table('orders')
             ->insertGetId([
-                'receiver_id' => $receiver,
+                'user_id' => $user->id,
                 'order_date' => now(),
                 'delivery_date' => now()->addDays(7),
+                'receiver_name' => $user->firstname . ' ' . $user->lastname,
+                'receiver_telephone' => $user->telephone,
+                'receiver_address' => $user->address,
                 'shipping_fee' => $shippingFee,
                 'total_price' => $totalPrice,
                 'status' => 1,
