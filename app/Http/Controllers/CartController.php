@@ -13,6 +13,9 @@ class CartController extends Controller
     public function index()
     {
         $user = auth()->user();
+        if ($user->telephone == null || $user->address == null) {
+            return redirect()->route('profile')->with('error', 'Please update your profile before checkout');
+        }
         // Select cart with image
         $carts = DB::table('carts as c')
             ->join('watches as w', 'c.watch_id', '=', 'w.id')

@@ -170,7 +170,7 @@ class PaymentController extends Controller
                         'shipping_fee' => $shippingFee
                     ]);
 
-                session()->flash('msg', 'Payment successful');
+                session()->flash('msg', 'Payment successfully!');
                 return redirect()->route('cart');
             } else {
                 // Payment failed
@@ -184,7 +184,7 @@ class PaymentController extends Controller
 
     public function error()
     {
-        session()->flash('error', 'Payment failed');
+        session()->flash('error', 'Payment failed!');
         return redirect()->route('cart');
     }
 }

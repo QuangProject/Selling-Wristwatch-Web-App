@@ -9,12 +9,6 @@
 @endsection
 
 @section('content')
-    @if (session('msg'))
-        <div class="alert alert-success my-1 text-center">{{ session('msg') }}</div>
-    @endif
-    @if (session('error'))
-        <div class="alert alert-danger my-1 text-center">{{ session('error') }}</div>
-    @endif
     <div class="cart-container py-5">
         <div class="card" id="cart">
             @if ($carts->count() == 0)

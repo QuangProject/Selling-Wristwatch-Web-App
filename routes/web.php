@@ -12,6 +12,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ReceiverController;
 use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WatchCategoryController;
 use App\Http\Controllers\WatchController;
@@ -58,9 +59,14 @@ Route::middleware(['count.cart'])->group(function () {
             Route::post('/profile/edit/password', [UserController::class, 'editPassword'])->name('profile.edit.password');
             Route::get('/cart', [CartController::class, 'index'])->name('cart');
             Route::get('/payment', [PaymentController::class, 'index'])->name('payment');
+            // Pay with paypal
             Route::post('/paypal', [PaymentController::class, 'paypal'])->name('paypal');
             Route::get('/paypal/success', [PaymentController::class, 'success'])->name('paypal.success');
             Route::get('/paypal/cancel', [PaymentController::class, 'cancel'])->name('paypal.cancel');
+            // Pay with stripe
+            Route::post('/stripe', [StripeController::class, 'stripe'])->name('stripe');
+            Route::get('/stripe/success', [StripeController::class, 'stripeSuccess'])->name('stripe.success');
+            Route::get('/stripe/cancel', [StripeController::class, 'stripeCancel'])->name('stripe.cancel');
             Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
             Route::get('/order-information', [UserController::class, 'orderInformation'])->name('order.information');
             Route::get('/purchase-history', [UserController::class, 'purchaseHistory'])->name('purchase.history');

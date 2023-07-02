@@ -184,7 +184,8 @@
                                     <label for="new-password" class="col-md-4 col-lg-3 col-form-label">New
                                         Password</label>
                                     <div class="col-md-8 col-lg-9">
-                                        <input name="newPassword" type="password" class="form-control" id="new-password">
+                                        <input name="newPassword" type="password" class="form-control"
+                                            id="new-password">
                                     </div>
                                 </div>
 

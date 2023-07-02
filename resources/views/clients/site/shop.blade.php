@@ -86,7 +86,7 @@
                                     <div class="product-image">
                                         <a href="{{ route('detail', ['id' => $watch->id]) }}" class="image"
                                             aria-label="Click here to view detail">
-                                            <img src="{{ route('watch.image.get', ['id' => $watch->images[0]->id]) }}"
+                                            <img src="{{ route('watch.image.get', ['id' => $watch->image_id]) }}"
                                                 loading="lazy" alt="{{ $watch->model }}">
                                         </a>
                                         @if ($watch->discount > 0)

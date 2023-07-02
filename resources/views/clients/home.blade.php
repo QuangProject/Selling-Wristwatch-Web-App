@@ -140,16 +140,16 @@
                             <div class="product-image">
                                 <a href="#" class="image">
                                     <img class="pic-1"
-                                        src="{{ route('watch.image.get', ['id' => $watch->images[0]->id]) }}">
+                                        src="{{ route('watch.image.get', ['id' => $watch->image_id]) }}">
                                     <img class="pic-2"
-                                        src="{{ route('watch.image.get', ['id' => $watch->images[0]->id]) }}ng">
+                                        src="{{ route('watch.image.get', ['id' => $watch->image_id]) }}">
                                 </a>
                                 @if ($watch->discount > 0)
                                     <span class="product-discount-label">-{{ $watch->discount }}%</span>
                                 @endif
                                 <ul class="product-links">
                                     <li><a href="#" data-tip="Add to Wishlist"><i class="far fa-heart"></i></a></li>
-                                    <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li>
+                                    {{-- <li><a href="#" data-tip="Compare"><i class="fa fa-random"></i></a></li> --}}
                                     <li><a href="#" data-tip="Quick View"><i class="fa fa-search"></i></a></li>
                                 </ul>
                             </div>
@@ -157,14 +157,14 @@
                                 <a class="add-to-cart" href="#">
                                     <i class="fas fa-plus"></i>Add to cart
                                 </a>
-                                <h3 class="title"><a href="#">Men's Jacket</a></h3>
-                                <ul class="rating">
+                                <h3 class="title"><a href="#">{{ $watch->model }}</a></h3>
+                                {{-- <ul class="rating">
                                     <li class="fas fa-star"></li>
                                     <li class="fas fa-star"></li>
                                     <li class="fas fa-star"></li>
                                     <li class="far fa-star"></li>
                                     <li class="far fa-star"></li>
-                                </ul>
+                                </ul> --}}
                                 @if ($watch->discount > 0)
                                     <div class="price">
                                         ${{ $watch->selling_price - ($watch->selling_price * $watch->discount) / 100 }}

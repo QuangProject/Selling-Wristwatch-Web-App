@@ -4,6 +4,7 @@ var phone_pattern = /^(\(0\d{1,3}\)\d{7})|(0\d{9})$/;
 const subTotal = document.getElementById('sub-total')
 const shipping = document.getElementById('shipping')
 const shippingPrice = document.getElementById('shipping-price')
+const shippingFeeStripe = document.getElementById('shipping-fee-stripe')
 const totalPrice = document.getElementById('total-price')
 const amount = document.getElementById('amount')
 
@@ -11,6 +12,7 @@ shipping.addEventListener('change', function () {
     const shippingValue = shipping.value
     const subTotalValue = subTotal.textContent
     shippingPrice.textContent = '$' + shippingValue
+    shippingFeeStripe.value = shippingValue
     const total = parseFloat(subTotalValue) + parseFloat(shippingValue)
     totalPrice.textContent = total
     amount.value = total

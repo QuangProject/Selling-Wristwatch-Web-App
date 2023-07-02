@@ -22,17 +22,34 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="left border">
-                            <div class="d-flex justify-content-between">
-                                <span class="ms-3 header">Payment</span>
-                                <div class="icons me-3">
-                                    <form action="{{ route('paypal') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" name="amount" id="amount" value="{{ $totalPrice + 5 }}">
-                                        <button type="submit" class="btn">
-                                            <img src="{{ asset('img/paypal.png') }}" />
-                                        </button>
-                                    </form>
-                                </div>
+                            <span class="ms-3 header">Payment Method</span>
+                            <div class="icons ms-3 d-flex">
+                                <form action="{{ route('paypal') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="amount" id="amount" value="{{ $totalPrice + 5 }}">
+                                    <button type="submit" class="btn border">
+                                        <img src="{{ asset('img/paypal.png') }}" />
+                                    </button>
+                                </form>
+                                <form action="{{ route('stripe') }}" method="POST" class="ms-3">
+                                    @csrf
+                                    @foreach ($carts as $index => $cart)
+                                        <div>
+                                            <input type="hidden" name="products[{{ $index }}][name]"
+                                                value="{{ $cart->model }}">
+                                            <input type="hidden" name="products[{{ $index }}][image]"
+                                                value="{{ route('watch.image.get', ['id' => $cart->image_id]) }}">
+                                            <input type="hidden" name="products[{{ $index }}][quantity]"
+                                                value="{{ $cart->quantity }}">
+                                            <input type="hidden" name="products[{{ $index }}][totalPrice]"
+                                                value="{{ $cart->selling_price }}">
+                                        </div>
+                                    @endforeach
+                                    <input type="hidden" name="shippingFee" id="shipping-fee-stripe" value="5">
+                                    <button type="submit" class="btn border">
+                                        <img src="{{ asset('img/stripe-logo.png') }}" />
+                                    </button>
+                                </form>
                             </div>
                             <div class="form-payment">
                                 <div class="text-center">
