@@ -35,8 +35,7 @@ class StatisticController extends Controller
             ->limit(6)
             ->get();
 
-        $recentSale = Order::select('orders.id', 'receivers.first_name', 'receivers.last_name', 'orders.total_price', 'orders.status')
-            ->join('receivers', 'orders.receiver_id', '=', 'receivers.id')
+        $recentSale = Order::select('orders.id', 'orders.receiver_name', 'orders.total_price', 'orders.status')
             ->whereMonth('orders.delivery_date', DB::raw('MONTH(CURDATE())'))
             ->orderBy('orders.delivery_date', 'DESC')
             ->get();

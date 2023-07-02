@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2023 at 08:35 PM
+-- Generation Time: Jul 02, 2023 at 05:03 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -62,6 +62,14 @@ CREATE TABLE `carts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `user_id`, `watch_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(29, 2, 1, 1, '2023-07-02 07:26:05', '2023-07-02 07:26:05'),
+(30, 3, 1, 1, '2023-07-02 14:12:51', '2023-07-02 14:13:03');
+
 -- --------------------------------------------------------
 
 --
@@ -80,11 +88,11 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Sports', NULL, NULL),
-(2, 'Luxury', NULL, NULL),
-(3, 'Fashion', NULL, NULL),
-(4, 'Smartwatches', NULL, NULL),
-(5, 'Diving', NULL, NULL);
+(1, 'Sports', '2023-07-02 15:01:35', '2023-07-02 15:01:35'),
+(2, 'Luxury', '2023-07-02 15:01:44', '2023-07-02 15:01:44'),
+(3, 'Fashion', '2023-07-02 15:01:52', '2023-07-02 15:01:52'),
+(4, 'Smartwatches', '2023-07-02 15:02:04', '2023-07-02 15:02:04'),
+(5, 'Diving', '2023-07-02 15:02:12', '2023-07-02 15:02:12');
 
 -- --------------------------------------------------------
 
@@ -11591,7 +11599,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (247, '2023_06_12_224628_create_contacts_table', 1),
 (252, '2023_06_22_014744_create_table_provinces', 2),
 (253, '2023_06_22_014809_create_table_districts', 2),
-(254, '2023_06_22_015141_create_table_communes', 2);
+(254, '2023_06_22_015141_create_table_communes', 2),
+(256, '2023_07_01_223006_create_table_payments', 3);
 
 -- --------------------------------------------------------
 
@@ -11601,9 +11610,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `receiver_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
   `order_date` datetime NOT NULL,
   `delivery_date` datetime NOT NULL,
+  `receiver_name` varchar(255) NOT NULL,
+  `receiver_telephone` varchar(255) NOT NULL,
+  `receiver_address` varchar(255) NOT NULL,
   `shipping_fee` decimal(8,2) NOT NULL,
   `total_price` decimal(8,2) NOT NULL,
   `status` int(11) NOT NULL,
@@ -11615,12 +11627,17 @@ CREATE TABLE `orders` (
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `receiver_id`, `order_date`, `delivery_date`, `shipping_fee`, `total_price`, `status`, `created_at`, `updated_at`) VALUES
-(8, 8, '2023-06-30 16:47:31', '2023-07-01 01:05:46', '5.00', '6805.00', 4, '2023-06-30 09:47:31', '2023-06-30 18:05:46'),
-(9, 9, '2023-06-30 16:52:20', '2023-07-07 16:52:20', '5.00', '3205.00', 4, '2023-06-30 09:52:20', '2023-06-30 18:00:47'),
-(10, 11, '2023-06-30 18:53:39', '2023-07-07 18:53:39', '5.00', '11205.00', 1, '2023-06-30 11:53:39', '2023-06-30 11:53:39'),
-(11, 12, '2023-07-01 01:00:09', '2023-07-08 01:00:09', '5.00', '8405.00', 2, '2023-06-30 18:00:10', '2023-06-30 18:00:40'),
-(12, 12, '2023-07-01 01:30:35', '2023-07-08 01:30:35', '10.00', '9810.00', 1, '2023-06-30 18:30:35', '2023-06-30 18:30:35');
+INSERT INTO `orders` (`id`, `user_id`, `order_date`, `delivery_date`, `receiver_name`, `receiver_telephone`, `receiver_address`, `shipping_fee`, `total_price`, `status`, `created_at`, `updated_at`) VALUES
+(8, 2, '2023-06-30 16:47:31', '2023-06-30 21:05:46', 'Quang Nguyen Duy', '0916843367', '217A, ấp An Thới, Xã An Bình, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '6805.00', 4, '2023-06-30 09:47:31', '2023-06-30 18:05:46'),
+(9, 2, '2023-06-30 16:52:20', '2023-06-30 20:52:20', 'Tran Nguyen', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '3205.00', 4, '2023-06-30 09:52:20', '2023-06-30 18:00:47'),
+(10, 3, '2023-06-30 18:53:39', '2023-06-30 19:48:05', 'Quang Nguyen', '0916843367', '98/7, Tam Vu Street, Phường Hưng Lợi, Quận Ninh Kiều, Thành phố Cần Thơ', '5.00', '11205.00', 4, '2023-06-30 11:53:39', '2023-07-02 12:48:05'),
+(11, 2, '2023-06-30 19:00:09', '2023-06-30 19:47:52', 'Diem Duong', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '8405.00', 4, '2023-06-30 18:00:10', '2023-07-02 12:47:52'),
+(12, 2, '2023-06-30 19:30:35', '2023-06-30 20:30:35', 'Diem Duong', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '10.00', '9810.00', 4, '2023-06-30 18:30:35', '2023-06-30 18:30:35'),
+(14, 2, '2023-07-02 00:36:39', '2023-07-09 00:36:39', 'John Doe', '', '1 Main St, San Jose, CA, 95131, US', '5.00', '17205.00', 4, '2023-07-01 17:36:39', '2023-07-01 17:36:39'),
+(15, 3, '2023-07-02 00:38:50', '2023-07-09 00:38:50', 'John Doe', '', '1 Main St, San Jose, CA, 95131, US', '10.00', '5910.00', 4, '2023-07-01 17:38:50', '2023-07-01 17:38:50'),
+(16, 2, '2023-07-02 00:50:15', '2023-07-09 00:50:15', 'John Doe', '', '1 Main St, San Jose, CA, 95131, US', '3.00', '3203.00', 3, '2023-07-01 17:50:15', '2023-07-01 17:50:15'),
+(17, 3, '2023-07-02 14:07:05', '2023-07-09 14:07:05', 'Nhung Nguyen', '0982872274', '217A, ấp An Thới, Xã An Bình, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '3005.00', 2, '2023-07-02 07:07:05', '2023-07-02 07:07:05'),
+(18, 2, '2023-07-02 14:25:57', '2023-07-09 14:25:57', 'Nguyen Que Tran (FGW CT)', '0843630939', 'Cafe Diem Huynh, Tan Hanh, Long Ho, Vinh Long', '5.00', '8900.00', 1, '2023-07-02 07:25:57', '2023-07-02 07:25:57');
 
 -- --------------------------------------------------------
 
@@ -11650,7 +11667,15 @@ INSERT INTO `order_details` (`order_id`, `watch_id`, `quantity`, `price`, `creat
 (10, 13, 1, '8900.00', '2023-06-30 11:53:39', '2023-06-30 11:53:39'),
 (11, 5, 2, '8400.00', '2023-06-30 18:00:10', '2023-06-30 18:00:10'),
 (12, 11, 1, '900.00', '2023-06-30 18:30:35', '2023-06-30 18:30:35'),
-(12, 13, 1, '8900.00', '2023-06-30 18:30:35', '2023-06-30 18:30:35');
+(12, 13, 1, '8900.00', '2023-06-30 18:30:35', '2023-06-30 18:30:35'),
+(14, 7, 1, '10500.00', '2023-07-01 17:36:39', '2023-07-01 17:36:39'),
+(14, 10, 1, '6700.00', '2023-07-01 17:36:39', '2023-07-01 17:36:39'),
+(15, 12, 1, '5900.00', '2023-07-01 17:38:50', '2023-07-01 17:38:50'),
+(16, 8, 1, '3200.00', '2023-07-01 17:50:15', '2023-07-01 17:50:15'),
+(17, 6, 1, '1200.00', '2023-07-02 07:07:05', '2023-07-02 07:07:05'),
+(17, 11, 2, '1800.00', '2023-07-02 07:07:05', '2023-07-02 07:07:05'),
+(18, 3, 1, '1500.00', '2023-07-02 07:25:57', '2023-07-02 07:25:57'),
+(18, 13, 1, '8900.00', '2023-07-02 07:25:57', '2023-07-02 07:25:57');
 
 -- --------------------------------------------------------
 
@@ -11675,6 +11700,34 @@ CREATE TABLE `password_reset_tokens` (
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `payment_id` varchar(255) NOT NULL,
+  `payer_id` varchar(255) NOT NULL,
+  `payer_email` varchar(255) NOT NULL,
+  `amount` double(8,2) NOT NULL,
+  `currency` varchar(255) NOT NULL,
+  `payment_status` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `payment_id`, `payer_id`, `payer_email`, `amount`, `currency`, `payment_status`, `created_at`, `updated_at`) VALUES
+(2, 'PAYID-MSQGH4A67X4712054846171U', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 17205.00, 'USD', 'approved', '2023-07-01 17:36:39', '2023-07-01 17:36:39'),
+(3, 'PAYID-MSQGJII4PC50526268710044', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 5910.00, 'USD', 'approved', '2023-07-01 17:38:50', '2023-07-01 17:38:50'),
+(4, 'PAYID-MSQGONY9NR436729M700572R', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 3203.00, 'USD', 'approved', '2023-07-01 17:50:15', '2023-07-01 17:50:15'),
+(5, 'PAYID-MSQSD2Q40C87254NM233974C', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 3005.00, 'USD', 'approved', '2023-07-02 07:07:05', '2023-07-02 07:07:05');
 
 -- --------------------------------------------------------
 
@@ -11788,7 +11841,7 @@ CREATE TABLE `receivers` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
-  `telephone` varchar(255) NOT NULL,
+  `telephone` varchar(255) DEFAULT NULL,
   `address` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -11802,7 +11855,10 @@ INSERT INTO `receivers` (`id`, `user_id`, `first_name`, `last_name`, `telephone`
 (8, 2, 'Quang', 'Nguyen Duy', '0916843367', '217A, ấp An Thới, Xã An Bình, Huyện Long Hồ, Tỉnh Vĩnh Long', '2023-06-26 09:50:16', '2023-06-26 10:26:42'),
 (9, 2, 'Tran', 'Nguyen', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '2023-06-30 09:50:45', '2023-06-30 09:50:45'),
 (11, 3, 'Quang', 'Nguyen', '0916843367', '98/7, Tam Vu Street, Phường Hưng Lợi, Quận Ninh Kiều, Thành phố Cần Thơ', '2023-06-30 11:53:28', '2023-06-30 11:53:28'),
-(12, 2, 'Diem', 'Duong', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '2023-06-30 17:58:36', '2023-06-30 17:58:36');
+(12, 2, 'Diem', 'Duong', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '2023-06-30 17:58:36', '2023-06-30 17:58:36'),
+(14, 2, 'John', 'Doe', NULL, '1 Main St, San Jose, CA, 95131, US', '2023-07-01 17:36:39', '2023-07-01 17:36:39'),
+(15, 3, 'Nhung', 'Nguyen', '0982872274', '217A, ấp An Thới, Xã An Bình, Huyện Long Hồ, Tỉnh Vĩnh Long', '2023-07-02 07:07:05', '2023-07-02 14:13:45'),
+(16, 2, 'Nguyen Que Tran', '(FGW CT)', '0843630939', 'Cafe Diem Huynh, Tan Hanh, Long Ho, Vinh Long', '2023-07-02 07:25:57', '2023-07-02 07:25:57');
 
 -- --------------------------------------------------------
 
@@ -11849,8 +11905,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `email_verified_at`, `password`, `gender`, `birthday`, `telephone`, `address`, `is_admin`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Nguyen Duy Quang', '(FGW CT)', 'quangndgcc200030@fpt.edu.vn', '2023-06-19 08:53:59', '$2y$10$GooQvvFGHn9taanw96.Ile6A2DhDQ3F3GSf5kRjG3/zYqMPeb6Ap6', NULL, NULL, NULL, NULL, 1, NULL, '2023-06-19 08:53:59', '2023-06-19 08:54:06'),
-(2, 'Nguyen Que Tran', '(FGW CT)', 'trannqgcc210042@fpt.edu.vn', '2023-06-21 20:09:27', '$2y$10$RCKR3zC71rvoiXmYKiJIKuIUpF.9/KuXkX1pnFsqJ8ZOGonDDK7be', NULL, NULL, NULL, NULL, 0, NULL, '2023-06-21 20:09:27', '2023-06-21 20:09:37'),
-(3, 'Quang', 'Nguyen Duy', 'ndquang5802@gmail.com', '2023-06-30 11:49:10', '$2y$10$BRSlzB12PcnBEZ.r9rXvzuWKX8HbY62veg02EWUwZZDf//nX0POe2', NULL, NULL, NULL, NULL, 0, NULL, '2023-06-30 11:49:10', '2023-06-30 11:49:23');
+(2, 'Nguyen Que Tran', '(FGW CT)', 'trannqgcc210042@fpt.edu.vn', '2023-06-21 20:09:27', '$2y$10$RCKR3zC71rvoiXmYKiJIKuIUpF.9/KuXkX1pnFsqJ8ZOGonDDK7be', 'female', '2003-03-09', '0843630939', 'Cafe Diem Huynh, Tan Hanh, Long Ho, Vinh Long', 0, NULL, '2023-06-21 20:09:27', '2023-07-02 07:25:12'),
+(3, 'Quang', 'Nguyen Duy', 'ndquang5802@gmail.com', '2023-06-30 11:49:10', '$2y$10$BRSlzB12PcnBEZ.r9rXvzuWKX8HbY62veg02EWUwZZDf//nX0POe2', 'male', '2002-08-05', '0327281160', '217A, ấp An Thới, xã An Bình, huyện Long Hồ, tỉnh Vĩnh Long', 0, NULL, '2023-06-30 11:49:10', '2023-07-02 07:05:36');
 
 -- --------------------------------------------------------
 
@@ -11889,17 +11945,17 @@ CREATE TABLE `watches` (
 INSERT INTO `watches` (`id`, `collection_id`, `model`, `original_price`, `selling_price`, `discount`, `stock`, `gender`, `case_material`, `case_diameter`, `case_thickness`, `strap_material`, `dial_color`, `crystal_material`, `water_resistance`, `movement_type`, `power_reserve`, `complications`, `availability`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Rolex Datejust 36', '9800.00', '10000.00', 0, 12, 'Unisex', 'Stainless', 36, 11, 'Leather', 'Black', 'Sapphire', 100, 'Automatic', 48, 'Date', 1, NULL, '2023-06-19 14:48:04'),
 (2, 2, 'Omega Speedmaster Anniversary Series 42mm', '4800.00', '5000.00', 0, 11, 'Men', 'Stainless', 42, 14, 'Steel', 'Blue', 'Sapphire', 50, 'Automatic', 60, 'Chronograph', 1, NULL, '2023-06-19 15:03:58'),
-(3, 3, 'Seiko Prospex SNJ039P1', '1300.00', '1500.00', 0, 9, 'Men', 'Stainless', 44, 13, 'Rubber', 'Black', 'Hardlex', 200, 'Automatic', 50, 'Date, Rotating Bezel', 1, NULL, '2023-06-30 11:53:39'),
+(3, 3, 'Seiko Prospex SNJ039P1', '1300.00', '1500.00', 0, 8, 'Men', 'Stainless', 44, 13, 'Rubber', 'Black', 'Hardlex', 200, 'Automatic', 50, 'Date, Rotating Bezel', 1, NULL, '2023-07-02 07:25:57'),
 (4, 1, 'Rolex Explorer II', '8300.00', '8500.00', 0, 5, 'Men', 'Stainless', 42, 12, 'Steel', 'White', 'Sapphire', 100, 'Automatic', 70, 'Date, GMT', 1, NULL, '2023-06-19 14:52:58'),
 (5, 2, 'Omega Seamaster Aqua Terra 150m', '4000.00', '4200.00', 0, 0, 'Women', 'Stainless', 36, 10, 'Leather', 'Blue', 'Sapphire', 150, 'Automatic', 48, 'Date', 1, NULL, '2023-06-30 18:00:10'),
-(6, 3, 'Seiko Presage Limited Edition', '1000.00', '1200.00', 0, 9, 'Men', 'Stainless', 40, 11, 'Steel', 'Ivory', 'Sapphire', 50, 'Automatic', 41, 'None', 1, NULL, '2023-06-19 14:58:25'),
-(7, 1, 'Rolex Datejust II', '10300.00', '10500.00', 0, 3, 'Men', 'Yellow Gold', 41, 12, 'Leather', 'Silver', 'Sapphire', 100, 'Automatic', 70, 'Date', 1, NULL, '2023-06-19 14:49:05'),
-(8, 4, 'Tag Heuer Connected Calibre E4', '3000.00', '3200.00', 0, 7, 'Unisex', 'Titanium', 45, 13, 'Rubber', 'Black', 'Sapphire', 50, 'Quartz', 0, 'Smartwatch', 1, NULL, '2023-06-30 09:52:20'),
-(9, 5, 'Casio G-Shock GMA S2100BS 7A', '500.00', '800.00', 0, 6, 'Men', 'Resin', 50, 15, 'Resin', 'Black', 'Mineral', 100, 'Quartz', 0, 'Altimeter, Compass', 1, NULL, '2023-06-30 11:53:39'),
-(10, 2, 'Omega De Ville Tresor', '6500.00', '6700.00', 0, 5, 'Women', 'Rose Gold', 36, 9, 'Leather', 'Champagne', 'Sapphire', 30, 'Quartz', 0, 'None', 1, NULL, '2023-06-19 14:52:15'),
-(11, 3, 'Cocktail Time Presage SRP837J1', '700.00', '900.00', 0, 8, 'Women', 'Stainless', 34, 11, 'Steel', 'Blue', 'Sapphire', 50, 'Automatic', 41, 'None', 1, NULL, '2023-06-30 18:30:35'),
-(12, 4, 'Tag Heuer Monaco', '5600.00', '5900.00', 0, 7, 'Men', 'Stainless', 39, 12, 'Leather', 'Black', 'Sapphire', 100, 'Automatic', 40, 'Chronograph', 1, NULL, '2023-06-19 14:55:08'),
-(13, 1, 'Rolex Milgauss Stainless Steel Green Anniversary', '8700.00', '8900.00', 0, 8, 'Men', 'Stainless', 40, 13, 'Steel', 'Black', 'Sapphire', 100, 'Automatic', 48, 'None', 1, NULL, '2023-06-30 18:30:35');
+(6, 3, 'Seiko Presage Limited Edition', '1000.00', '1200.00', 0, 8, 'Men', 'Stainless', 40, 11, 'Steel', 'Ivory', 'Sapphire', 50, 'Automatic', 41, 'None', 1, NULL, '2023-07-02 07:07:05'),
+(7, 1, 'Rolex Datejust II', '10300.00', '10500.00', 0, 2, 'Men', 'Yellow Gold', 41, 12, 'Leather', 'Silver', 'Sapphire', 100, 'Automatic', 70, 'Date', 1, NULL, '2023-07-01 17:36:39'),
+(8, 4, 'Tag Heuer Connected Calibre E4', '3000.00', '3200.00', 0, 6, 'Unisex', 'Titanium', 45, 13, 'Rubber', 'Black', 'Sapphire', 50, 'Quartz', 0, 'Smartwatch', 1, NULL, '2023-07-01 17:50:15'),
+(9, 5, 'Casio G-Shock GMA S2100BS 7A', '500.00', '800.00', 0, 5, 'Men', 'Resin', 50, 15, 'Resin', 'Black', 'Mineral', 100, 'Quartz', 0, 'Altimeter, Compass', 1, NULL, '2023-07-01 16:12:03'),
+(10, 2, 'Omega De Ville Tresor', '6500.00', '6700.00', 0, 4, 'Women', 'Rose Gold', 36, 9, 'Leather', 'Champagne', 'Sapphire', 30, 'Quartz', 0, 'None', 1, NULL, '2023-07-01 17:36:39'),
+(11, 3, 'Cocktail Time Presage SRP837J1', '700.00', '900.00', 0, 6, 'Women', 'Stainless', 34, 11, 'Steel', 'Blue', 'Sapphire', 50, 'Automatic', 41, 'None', 1, NULL, '2023-07-02 07:07:05'),
+(12, 4, 'Tag Heuer Monaco', '5600.00', '5900.00', 0, 6, 'Men', 'Stainless', 39, 12, 'Leather', 'Black', 'Sapphire', 100, 'Automatic', 40, 'Chronograph', 1, NULL, '2023-07-01 17:38:50'),
+(13, 1, 'Rolex Milgauss Stainless Steel Green Anniversary', '8700.00', '8900.00', 0, 7, 'Men', 'Stainless', 40, 13, 'Steel', 'Black', 'Sapphire', 100, 'Automatic', 48, 'None', 1, NULL, '2023-07-02 07:25:57');
 
 -- --------------------------------------------------------
 
@@ -12015,7 +12071,7 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `orders_receiver_id_foreign` (`receiver_id`);
+  ADD KEY `orders_user_id_foreign` (`user_id`);
 
 --
 -- Indexes for table `order_details`
@@ -12035,6 +12091,12 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `personal_access_tokens`
@@ -12102,7 +12164,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -12150,13 +12212,19 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=255;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -12174,7 +12242,7 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `receivers`
 --
 ALTER TABLE `receivers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -12239,7 +12307,7 @@ ALTER TABLE `images`
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_receiver_id_foreign` FOREIGN KEY (`receiver_id`) REFERENCES `receivers` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `order_details`

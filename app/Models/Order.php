@@ -10,17 +10,20 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'receiver_id',
+        'user_id',
         'order_date',
         'delivery_date',
+        'receiver_name',
+        'receiver_telephone',
+        'receiver_address',
         'shipping_fee',
         'total_price',
         'status',
     ];
 
-    public function receiver()
+    public function users()
     {
-        return $this->belongsTo(Receiver::class);
+        return $this->belongsTo(User::class);
     }
 
     public function orderDetails()

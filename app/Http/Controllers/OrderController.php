@@ -12,8 +12,7 @@ class OrderController extends Controller
     // Action index()
     public function index()
     {
-        $orders = Order::join('receivers', 'orders.receiver_id', '=', 'receivers.id')
-            ->select('orders.id', 'orders.order_date', 'orders.delivery_date', 'orders.shipping_fee', 'orders.total_price', 'orders.status', 'receivers.first_name', 'receivers.last_name', 'receivers.telephone', 'receivers.address')
+        $orders = Order::select('orders.id', 'orders.order_date', 'orders.delivery_date', 'orders.shipping_fee', 'orders.total_price', 'orders.status', 'orders.receiver_name', 'orders.receiver_telephone', 'orders.receiver_address')
             ->get();
         return view('admin.order.index')->with('orders', $orders);
         // return response()->json([

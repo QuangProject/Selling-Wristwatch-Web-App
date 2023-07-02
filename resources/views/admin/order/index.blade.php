@@ -30,9 +30,9 @@
                 @foreach ($orders as $order)
                     <tr>
                         <td>{{ $order->id }}</td>
-                        <td>{{ $order->first_name }} {{ $order->last_name }}</td>
-                        <td>{{ $order->telephone }}</td>
-                        <td>{{ $order->address }}</td>
+                        <td>{{ $order->receiver_name }}</td>
+                        <td>{{ $order->receiver_telephone }}</td>
+                        <td>{{ $order->receiver_address }}</td>
                         <td>{{ $order->order_date }}</td>
                         <td>{{ $order->delivery_date }}</td>
                         <td>${{ $order->shipping_fee }}</td>

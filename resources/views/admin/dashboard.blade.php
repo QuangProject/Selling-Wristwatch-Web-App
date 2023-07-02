@@ -263,7 +263,7 @@
                                             @foreach ($recentSale as $item)
                                                 <tr>
                                                     <th scope="row"><a href="#">#{{ $item->id }}</a></th>
-                                                    <td>{{ $item->first_name }} {{ $item->last_name }}</td>
+                                                    <td>{{ $item->receiver_name }}</td>
                                                     <td>${{ $item->total_price }}</td>
                                                     <td>
                                                         @if ($item->status == 1)
