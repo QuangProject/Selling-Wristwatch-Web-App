@@ -28,7 +28,7 @@
                                         <h5 class="mb-0">ORDER <span
                                                 class="text-danger fw-bold">#{{ $order->id }}</span>
                                         </h5>
-                                        <a href="{{ route('detailed.information', ['id' => $order->id, 'type' => 'order']) }}"
+                                        <a href="{{ route('detailed.information', ['id' => $order->id]) }}"
                                             class="text-danger">Track order details <i
                                                 class="fa-solid fa-angles-right"></i></a>
                                     </div>

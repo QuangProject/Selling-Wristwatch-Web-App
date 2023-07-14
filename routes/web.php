@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CollectionController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\OrderController;
@@ -69,8 +70,9 @@ Route::middleware(['count.cart'])->group(function () {
             Route::get('/stripe/cancel', [StripeController::class, 'stripeCancel'])->name('stripe.cancel');
             Route::get('/receiver', [ReceiverController::class, 'index'])->name('receiver');
             Route::get('/order-information', [UserController::class, 'orderInformation'])->name('order.information');
+            Route::get('/order-information/{id}', [UserController::class, 'detailedInformation'])->name('detailed.information');
             Route::get('/purchase-history', [UserController::class, 'purchaseHistory'])->name('purchase.history');
-            Route::get('/detail-information/{id}/{type}', [UserController::class, 'detailedInformation'])->name('detailed.information');
+            Route::get('/purchase-history/{id}', [UserController::class, 'detailedHistory'])->name('detailed.history');
         });
     });
 });

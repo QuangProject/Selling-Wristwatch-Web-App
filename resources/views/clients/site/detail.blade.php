@@ -39,7 +39,7 @@
                     <div class="product-dtl">
                         <div class="product-info">
                             <div class="product-name" id="product-name">{{ $watch->model }}</div>
-                            {{-- <div class="reviews-counter">
+                            <div class="reviews-counter">
                                 <div class="rate">
                                     <input type="radio" id="star5" name="rate" value="5" checked />
                                     <label for="star5" title="text">5 stars</label>
@@ -53,7 +53,7 @@
                                     <label for="star1" title="text">1 star</label>
                                 </div>
                                 <span>3 Reviews</span>
-                            </div> --}}
+                            </div>
                             <div class="product-price-discount">
                                 @if ($watch->discount > 0)
                                     <span

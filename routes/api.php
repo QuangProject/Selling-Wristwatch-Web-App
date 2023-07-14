@@ -119,10 +119,13 @@ Route::put('/order-details/{id}', 'App\Http\Controllers\OrderDetailController@up
 Route::delete('/order-details/{id}', 'App\Http\Controllers\OrderDetailController@destroy');
 
 // Statistic
-Route::get('/statistic/sale', 'App\Http\Controllers\StatisticController@sale');
-Route::get('/statistic/revenue', 'App\Http\Controllers\StatisticController@revenue');
-Route::get('/statistic/order', 'App\Http\Controllers\StatisticController@order');
-Route::get('/statistic/watch', 'App\Http\Controllers\StatisticController@watch');
-Route::get('/statistic/brand', 'App\Http\Controllers\StatisticController@brand');
-Route::get('/statistic/category', 'App\Http\Controllers\StatisticController@category');
-Route::get('/statistic/user', 'App\Http\Controllers\StatisticController@user');
+Route::get('/statistic/sale/{type}', 'App\Http\Controllers\StatisticController@sale');
+Route::get('/statistic/revenue/{type}', 'App\Http\Controllers\StatisticController@revenue');
+Route::get('/statistic/chart/{type}', 'App\Http\Controllers\StatisticController@chart');
+
+// Review
+Route::get('/reviews', 'App\Http\Controllers\ReviewController@list');
+Route::post('/reviews', 'App\Http\Controllers\ReviewController@store');
+Route::get('/reviews/{id}', 'App\Http\Controllers\ReviewController@show');
+Route::put('/reviews/{id}', 'App\Http\Controllers\ReviewController@update');
+Route::delete('/reviews/{id}', 'App\Http\Controllers\ReviewController@destroy');

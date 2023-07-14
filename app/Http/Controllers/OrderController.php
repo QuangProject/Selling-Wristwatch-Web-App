@@ -65,18 +65,25 @@ class OrderController extends Controller
     // Action update()
     public function update(Request $request, $id)
     {
-        $status = $request->input('status');
+        try {
+            $status = $request->input('status');
 
-        $order = Order::find($id);
-        $order->status = $status;
-        if ($status == 4) {
-            $order->delivery_date = now();
+            $order = Order::find($id);
+            $order->status = $status;
+            if ($status == 4) {
+                $order->delivery_date = now();
+            }
+            $order->save();
+
+            return response()->json([
+                'message' => 'Order updated successfully',
+                'order' => $order
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Order updated failed',
+                'error' => $th->getMessage()
+            ], 500);
         }
-        $order->save();
-
-        return response()->json([
-            'message' => 'Order updated successfully',
-            'order' => $order
-        ], 200);
     }
 }

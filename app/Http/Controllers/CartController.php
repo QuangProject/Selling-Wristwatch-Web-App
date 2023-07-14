@@ -93,10 +93,6 @@ class CartController extends Controller
                 'message' => 'Add to cart successfully',
                 'cart' => $cart
             ], 201);
-            return response()->json([
-                'message' => 'Add to cart successfully',
-                'user' => $user
-            ], 201);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Cart created failed',

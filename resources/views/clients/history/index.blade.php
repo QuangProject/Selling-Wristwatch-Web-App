@@ -31,8 +31,8 @@
                                             {{ \Carbon\Carbon::parse($purchaseHistory->delivery_date)->format('M d, Y') }}</span>
                                     </div>
                                     <div>
-                                        <a href="{{ route('detailed.information', ['id' => $purchaseHistory->id, 'type' => 'history']) }}">
-                                            <button class="btn btn-outline-primary" type="button">Track order
+                                        <a href="{{ route('detailed.history', ['id' => $purchaseHistory->id]) }}">
+                                            <button class="btn btn-outline-danger" type="button">View order
                                                 details</button>
                                         </a>
                                     </div>

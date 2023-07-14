@@ -120,15 +120,14 @@ class UserController extends Controller
     }
 
     // Action detailedInformation()
-    public function detailedInformation($id, $type)
+    public function detailedInformation($id)
     {
-        $returnUrl = "";
-        if ($type == 'order') {
-            $returnUrl = route('order.information');
-        } else {
-            $returnUrl = route('purchase.history');
-        }
-
+        // SELECT od.order_id, od.watch_id, od.price, w.model, w.selling_price, w.gender, i.id as image_id, o.shipping_fee, o.total_price
+        // FROM order_details od
+        // JOIN orders o ON o.id = od.order_id
+        // JOIN watches w ON w.id = od.watch_id
+        // JOIN (SELECT MIN(id) as id, watch_id FROM images GROUP BY watch_id) i ON w.id = i.watch_id
+        // WHERE od.order_id = 16
         $orderDetail = DB::table('order_details as od')
             ->join('orders as o', 'od.order_id', '=', 'o.id')
             ->join('watches as w', 'od.watch_id', '=', 'w.id')
@@ -136,8 +135,9 @@ class UserController extends Controller
             ->select('od.order_id', 'od.watch_id', 'od.quantity', 'od.price', 'w.model', 'w.selling_price', 'w.gender', 'i.id as image_id', 'o.shipping_fee', 'o.total_price')
             ->where('od.order_id', $id)
             ->get();
-            
-        return view('clients.order.detail')->with('orderDetails', $orderDetail)->with('returnUrl', $returnUrl);
+
+        return view('clients.order.detail')->with('orderDetails', $orderDetail);
+        // return response()->json(['value' => $orderDetail], 200);
     }
 
     // Action purchaseHistory()
@@ -151,5 +151,27 @@ class UserController extends Controller
             ->orderBy('orders.delivery_date', 'desc')
             ->get();
         return view('clients.history.index')->with('purchaseHistories', $purchaseHistories);
+    }
+
+    public function detailedHistory($id)
+    {
+        // SELECT od.order_id, od.watch_id, od.price, w.model, w.selling_price, w.gender, i.id as image_id, o.shipping_fee, o.total_price, r.*
+        // FROM order_details od
+        // JOIN orders o ON o.id = od.order_id
+        // JOIN watches w ON w.id = od.watch_id
+        // JOIN (SELECT MIN(id) as id, watch_id FROM images GROUP BY watch_id) i ON w.id = i.watch_id
+        // LEFT JOIN reviews r ON w.id = r.watch_id
+        // WHERE od.order_id = 16
+        $orderDetail = DB::table('order_details as od')
+            ->join('orders as o', 'od.order_id', '=', 'o.id')
+            ->join('watches as w', 'od.watch_id', '=', 'w.id')
+            ->join(DB::raw('(SELECT MIN(id) as id, watch_id FROM images GROUP BY watch_id) as i'), 'w.id', '=', 'i.watch_id')
+            ->leftJoin('reviews as r', 'w.id', '=', 'r.watch_id')
+            ->select('od.order_id', 'od.watch_id', 'od.quantity', 'od.price', 'w.model', 'w.selling_price', 'w.gender', 'i.id as image_id', 'o.shipping_fee', 'o.total_price', 'r.comment')
+            ->where('od.order_id', $id)
+            ->get();
+
+        return view('clients.history.detail')->with('orderDetails', $orderDetail);
+        // return response()->json(['value' => $orderDetail], 200);
     }
 }

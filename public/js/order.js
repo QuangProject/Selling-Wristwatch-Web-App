@@ -3,11 +3,12 @@ $(document).ready(function () {
         event.preventDefault();
         var id = $(this).attr("data-id");
         var status = $(this).val();
+        console.log(id, status);
         $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
         $.ajax({
             url: "/api/orders/" + id,
             type: "PUT",
-            data: { id: id, status: status },
+            data: { status: status },
             success: function (response) {
                 $('.overlay').remove()
                 Swal.fire({

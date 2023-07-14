@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2023 at 05:03 PM
+-- Generation Time: Jul 05, 2023 at 10:07 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -68,7 +68,7 @@ CREATE TABLE `carts` (
 
 INSERT INTO `carts` (`id`, `user_id`, `watch_id`, `quantity`, `created_at`, `updated_at`) VALUES
 (29, 2, 1, 1, '2023-07-02 07:26:05', '2023-07-02 07:26:05'),
-(30, 3, 1, 1, '2023-07-02 14:12:51', '2023-07-02 14:13:03');
+(33, 3, 13, 1, '2023-07-02 16:11:53', '2023-07-02 16:11:53');
 
 -- --------------------------------------------------------
 
@@ -11628,16 +11628,26 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `order_date`, `delivery_date`, `receiver_name`, `receiver_telephone`, `receiver_address`, `shipping_fee`, `total_price`, `status`, `created_at`, `updated_at`) VALUES
-(8, 2, '2023-06-30 16:47:31', '2023-06-30 21:05:46', 'Quang Nguyen Duy', '0916843367', '217A, ấp An Thới, Xã An Bình, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '6805.00', 4, '2023-06-30 09:47:31', '2023-06-30 18:05:46'),
-(9, 2, '2023-06-30 16:52:20', '2023-06-30 20:52:20', 'Tran Nguyen', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '3205.00', 4, '2023-06-30 09:52:20', '2023-06-30 18:00:47'),
-(10, 3, '2023-06-30 18:53:39', '2023-06-30 19:48:05', 'Quang Nguyen', '0916843367', '98/7, Tam Vu Street, Phường Hưng Lợi, Quận Ninh Kiều, Thành phố Cần Thơ', '5.00', '11205.00', 4, '2023-06-30 11:53:39', '2023-07-02 12:48:05'),
-(11, 2, '2023-06-30 19:00:09', '2023-06-30 19:47:52', 'Diem Duong', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '8405.00', 4, '2023-06-30 18:00:10', '2023-07-02 12:47:52'),
-(12, 2, '2023-06-30 19:30:35', '2023-06-30 20:30:35', 'Diem Duong', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '10.00', '9810.00', 4, '2023-06-30 18:30:35', '2023-06-30 18:30:35'),
-(14, 2, '2023-07-02 00:36:39', '2023-07-09 00:36:39', 'John Doe', '', '1 Main St, San Jose, CA, 95131, US', '5.00', '17205.00', 4, '2023-07-01 17:36:39', '2023-07-01 17:36:39'),
-(15, 3, '2023-07-02 00:38:50', '2023-07-09 00:38:50', 'John Doe', '', '1 Main St, San Jose, CA, 95131, US', '10.00', '5910.00', 4, '2023-07-01 17:38:50', '2023-07-01 17:38:50'),
-(16, 2, '2023-07-02 00:50:15', '2023-07-09 00:50:15', 'John Doe', '', '1 Main St, San Jose, CA, 95131, US', '3.00', '3203.00', 3, '2023-07-01 17:50:15', '2023-07-01 17:50:15'),
-(17, 3, '2023-07-02 14:07:05', '2023-07-09 14:07:05', 'Nhung Nguyen', '0982872274', '217A, ấp An Thới, Xã An Bình, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '3005.00', 2, '2023-07-02 07:07:05', '2023-07-02 07:07:05'),
-(18, 2, '2023-07-02 14:25:57', '2023-07-09 14:25:57', 'Nguyen Que Tran (FGW CT)', '0843630939', 'Cafe Diem Huynh, Tan Hanh, Long Ho, Vinh Long', '5.00', '8900.00', 1, '2023-07-02 07:25:57', '2023-07-02 07:25:57');
+(8, 2, '2023-04-29 16:47:31', '2023-06-30 22:49:13', 'Quang Nguyen Duy', '0916843367', '217A, ấp An Thới, Xã An Bình, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '6805.00', 4, '2023-06-30 09:47:31', '2023-07-02 15:49:13'),
+(9, 2, '2023-04-29 16:52:20', '2023-06-30 22:49:22', 'Tran Nguyen', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '3205.00', 4, '2023-06-30 09:52:20', '2023-07-02 15:49:22'),
+(10, 3, '2023-05-29 18:53:39', '2023-06-30 22:49:27', 'Quang Nguyen', '0916843367', '98/7, Tam Vu Street, Phường Hưng Lợi, Quận Ninh Kiều, Thành phố Cần Thơ', '5.00', '11205.00', 4, '2023-06-30 11:53:39', '2023-07-02 15:49:27'),
+(11, 2, '2023-05-29 19:00:09', '2023-06-30 22:49:32', 'Diem Duong', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '8405.00', 4, '2023-06-30 18:00:10', '2023-07-02 15:49:32'),
+(12, 2, '2023-05-29 19:30:35', '2023-06-30 22:49:39', 'Diem Duong', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '10.00', '9810.00', 4, '2023-06-30 18:30:35', '2023-07-02 15:49:39'),
+(14, 2, '2023-07-06 00:07:59', '2023-07-06 22:49:43', 'John Doe', '', '1 Main St, San Jose, CA, 95131, US', '5.00', '17205.00', 4, '2023-07-01 17:36:39', '2023-07-02 15:49:43'),
+(15, 3, '2023-07-06 00:07:59', '2023-07-06 22:49:50', 'John Doe', '', '1 Main St, San Jose, CA, 95131, US', '10.00', '5910.00', 4, '2023-07-01 17:38:50', '2023-07-02 15:49:50'),
+(16, 2, '2023-07-05 00:07:59', '2023-07-06 23:18:31', 'John Doe', '', '1 Main St, San Jose, CA, 95131, US', '3.00', '3203.00', 4, '2023-07-01 17:50:15', '2023-07-02 16:18:31'),
+(17, 3, '2023-06-05 14:07:05', '2023-07-05 23:12:52', 'Nhung Nguyen', '0982872274', '217A, ấp An Thới, Xã An Bình, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '3005.00', 1, '2023-07-02 07:07:05', '2023-07-02 16:12:52'),
+(18, 2, '2023-06-05 14:25:57', '2023-07-05 23:15:03', 'Nguyen Que Tran (FGW CT)', '0843630939', 'Cafe Diem Huynh, Tan Hanh, Long Ho, Vinh Long', '5.00', '8900.00', 3, '2023-07-02 07:25:57', '2023-07-02 16:24:17'),
+(19, 3, '2023-06-05 22:13:34', '2023-07-05 22:13:34', 'Nhung Nguyen', '0982872274', '217A, ấp An Thới, Xã An Bình, Huyện Long Hồ, Tỉnh Vĩnh Long', '5.00', '10005.00', 4, '2023-07-02 15:13:34', '2023-07-02 15:13:34'),
+(20, 3, '2023-06-05 22:35:48', '2023-07-05 22:35:48', 'John Doe', '0327281160', '1 Main St, San Jose, CA, 95131, US', '5.00', '805.00', 4, '2023-07-02 15:35:48', '2023-07-02 15:35:48'),
+(21, 3, '2023-07-05 22:38:04', '2023-07-05 22:38:04', 'Quang Nguyen Duy', '0327281160', '217A, ấp An Thới, xã An Bình, huyện Long Hồ, tỉnh Vĩnh Long', '5.00', '1500.00', 4, '2023-07-02 15:38:04', '2023-07-02 15:38:04'),
+(22, 3, '2022-07-04 22:38:04', '2022-07-09 22:38:04', 'Quang Nguyen Duy', '0327281160', '217A, ấp An Thới, xã An Bình, huyện Long Hồ, tỉnh Vĩnh Long', '5.00', '7500.00', 4, '2023-07-05 15:51:34', '2023-07-05 15:51:34'),
+(23, 3, '2022-07-04 22:38:04', '2022-07-09 22:38:04', 'Quang Nguyen Duy', '0327281160', '217A, ấp An Thới, xã An Bình, huyện Long Hồ, tỉnh Vĩnh Long', '5.00', '12500.00', 4, '2023-07-05 15:51:34', '2023-07-05 15:51:34'),
+(24, 3, '2022-07-04 22:38:04', '2022-07-09 22:38:04', 'Quang Nguyen Duy', '0327281160', '217A, ấp An Thới, xã An Bình, huyện Long Hồ, tỉnh Vĩnh Long', '5.00', '20000.00', 4, '2023-07-05 15:51:34', '2023-07-05 15:51:34'),
+(25, 3, '2022-07-04 22:38:04', '2022-07-09 22:38:04', 'Quang Nguyen Duy', '0327281160', '217A, ấp An Thới, xã An Bình, huyện Long Hồ, tỉnh Vĩnh Long', '5.00', '15500.00', 4, '2023-07-05 15:51:34', '2023-07-05 15:51:34'),
+(26, 3, '2022-07-04 22:38:04', '2022-07-09 22:38:04', 'Quang Nguyen Duy', '0327281160', '217A, ấp An Thới, xã An Bình, huyện Long Hồ, tỉnh Vĩnh Long', '5.00', '5500.00', 4, '2023-07-05 15:51:34', '2023-07-05 15:51:34'),
+(27, 3, '2022-07-04 22:38:04', '2022-07-09 22:38:04', 'Quang Nguyen Duy', '0327281160', '217A, ấp An Thới, xã An Bình, huyện Long Hồ, tỉnh Vĩnh Long', '5.00', '10500.00', 4, '2023-07-05 15:51:34', '2023-07-05 15:51:34'),
+(28, 3, '2022-07-04 22:38:04', '2022-07-09 22:38:04', 'Quang Nguyen Duy', '0327281160', '217A, ấp An Thới, xã An Bình, huyện Long Hồ, tỉnh Vĩnh Long', '5.00', '1500.00', 4, '2023-07-05 15:51:34', '2023-07-05 15:51:34');
 
 -- --------------------------------------------------------
 
@@ -11675,7 +11685,10 @@ INSERT INTO `order_details` (`order_id`, `watch_id`, `quantity`, `price`, `creat
 (17, 6, 1, '1200.00', '2023-07-02 07:07:05', '2023-07-02 07:07:05'),
 (17, 11, 2, '1800.00', '2023-07-02 07:07:05', '2023-07-02 07:07:05'),
 (18, 3, 1, '1500.00', '2023-07-02 07:25:57', '2023-07-02 07:25:57'),
-(18, 13, 1, '8900.00', '2023-07-02 07:25:57', '2023-07-02 07:25:57');
+(18, 13, 1, '8900.00', '2023-07-02 07:25:57', '2023-07-02 07:25:57'),
+(19, 1, 1, '10000.00', '2023-07-02 15:13:34', '2023-07-02 15:13:34'),
+(20, 9, 1, '800.00', '2023-07-02 15:35:48', '2023-07-02 15:35:48'),
+(21, 3, 1, '1500.00', '2023-07-02 15:38:04', '2023-07-02 15:38:04');
 
 -- --------------------------------------------------------
 
@@ -11727,7 +11740,9 @@ INSERT INTO `payments` (`id`, `payment_id`, `payer_id`, `payer_email`, `amount`,
 (2, 'PAYID-MSQGH4A67X4712054846171U', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 17205.00, 'USD', 'approved', '2023-07-01 17:36:39', '2023-07-01 17:36:39'),
 (3, 'PAYID-MSQGJII4PC50526268710044', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 5910.00, 'USD', 'approved', '2023-07-01 17:38:50', '2023-07-01 17:38:50'),
 (4, 'PAYID-MSQGONY9NR436729M700572R', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 3203.00, 'USD', 'approved', '2023-07-01 17:50:15', '2023-07-01 17:50:15'),
-(5, 'PAYID-MSQSD2Q40C87254NM233974C', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 3005.00, 'USD', 'approved', '2023-07-02 07:07:05', '2023-07-02 07:07:05');
+(5, 'PAYID-MSQSD2Q40C87254NM233974C', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 3005.00, 'USD', 'approved', '2023-07-02 07:07:05', '2023-07-02 07:07:05'),
+(6, 'PAYID-MSQZQVI9RX27072PX219002C', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 805.00, 'USD', 'approved', '2023-07-02 15:31:50', '2023-07-02 15:31:50'),
+(7, 'PAYID-MSQZSRI82568549W17939836', 'NAWJYCZ43L7GQ', 'sb-yiwa4726486947@business.example.com', 805.00, 'USD', 'approved', '2023-07-02 15:35:47', '2023-07-02 15:35:47');
 
 -- --------------------------------------------------------
 
@@ -11856,9 +11871,9 @@ INSERT INTO `receivers` (`id`, `user_id`, `first_name`, `last_name`, `telephone`
 (9, 2, 'Tran', 'Nguyen', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '2023-06-30 09:50:45', '2023-06-30 09:50:45'),
 (11, 3, 'Quang', 'Nguyen', '0916843367', '98/7, Tam Vu Street, Phường Hưng Lợi, Quận Ninh Kiều, Thành phố Cần Thơ', '2023-06-30 11:53:28', '2023-06-30 11:53:28'),
 (12, 2, 'Diem', 'Duong', '0843630939', 'Cafe Diem Huynh, Xã Tân Hạnh, Huyện Long Hồ, Tỉnh Vĩnh Long', '2023-06-30 17:58:36', '2023-06-30 17:58:36'),
-(14, 2, 'John', 'Doe', NULL, '1 Main St, San Jose, CA, 95131, US', '2023-07-01 17:36:39', '2023-07-01 17:36:39'),
 (15, 3, 'Nhung', 'Nguyen', '0982872274', '217A, ấp An Thới, Xã An Bình, Huyện Long Hồ, Tỉnh Vĩnh Long', '2023-07-02 07:07:05', '2023-07-02 14:13:45'),
-(16, 2, 'Nguyen Que Tran', '(FGW CT)', '0843630939', 'Cafe Diem Huynh, Tan Hanh, Long Ho, Vinh Long', '2023-07-02 07:25:57', '2023-07-02 07:25:57');
+(16, 2, 'Nguyen Que Tran', '(FGW CT)', '0843630939', 'Cafe Diem Huynh, Tan Hanh, Long Ho, Vinh Long', '2023-07-02 07:25:57', '2023-07-02 07:25:57'),
+(17, 3, 'John', 'Doe', '0327281160', '1 Main St, San Jose, CA, 95131, US', '2023-07-02 15:31:51', '2023-07-02 15:31:51');
 
 -- --------------------------------------------------------
 
@@ -11943,15 +11958,15 @@ CREATE TABLE `watches` (
 --
 
 INSERT INTO `watches` (`id`, `collection_id`, `model`, `original_price`, `selling_price`, `discount`, `stock`, `gender`, `case_material`, `case_diameter`, `case_thickness`, `strap_material`, `dial_color`, `crystal_material`, `water_resistance`, `movement_type`, `power_reserve`, `complications`, `availability`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Rolex Datejust 36', '9800.00', '10000.00', 0, 12, 'Unisex', 'Stainless', 36, 11, 'Leather', 'Black', 'Sapphire', 100, 'Automatic', 48, 'Date', 1, NULL, '2023-06-19 14:48:04'),
+(1, 1, 'Rolex Datejust 36', '9800.00', '10000.00', 0, 11, 'Unisex', 'Stainless', 36, 11, 'Leather', 'Black', 'Sapphire', 100, 'Automatic', 48, 'Date', 1, NULL, '2023-07-02 15:13:34'),
 (2, 2, 'Omega Speedmaster Anniversary Series 42mm', '4800.00', '5000.00', 0, 11, 'Men', 'Stainless', 42, 14, 'Steel', 'Blue', 'Sapphire', 50, 'Automatic', 60, 'Chronograph', 1, NULL, '2023-06-19 15:03:58'),
-(3, 3, 'Seiko Prospex SNJ039P1', '1300.00', '1500.00', 0, 8, 'Men', 'Stainless', 44, 13, 'Rubber', 'Black', 'Hardlex', 200, 'Automatic', 50, 'Date, Rotating Bezel', 1, NULL, '2023-07-02 07:25:57'),
+(3, 3, 'Seiko Prospex SNJ039P1', '1300.00', '1500.00', 0, 7, 'Men', 'Stainless', 44, 13, 'Rubber', 'Black', 'Hardlex', 200, 'Automatic', 50, 'Date, Rotating Bezel', 1, NULL, '2023-07-02 15:38:04'),
 (4, 1, 'Rolex Explorer II', '8300.00', '8500.00', 0, 5, 'Men', 'Stainless', 42, 12, 'Steel', 'White', 'Sapphire', 100, 'Automatic', 70, 'Date, GMT', 1, NULL, '2023-06-19 14:52:58'),
 (5, 2, 'Omega Seamaster Aqua Terra 150m', '4000.00', '4200.00', 0, 0, 'Women', 'Stainless', 36, 10, 'Leather', 'Blue', 'Sapphire', 150, 'Automatic', 48, 'Date', 1, NULL, '2023-06-30 18:00:10'),
 (6, 3, 'Seiko Presage Limited Edition', '1000.00', '1200.00', 0, 8, 'Men', 'Stainless', 40, 11, 'Steel', 'Ivory', 'Sapphire', 50, 'Automatic', 41, 'None', 1, NULL, '2023-07-02 07:07:05'),
 (7, 1, 'Rolex Datejust II', '10300.00', '10500.00', 0, 2, 'Men', 'Yellow Gold', 41, 12, 'Leather', 'Silver', 'Sapphire', 100, 'Automatic', 70, 'Date', 1, NULL, '2023-07-01 17:36:39'),
 (8, 4, 'Tag Heuer Connected Calibre E4', '3000.00', '3200.00', 0, 6, 'Unisex', 'Titanium', 45, 13, 'Rubber', 'Black', 'Sapphire', 50, 'Quartz', 0, 'Smartwatch', 1, NULL, '2023-07-01 17:50:15'),
-(9, 5, 'Casio G-Shock GMA S2100BS 7A', '500.00', '800.00', 0, 5, 'Men', 'Resin', 50, 15, 'Resin', 'Black', 'Mineral', 100, 'Quartz', 0, 'Altimeter, Compass', 1, NULL, '2023-07-01 16:12:03'),
+(9, 5, 'Casio G-Shock GMA S2100BS 7A', '500.00', '800.00', 0, 4, 'Men', 'Resin', 50, 15, 'Resin', 'Black', 'Mineral', 100, 'Quartz', 0, 'Altimeter, Compass', 1, NULL, '2023-07-02 15:35:48'),
 (10, 2, 'Omega De Ville Tresor', '6500.00', '6700.00', 0, 4, 'Women', 'Rose Gold', 36, 9, 'Leather', 'Champagne', 'Sapphire', 30, 'Quartz', 0, 'None', 1, NULL, '2023-07-01 17:36:39'),
 (11, 3, 'Cocktail Time Presage SRP837J1', '700.00', '900.00', 0, 6, 'Women', 'Stainless', 34, 11, 'Steel', 'Blue', 'Sapphire', 50, 'Automatic', 41, 'None', 1, NULL, '2023-07-02 07:07:05'),
 (12, 4, 'Tag Heuer Monaco', '5600.00', '5900.00', 0, 6, 'Men', 'Stainless', 39, 12, 'Leather', 'Black', 'Sapphire', 100, 'Automatic', 40, 'Chronograph', 1, NULL, '2023-07-01 17:38:50'),
@@ -12164,7 +12179,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -12218,13 +12233,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -12242,7 +12257,7 @@ ALTER TABLE `provinces`
 -- AUTO_INCREMENT for table `receivers`
 --
 ALTER TABLE `receivers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `reviews`

@@ -16,7 +16,7 @@
                     <div class="card" style="border-radius: 10px;">
                         <div class="card-header px-4 py-5">
                             <div class="mb-4">
-                                <a href="{{ $returnUrl }}">
+                                <a href="{{ route('order.information') }}">
                                     <i class="fa-solid fa-arrow-left-long"></i> Back
                                 </a>
                             </div>
@@ -34,7 +34,7 @@
                                 <div class="card shadow-0 border mb-4">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-md-2 text-center">
                                                 <img src="{{ route('watch.image.get', ['id' => $orderDetail->image_id]) }}"
                                                     class="img-fluid" width="100" class="my-3" loading="lazy">
                                             </div>
