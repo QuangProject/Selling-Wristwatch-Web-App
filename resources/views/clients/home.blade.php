@@ -17,11 +17,11 @@
     @endif
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
-        <div class="container d-flex justify-content-center justify-content-xl-end" data-aos="fade-up" data-aos-delay="500">
+        <div class="container d-flex justify-content-center justify-content-xl-end" data-aos="fade-up" data-aos-delay="100">
             <div class="text-center">
                 <h1>Welcome to WatchWorld</h1>
                 <h2>Unlock Time's Beauty: WatchWorld, Where Elegance Never Stops.</h2>
-                <a href="#about" class="btn-get-started scrollto">Get Started</a>
+                <a href="{{ route('shop') }}" class="btn-get-started scrollto">Get Started</a>
             </div>
         </div>
     </section><!-- End Hero -->
@@ -56,9 +56,7 @@
     <!-- ======= Why Us Section ======= -->
     <section id="why-us" class="why-us">
         <div class="container">
-
             <div class="row">
-
                 <div class="col-lg-4" data-aos="fade-up">
                     <div class="box">
                         <span>01</span>
@@ -118,7 +116,7 @@
                     craftsmanship, elegance, and innovation as you embark on a journey through our exquisite collections.
                     Your time is precious, and at WatchWorld, we ensure that every second is counted with impeccable style.
                 </p>
-                <a class="cta-btn" href="#">About</a>
+                <a class="cta-btn" href="{{ route('about') }}">About</a>
             </div>
 
         </div>
@@ -139,10 +137,8 @@
                         <div class="product-grid">
                             <div class="product-image">
                                 <a href="#" class="image">
-                                    <img class="pic-1"
-                                        src="{{ route('watch.image.get', ['id' => $watch->image_id]) }}">
-                                    <img class="pic-2"
-                                        src="{{ route('watch.image.get', ['id' => $watch->image_id]) }}">
+                                    <img class="pic-1" src="{{ route('watch.image.get', ['id' => $watch->image_id]) }}">
+                                    <img class="pic-2" src="{{ route('watch.image.get', ['id' => $watch->image_id]) }}">
                                 </a>
                                 @if ($watch->discount > 0)
                                     <span class="product-discount-label">-{{ $watch->discount }}%</span>
@@ -168,7 +164,8 @@
                                 @if ($watch->discount > 0)
                                     <div class="price">
                                         ${{ $watch->selling_price - ($watch->selling_price * $watch->discount) / 100 }}
-                                        <span>${{ $watch->selling_price }}</span></div>
+                                        <span>${{ $watch->selling_price }}</span>
+                                    </div>
                                 @else
                                     <div class="price">${{ $watch->selling_price }}</div>
                                 @endif

@@ -21,7 +21,7 @@
 
                     <!-- Brand -->
                     <a class="text-white" style="text-decoration: none;" href="/">
-                        <h3 class="fw-bold mx-3">Watch World</h3>
+                        <h3 class="text-light text-uppercase mx-3">Watch World</h3>
                     </a>
                 </nav>
                 <!-- Navbar -->

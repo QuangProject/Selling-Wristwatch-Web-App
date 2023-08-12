@@ -1,7 +1,7 @@
 @extends('layouts.base')
 
 @section('title')
-    Login
+    Register
 @endsection
 
 @section('css')

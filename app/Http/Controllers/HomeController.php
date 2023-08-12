@@ -23,10 +23,10 @@ class HomeController extends Controller
 
         // Get 6 brands best seller
         // SELECT b.id, b.name, COUNT(b.id) as brand_count, SUM(od.quantity) as total_quantity
-        // FROM brands as b 
+        // FROM brands as b
         // LEFT JOIN collections as c ON b.id = c.brand_id
-        // LEFT JOIN watches as w ON w.collection_id = c.id 
-        // LEFT JOIN order_details as od ON od.watch_id = w.id 
+        // LEFT JOIN watches as w ON w.collection_id = c.id
+        // LEFT JOIN order_details as od ON od.watch_id = w.id
         // GROUP BY b.id, b.name
         // ORDER BY brand_count DESC, b.updated_at DESC LIMIT 4
         $brands = Brand::select('brands.id', 'brands.name')
@@ -69,41 +69,68 @@ class HomeController extends Controller
         $watches = null;
         if ($request->has('brand_id')) {
             $brandId = $request->input('brand_id');
-            $watches = Watch::with('images')
+            $watches = Watch::select('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'images.id as image_id')
+                ->selectRaw('COUNT(watches.id) as watch_count')
+                ->selectRaw('SUM(order_details.quantity) as total_quantity')
+                ->join(DB::raw('(SELECT MIN(id) as id, watch_id FROM images GROUP BY watch_id) as images'), 'watches.id', '=', 'images.watch_id')
+                ->leftJoin('order_details', 'order_details.watch_id', '=', 'watches.id')
                 ->join('collections', 'watches.collection_id', '=', 'collections.id')
-                ->select('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount')
+                ->groupBy('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'image_id')
                 ->where('collections.brand_id', $brandId)
+                ->orderByDesc('watches.updated_at')
+                ->orderByDesc('total_quantity')
                 ->paginate(8);
         } elseif ($request->has('collection_id')) {
             $collectionId = $request->input('collection_id');
-            $watches = Watch::with('images')
-                ->select('id', 'model', 'stock', 'selling_price', 'discount')
-                ->where('collection_id', $collectionId)
+            $watches = Watch::select('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'images.id as image_id')
+                ->selectRaw('COUNT(watches.id) as watch_count')
+                ->selectRaw('SUM(order_details.quantity) as total_quantity')
+                ->join(DB::raw('(SELECT MIN(id) as id, watch_id FROM images GROUP BY watch_id) as images'), 'watches.id', '=', 'images.watch_id')
+                ->leftJoin('order_details', 'order_details.watch_id', '=', 'watches.id')
+                ->groupBy('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'image_id')
+                ->where('watches.collection_id', $collectionId)
+                ->orderByDesc('watches.updated_at')
+                ->orderByDesc('total_quantity')
                 ->paginate(8);
         } elseif ($request->has('category_id')) {
             $categoryId = $request->input('category_id');
-            $watches = Watch::with('images')
+            $watches = Watch::select('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'images.id as image_id')
+                ->selectRaw('COUNT(watches.id) as watch_count')
+                ->selectRaw('SUM(order_details.quantity) as total_quantity')
+                ->join(DB::raw('(SELECT MIN(id) as id, watch_id FROM images GROUP BY watch_id) as images'), 'watches.id', '=', 'images.watch_id')
+                ->leftJoin('order_details', 'order_details.watch_id', '=', 'watches.id')
                 ->join('watch_categories', 'watches.id', '=', 'watch_categories.watch_id')
-                ->select('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount')
+                ->groupBy('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'image_id')
                 ->where('watch_categories.category_id', $categoryId)
+                ->orderByDesc('watches.updated_at')
+                ->orderByDesc('total_quantity')
                 ->paginate(8);
         } elseif ($request->has('gender')) {
             $gender = $request->input('gender');
             if ($gender == 'men') {
-                $watches = Watch::with('images')
-                    ->select('id', 'model', 'stock', 'selling_price', 'discount')
-                    ->where('gender', 'Men')
+                $watches = Watch::select('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'images.id as image_id')
+                    ->selectRaw('COUNT(watches.id) as watch_count')
+                    ->selectRaw('SUM(order_details.quantity) as total_quantity')
+                    ->join(DB::raw('(SELECT MIN(id) as id, watch_id FROM images GROUP BY watch_id) as images'), 'watches.id', '=', 'images.watch_id')
+                    ->leftJoin('order_details', 'order_details.watch_id', '=', 'watches.id')
+                    ->groupBy('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'image_id')
+                    ->where('watches.gender', 'Men')
+                    ->orderByDesc('watches.updated_at')
+                    ->orderByDesc('total_quantity')
                     ->paginate(8);
             } else {
-                $watches = Watch::with('images')
-                    ->select('id', 'model', 'stock', 'selling_price', 'discount')
-                    ->where('gender', 'Women')
+                $watches = Watch::select('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'images.id as image_id')
+                    ->selectRaw('COUNT(watches.id) as watch_count')
+                    ->selectRaw('SUM(order_details.quantity) as total_quantity')
+                    ->join(DB::raw('(SELECT MIN(id) as id, watch_id FROM images GROUP BY watch_id) as images'), 'watches.id', '=', 'images.watch_id')
+                    ->leftJoin('order_details', 'order_details.watch_id', '=', 'watches.id')
+                    ->groupBy('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'image_id')
+                    ->where('watches.gender', 'Women')
+                    ->orderByDesc('watches.updated_at')
+                    ->orderByDesc('total_quantity')
                     ->paginate(8);
             }
         } else {
-            // $watches = Watch::with('images')
-            //     ->select('id', 'model', 'stock', 'selling_price', 'discount')
-            //     ->paginate(8);
             $watches = Watch::select('watches.id', 'watches.model', 'watches.stock', 'watches.selling_price', 'watches.discount', 'images.id as image_id')
                 ->selectRaw('COUNT(watches.id) as watch_count')
                 ->selectRaw('SUM(order_details.quantity) as total_quantity')
@@ -113,10 +140,6 @@ class HomeController extends Controller
                 ->orderByDesc('watches.updated_at')
                 ->orderByDesc('total_quantity')
                 ->paginate(8);
-            // return response()->json([
-            //     'message' => 'Get all watches successfully',
-            //     'watches' => $watches
-            // ], 200);
         }
         $brands = Brand::select('id', 'name')->get();
         $collections = Collection::select('id', 'name')->get();

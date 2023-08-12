@@ -21,9 +21,6 @@
                     </div>
 
                     <div class="signin-form">
-                        @if (session('msg'))
-                            <div class="alert alert-success">{{ session('msg') }}</div>
-                        @endif
                         <h2 class="form-title fw-bold">Sign in</h2>
                         <form method="POST" class="register-form" id="login-form" action="{{ route('login') }}">
                             @csrf

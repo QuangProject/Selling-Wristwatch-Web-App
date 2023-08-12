@@ -164,6 +164,12 @@ class PaymentController extends Controller
         }
     }
 
+    public function cancel(Request $request)
+    {
+        session()->flash('error', 'Payment failed!');
+        return redirect()->route('cart');
+    }
+
     public function error()
     {
         session()->flash('error', 'Payment failed!');
