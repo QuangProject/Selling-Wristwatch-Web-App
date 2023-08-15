@@ -148,7 +148,7 @@
                 </div>
             </div>
             <div class="product-info-tabs">
-                <h5>Reviews (0)</h5>
+                <h5>Reviews ({{ count($reviews) }})</h5>
                 <table class="table table-striped table-product">
                     <thead class="fw-bold">
                         <tr>
@@ -158,11 +158,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>FirstName LastName</td>
-                            <td>Content</td>
-                            <td>FeedDate</td>
-                        </tr>
+                        @foreach ($reviews as $review)
+                            <tr>
+                                <td>{{ $review->firstname }} {{ $review->lastname }}</td>
+                                <td>{{ $review->comment }}</td>
+                                <td>{{ $review->created_at }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

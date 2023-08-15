@@ -19,7 +19,7 @@
             </div>
         @else
             @foreach ($orders as $order)
-                <div class="d-flex justify-content-center align-items-center mb-4">
+                <div class="d-flex justify-content-center align-items-center mb-4 count-order" id="order_{{ $order->id }}">
                     <div class="col-12">
                         <div class="card card-stepper text-black" style="border-radius: 16px;">
                             <div class="card-body p-5">
@@ -49,7 +49,7 @@
                                     <li class="step0 active"></li>
                                     <li class="step0 {{ $order->status >= 2 ? 'active' : '' }}"></li>
                                     <li class="step0 {{ $order->status >= 3 ? 'active' : '' }}"></li>
-                                    <li class="step0 {{ $order->status >= 4 ? 'active' : '' }}"></li>
+                                    <li class="step0"></li>
                                 </ul>
 
                                 <div class="d-flex justify-content-around">
@@ -95,6 +95,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="text-end mt-3">
+                                    <button class="btn btn-outline-danger"
+                                        onclick="orderReceived({{ $order->id }}, 4)">Order received</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -102,4 +106,8 @@
             @endforeach
         @endif
     </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/order.js') }}"></script>
 @endsection

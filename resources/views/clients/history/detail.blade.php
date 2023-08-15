@@ -35,8 +35,10 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-md-2 text-center">
-                                                <img src="{{ route('watch.image.get', ['id' => $orderDetail->image_id]) }}"
-                                                    class="img-fluid" width="100" class="my-3" loading="lazy">
+                                                <a href="{{ route('detail', ['id' => $orderDetail->watch_id]) }}">
+                                                    <img src="{{ route('watch.image.get', ['id' => $orderDetail->image_id]) }}"
+                                                        class="img-fluid" width="100" class="my-3" loading="lazy">
+                                                </a>
                                             </div>
                                             <div
                                                 class="col-md-2 text-center d-flex justify-content-center align-items-center">

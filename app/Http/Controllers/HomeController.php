@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Collection;
+use App\Models\Review;
 use App\Models\Watch;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -163,6 +164,11 @@ class HomeController extends Controller
     public function detail($id)
     {
         $watch = Watch::with('images')->findOrFail($id);
-        return view('clients.site.detail')->with('watch', $watch);
+        $reviews = Review::select('reviews.id', 'users.firstname', 'users.lastname', 'reviews.comment', 'reviews.created_at')
+            ->join('users', 'users.id', '=', 'reviews.user_id')
+            ->where('watch_id', $id)
+            ->orderByDesc('created_at')
+            ->get();
+        return view('clients.site.detail')->with('watch', $watch)->with('reviews', $reviews);
     }
 }

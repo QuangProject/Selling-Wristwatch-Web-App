@@ -24,7 +24,7 @@ function submitFeedback() {
     formData.append("watch_id", watchId);
     formData.append("rating", rating);
     formData.append("comment", comment);
-
+    $('body').append('<div class="overlay"><div class="dot-spinner center"><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div><div class="dot-spinner__dot"></div></div></div>')
     $.ajax({
         url: "/api/reviews",
         type: "POST",
@@ -32,7 +32,15 @@ function submitFeedback() {
         processData: false,
         contentType: false,
         success: function (response) {
-            console.log(response);
+            $('.overlay').remove()
+            Swal.fire({
+                'icon': 'success',
+                'title': 'Update status successfully',
+                'showConfirmButton': false,
+                'timer': 2000
+            }).then(() => {
+                location.reload();
+            })
         },
         error: function (error) {
             console.log(error);

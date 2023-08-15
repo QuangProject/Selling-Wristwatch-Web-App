@@ -113,7 +113,7 @@ class UserController extends Controller
         $orders = Order::join('users', 'orders.user_id', '=', 'users.id')
             ->select('orders.id', 'orders.order_date', 'orders.delivery_date', 'orders.shipping_fee', 'orders.total_price', 'orders.status')
             ->where('orders.user_id', $user->id)
-            ->whereNotIn('orders.status', [4])
+            ->whereNotIn('orders.status', [4, 5])
             ->orderBy('orders.delivery_date', 'desc')
             ->get();
         return view('clients.order.index')->with('orders', $orders);
