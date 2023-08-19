@@ -19,6 +19,7 @@ class Order extends Model
         'shipping_fee',
         'total_price',
         'status',
+        'payment_method',
     ];
 
     public function users()

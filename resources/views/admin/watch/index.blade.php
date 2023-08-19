@@ -164,14 +164,14 @@
                                                 value="0" autocomplete="off">
                                             <span class="text-danger" id="error-add-watch-discount"></span>
                                         </div>
-                                        {{-- Selling Price --}}
+                                        {{-- Stock --}}
                                         <div class="forms-inputs mt-3">
-                                            <label for="add-watch-selling-price">
-                                                <h6 class="fw-bold">Selling Price</h6>
+                                            <label for="add-watch-stock">
+                                                <h6 class="fw-bold">Stock</h6>
                                             </label>
-                                            <input type="text" id="add-watch-selling-price" class="form-control"
+                                            <input type="text" id="add-watch-stock" class="form-control"
                                                 autocomplete="off">
-                                            <span class="text-danger" id="error-add-watch-selling-price"></span>
+                                            <span class="text-danger" id="error-add-watch-stock"></span>
                                         </div>
                                     </div>
                                     <div class="col-12 col-lg-4">

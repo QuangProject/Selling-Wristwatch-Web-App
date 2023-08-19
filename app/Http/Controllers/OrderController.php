@@ -41,7 +41,8 @@ class OrderController extends Controller
             'receiver_address' => $receiver->address,
             'shipping_fee' => $shippingFee,
             'total_price' => $totalPrice,
-            'status' => 1
+            'status' => 1,
+            'payment_method' => 'COD'
         ]);
 
         return response()->json([
@@ -53,13 +54,17 @@ class OrderController extends Controller
     // Action detail()
     public function detail($id)
     {
-        $orderDetal = DB::table('order_details as od')
+        $orderDetails = DB::table('order_details as od')
             ->join('watches as w', 'od.watch_id', '=', 'w.id')
             ->join(DB::raw('(SELECT MIN(id) as id, watch_id FROM images GROUP BY watch_id) as i'), 'w.id', '=', 'i.watch_id')
             ->select('od.order_id', 'od.watch_id', 'od.quantity', 'od.price', 'w.model', 'w.selling_price', 'w.gender', 'i.id as image_id')
             ->where('od.order_id', $id)
             ->get();
-        return view('admin.order.detail')->with('orderDetals', $orderDetal);
+        return view('admin.order.detail')->with('orderDetails', $orderDetails);
+        // return response()->json([
+        //     'message' => 'Order created successfully',
+        //     'orderDetals' => $orderDetal
+        // ], 201);
     }
 
     // Action update()

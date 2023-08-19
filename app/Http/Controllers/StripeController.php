@@ -16,10 +16,12 @@ class StripeController extends Controller
         $products = $request->get('products');
         $shippingFee = $request->get('shippingFee');
         $lineItems = [];
+        $allPrice = 0;
 
         foreach ($products as $product) {
             $totalPrice = $product['totalPrice'];
             $total = $totalPrice * 100;
+            $allPrice += $total;
 
             $lineItems[] = [
                 'price_data' => [
@@ -50,7 +52,7 @@ class StripeController extends Controller
         $session = \Stripe\Checkout\Session::create([
             'line_items' => $lineItems,
             'mode' => 'payment',
-            'success_url' => route('stripe.success', ['totalPrice' => $totalPrice, 'shippingFee' => $shippingFee]),
+            'success_url' => route('stripe.success', ['totalPrice' => $allPrice / 100, 'shippingFee' => $shippingFee]),
             'cancel_url' => route('stripe.cancel'),
         ]);
 
@@ -75,6 +77,7 @@ class StripeController extends Controller
                 'shipping_fee' => $shippingFee,
                 'total_price' => $totalPrice,
                 'status' => 1,
+                'payment_method' => 'Stripe',
                 'created_at' => now(),
                 'updated_at' => now()
             ]);

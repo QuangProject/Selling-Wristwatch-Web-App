@@ -474,6 +474,7 @@ buttonAddWatch.addEventListener('click', function () {
             inputAddWatchOriginalPrice.value = '';
             inputAddWatchSellingPrice.value = '';
             inputAddWatchDiscount.value = '';
+            inputAddWatchStock.value = '';
             inputAddWatchGender.value = '';
             inputAddWatchCaseMaterial.value = '';
             inputAddWatchCaseDiameter.value = '';

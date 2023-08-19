@@ -112,6 +112,7 @@ class PaymentController extends Controller
                         'shipping_fee' => $shippingFee,
                         'total_price' => $totalPrice,
                         'status' => 1,
+                        'payment_method' => 'PayPal',
                         'created_at' => now(),
                         'updated_at' => now()
                     ]);

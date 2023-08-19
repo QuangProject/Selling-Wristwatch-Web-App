@@ -20,10 +20,12 @@
                                     <i class="fa-solid fa-arrow-left-long"></i> Back
                                 </a>
                             </div>
-                            <h5 class="text-muted mb-0">Thanks for your Order, <span
-                                    style="color: #a8729a;">{{ Auth::user()->firstname }}</span>!
-                            </h5>
+                            <h5 class="text-muted mb-0">Thanks for your order!</h5>
+                            <div>
+                                <h5>Delivery address</h5>
+                            </div>
                         </div>
+
                         <div class="card-body p-4">
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
