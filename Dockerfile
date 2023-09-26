@@ -19,6 +19,15 @@ RUN docker-php-ext-install bcmath
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+# Set the working directory in the container
+WORKDIR /var/www/html
+
+# Copy the Laravel application into the container
+COPY . .
+
+# Install project dependencies
+RUN composer install --no-interaction
+
 # Expose port 9000 for PHP-FPM
 EXPOSE 9000
 
