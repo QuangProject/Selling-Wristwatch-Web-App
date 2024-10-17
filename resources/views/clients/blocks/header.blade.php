@@ -1,5 +1,5 @@
-<header class="ftco-section">
-    <div class="container-fluid px-lg-5 pb-3">
+<header>
+    <div class="container-fluid px-lg-5 py-3 bg-secondary">
         <div class="row">
             <div class="col-md-8 order-md-first">
                 <div class="row">
@@ -25,11 +25,11 @@
             <div class="col-md-4 d-flex justify-content-center justify-content-lg-end align-items-center">
                 <div class="social-media">
                     @guest
-                        <a href="{{ route('register') }}" class="btn btn-outline-danger mx-2" role="button">
+                        <a href="{{ route('register') }}" class="btn btn-danger mx-2" role="button">
                             Sign up
                         </a>
-                        <a href="{{ route('login') }}" class="btn btn-outline-secondary me-2" role="button">
-                            Sign in
+                        <a href="{{ route('login') }}" class="btn btn-outline-light me-2" role="button">
+                            Login
                         </a>
                     @else
                         <nav class="header-nav ms-auto">

@@ -1,5 +1,5 @@
 * {
-  font-family: "Quicksand", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -41,10 +41,6 @@ h5,
 
 .bg-primary {
   background: #ff0000 !important;
-}
-
-.ftco-section {
-  padding: 2em 0 0 0;
 }
 
 .ftco-no-pt {

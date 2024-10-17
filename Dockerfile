@@ -16,20 +16,23 @@ RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 RUN docker-php-ext-install gd pdo pdo_mysql
 RUN docker-php-ext-install bcmath
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# Clear cache
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Set the working directory in the container
-WORKDIR /var/www/html
+# Install Composer
+COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
 # Copy the Laravel application into the container
-COPY . .
+COPY . /var/www/html
+
+# Copy existing application directory permissions
+COPY --chown=www-data:www-data . /var/www/html
+
+# Change current user to www-data
+USER www-data
 
 # Install project dependencies
 RUN composer install --no-interaction
 
-# Expose port 9000 for PHP-FPM
-EXPOSE 9000
-
-# Start PHP-FPM
-CMD ["php-fpm"]
+# Expose port 8000 for the PHP built-in server
+EXPOSE 8000
